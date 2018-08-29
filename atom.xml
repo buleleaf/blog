@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="blog.zhengjie.me/"/>
+  <link href="www.zhengjie.me/"/>
   <updated>2018-08-29T09:35:20.938Z</updated>
-  <id>blog.zhengjie.me/</id>
+  <id>www.zhengjie.me/</id>
   
   <author>
     <name>郑杰</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Jhipster 微服务与微服务相互通信</title>
-    <link href="blog.zhengjie.me/blog/503.html"/>
-    <id>blog.zhengjie.me/blog/503.html</id>
+    <link href="www.zhengjie.me/blog/503.html"/>
+    <id>www.zhengjie.me/blog/503.html</id>
     <published>2018-08-13T03:52:27.000Z</published>
     <updated>2018-08-29T09:35:20.938Z</updated>
     
@@ -37,19 +37,19 @@
     
     </summary>
     
-      <category term="JHipster" scheme="blog.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="Jhipster微服务调用微服务" scheme="blog.zhengjie.me/tags/Jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="Jhipster微服务调用微服务" scheme="www.zhengjie.me/tags/Jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
-      <category term="微服务相互通信" scheme="blog.zhengjie.me/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9B%B8%E4%BA%92%E9%80%9A%E4%BF%A1/"/>
+      <category term="微服务相互通信" scheme="www.zhengjie.me/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9B%B8%E4%BA%92%E9%80%9A%E4%BF%A1/"/>
     
   </entry>
   
   <entry>
     <title>Jhipster 如何彻底删除Entity</title>
-    <link href="blog.zhengjie.me/blog/498.html"/>
-    <id>blog.zhengjie.me/blog/498.html</id>
+    <link href="www.zhengjie.me/blog/498.html"/>
+    <id>www.zhengjie.me/blog/498.html</id>
     <published>2018-08-10T08:56:00.000Z</published>
     <updated>2018-08-29T11:37:22.231Z</updated>
     
@@ -66,21 +66,21 @@
     
     </summary>
     
-      <category term="JHipster" scheme="blog.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="jhipster删除实体" scheme="blog.zhengjie.me/tags/jhipster%E5%88%A0%E9%99%A4%E5%AE%9E%E4%BD%93/"/>
+      <category term="jhipster删除实体" scheme="www.zhengjie.me/tags/jhipster%E5%88%A0%E9%99%A4%E5%AE%9E%E4%BD%93/"/>
     
   </entry>
   
   <entry>
     <title>Jhipster创建实体，Gateway数据菜单为空</title>
-    <link href="blog.zhengjie.me/blog/494.html"/>
-    <id>blog.zhengjie.me/blog/494.html</id>
+    <link href="www.zhengjie.me/blog/494.html"/>
+    <id>www.zhengjie.me/blog/494.html</id>
     <published>2018-08-10T02:05:35.000Z</published>
     <updated>2018-08-29T11:42:42.364Z</updated>
     
-    <content type="html"><![CDATA[<p>在微服务创建entity后还需要在Gateway中同步一次，只有这样Gateway中才会生成相应的页面，不然访问他的数据菜单会是一个空的。切换到app文件夹，根据提示创建一个实体，可参考链接:<br> </p><p><a href="https://www.zhengjie.me/blog/438.html" target="_blank" rel="noopener">JHipster 创建实体，并且增加关联关系</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd app</span><br><span class="line">yo jhipster:entity Role --table-name role</span><br><span class="line">......</span><br><span class="line">Overwrite src\main\resources\config\liquibase\master.xml? (ynaxdH)  Y</span><br></pre></td></tr></table></figure><p>创建完成后，打开网关服务，查看数据菜单，发现并没有我们添加的实体 </p><p><img src="https://i.imgur.com/Fh3VPpj.jpg" alt=""></p><p>这是因为我们只是在app中添加了Role，并没有将Role同步到<em>gateway</em>中</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd gateway</span><br><span class="line">yo jhipster:entity Role</span><br><span class="line">#是否从一个已经存在的微服生成</span><br><span class="line">Do you want to generate this entity from an existing microservice? Y</span><br><span class="line">#输入我们微服务的根路径（相对路径和绝对路径都可以）</span><br><span class="line">Enter the path to the microservice root directory: ../app</span><br><span class="line">#是否更新实体</span><br><span class="line">Do you want to update the entity? Y</span><br><span class="line">Overwrite src\main\webapp\app\layouts\navbar\navbar.component.html? (ynaxdH) y</span><br></pre></td></tr></table></figure><p>再次打开<code>http://10.93.0.96:8080/#/</code>，就能够查就能够对我们的实体进行操作了。</p>]]></content>
+    <content type="html"><![CDATA[<p>在微服务创建entity后还需要在Gateway中同步一次，只有这样Gateway中才会生成相应的页面，不然访问他的数据菜单会是一个空的。切换到app文件夹，根据提示创建一个实体，可参考链接:<br> </p><p><a href="https://www.zhengjie.me/blog/438.html">JHipster 创建实体，并且增加关联关系</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd app</span><br><span class="line">yo jhipster:entity Role --table-name role</span><br><span class="line">......</span><br><span class="line">Overwrite src\main\resources\config\liquibase\master.xml? (ynaxdH)  Y</span><br></pre></td></tr></table></figure><p>创建完成后，打开网关服务，查看数据菜单，发现并没有我们添加的实体 </p><p><img src="https://i.imgur.com/Fh3VPpj.jpg" alt=""></p><p>这是因为我们只是在app中添加了Role，并没有将Role同步到<em>gateway</em>中</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd gateway</span><br><span class="line">yo jhipster:entity Role</span><br><span class="line">#是否从一个已经存在的微服生成</span><br><span class="line">Do you want to generate this entity from an existing microservice? Y</span><br><span class="line">#输入我们微服务的根路径（相对路径和绝对路径都可以）</span><br><span class="line">Enter the path to the microservice root directory: ../app</span><br><span class="line">#是否更新实体</span><br><span class="line">Do you want to update the entity? Y</span><br><span class="line">Overwrite src\main\webapp\app\layouts\navbar\navbar.component.html? (ynaxdH) y</span><br></pre></td></tr></table></figure><p>再次打开<code>http://10.93.0.96:8080/#/</code>，就能够查就能够对我们的实体进行操作了。</p>]]></content>
     
     <summary type="html">
     
@@ -92,17 +92,17 @@
     
     </summary>
     
-      <category term="JHipster" scheme="blog.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="jhipster Gateway数据菜单为空" scheme="blog.zhengjie.me/tags/jhipster-Gateway%E6%95%B0%E6%8D%AE%E8%8F%9C%E5%8D%95%E4%B8%BA%E7%A9%BA/"/>
+      <category term="jhipster Gateway数据菜单为空" scheme="www.zhengjie.me/tags/jhipster-Gateway%E6%95%B0%E6%8D%AE%E8%8F%9C%E5%8D%95%E4%B8%BA%E7%A9%BA/"/>
     
   </entry>
   
   <entry>
     <title>Java 8 Optional 类</title>
-    <link href="blog.zhengjie.me/blog/492.html"/>
-    <id>blog.zhengjie.me/blog/492.html</id>
+    <link href="www.zhengjie.me/blog/492.html"/>
+    <id>www.zhengjie.me/blog/492.html</id>
     <published>2018-08-09T13:06:36.000Z</published>
     <updated>2018-08-29T11:44:31.365Z</updated>
     
@@ -117,21 +117,21 @@
     
     </summary>
     
-      <category term="随笔" scheme="blog.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="Optional 类" scheme="blog.zhengjie.me/tags/Optional-%E7%B1%BB/"/>
+      <category term="Optional 类" scheme="www.zhengjie.me/tags/Optional-%E7%B1%BB/"/>
     
   </entry>
   
   <entry>
     <title>Jhipster 创建微服务</title>
-    <link href="blog.zhengjie.me/blog/478.html"/>
-    <id>blog.zhengjie.me/blog/478.html</id>
+    <link href="www.zhengjie.me/blog/478.html"/>
+    <id>www.zhengjie.me/blog/478.html</id>
     <published>2018-08-08T07:58:15.000Z</published>
     <updated>2018-08-29T11:58:20.257Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>jHipster 集成了springcloud的注册中心（eureka server）和配置中心（config server），eureka server 能够将我们自己开发的微服务（Microservices）都纳入到它自身当中，config server 能够集中管理应用程序各个环境下的配置，默认使用git 仓库存储配置内容。 <br><br><br>Microservices没有前端页面，前端页面由网关产生（gateway），权限控制可以通过UAA进行管理，并且要在JHipster Registry中注册、发现和管理。<br><br><br> <code>JHipster Registry</code> 是微服架构必不可少的。它把所有的组件连接在一起，使他们能够互相通信。<br><br><br> <code>Microservices</code> 它只有后台代码。它更注重的是在API上。一个微服结构可以有许多微服应用，每个包含几个相关的实体和业务规则。<br><br><code>Gateway</code> 它为所有微服务提供了HTTP路由和负载均衡，服务质量，安全和API文档。<br><br> <code>UAA</code>是一个使用OAuth2认证协议、为JHipster微服务提供用户账户和授权的服务。</p><p><img src="https://i.imgur.com/Vbap5GR.png" alt=""></p><h4 id="微服务安装"><a href="#微服务安装" class="headerlink" title="微服务安装"></a>微服务安装</h4><h5 id="安装JHipster-Registry"><a href="#安装JHipster-Registry" class="headerlink" title="安装JHipster Registry"></a>安装JHipster Registry</h5><p>由于 JHipster Registry 是一个标准的jhipster，所以我们只需要克隆下来运行它即可。没有必要打开idea或者修改它： <br></p><h6 id="第一种方式"><a href="#第一种方式" class="headerlink" title="第一种方式"></a>第一种方式</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/jhipster/jhipster-registry</span><br><span class="line">#cd到jhipster-registry文件夹，运行</span><br><span class="line">mvnw</span><br></pre></td></tr></table></figure><p>执行mvnw命令后，系统将自动编译运行。 </p><h6 id="第二种方式"><a href="#第二种方式" class="headerlink" title="第二种方式"></a>第二种方式</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/jhipster/jhipster-registry.git</span><br><span class="line"># 编译启动</span><br><span class="line">mvn clean package</span><br><span class="line">java -jar target/jhipster-registry-*.war</span><br></pre></td></tr></table></figure><p>打开<a href="http://localhost:8761/，并且登录，默认账户admin，密码admin。" target="_blank" rel="noopener">http://localhost:8761/，并且登录，默认账户admin，密码admin。</a></p><p>Instances Registered是自动注册的服务，当我们创建服务后，将自动注册到这里</p><p><img src="https://i.imgur.com/eROMVxV.jpg" alt=""></p><h5 id="安装uaa"><a href="#安装uaa" class="headerlink" title="安装uaa"></a>安装uaa</h5><p>部署完jHipster registry ，我们需要创建一个用于控制访问权限的项目。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#创建文件夹存放项目</span><br><span class="line">mkdir uaa</span><br><span class="line">#切换到文件夹</span><br><span class="line">cd uaa</span><br><span class="line">#创建UAA服务</span><br><span class="line">yo jhipster</span><br><span class="line">#仅供参考</span><br><span class="line">? (1/14) Which *type* of application would you like to create? [BETA] JHipster UAA server (for microservice OAuth2 authentication)</span><br><span class="line">? (2/14) What is the base name of your application? uaa</span><br><span class="line">? (3/14) Would you like to install other generators from the JHipster Market Place? No</span><br><span class="line">? (3/14) As you are running in a microservice architecture, on which port would like your server to run? It should be unique to avoid port conflicts. 9999</span><br><span class="line">? (4/14) What is your default Java package name? cn.jhipter.uaa</span><br><span class="line">? (5/14) Which Service Discovery and Configuration solution would you like to use? JHipster Registry (using Eureka and Spring Cloud Config)</span><br><span class="line">? (6/14) Which *type* of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle, MSSQL)</span><br><span class="line">? (7/14) Which *production* database would you like to use? MySQL</span><br><span class="line">? (8/14) Which *development* database would you like to use? MySQL</span><br><span class="line">? (9/14) Do you want to use Hibernate 2nd level cache? Yes, with HazelCast (distributed cache, for multiple nodes)</span><br><span class="line">? (10/14) Would you like to use Maven or Gradle for building the backend? Maven</span><br><span class="line">? (11/14) Which other technologies would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (12/14) Would you like to enable internationalization support? Yes</span><br><span class="line">#国际化支持，选择简体中文</span><br><span class="line">? Please choose the native language of the application? Chinese (Simplified)</span><br><span class="line">? Please choose additional languages to install (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (13/14) Which testing frameworks would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)Gatling</span><br></pre></td></tr></table></figure><p>通过<code>mvnw</code>编译启动项目</p><h5 id="创建Microservices-Application"><a href="#创建Microservices-Application" class="headerlink" title="创建Microservices Application"></a>创建Microservices Application</h5><p>操作同uaa</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#创建文件夹存放项目</span><br><span class="line">mkdir app</span><br><span class="line">#切换到文件夹</span><br><span class="line">cd app</span><br><span class="line">#创建微服务</span><br><span class="line">yo jhipster</span><br><span class="line">#仅供参考</span><br><span class="line">? (1/14) Which *type* of application would you like to create? Microservice application</span><br><span class="line">? (2/14) What is the base name of your application? app</span><br><span class="line">? (3/14) Would you like to install other generators from the JHipster Market Place? No</span><br><span class="line">? (3/14) As you are running in a microservice architecture, on which port would like your server to run? It should be unique to avoid port conflicts. 8081</span><br><span class="line">? (4/14) What is your default Java package name? cn.jhipster.app</span><br><span class="line">? (5/14) Which *type* of authentication would you like to use? [BETA] Authentication with JHipster UAA server (the server must be generated separately)</span><br><span class="line">? (6/14) What is the folder path of your UAA application?. ../uaa</span><br><span class="line">? (7/14) Which Service Discovery and Configuration solution would you like to use? JHipster Registry (using Eureka and Spring Cloud Config)</span><br><span class="line">? (8/14) Which *type* of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle)</span><br><span class="line">? (9/14) Which *production* database would you like to use? MySQL</span><br><span class="line">? (10/14) Which *development* database would you like to use? MySQL</span><br><span class="line">? (11/14) Do you want to use Hibernate 2nd level cache? Yes, with HazelCast (distributed cache, for multiple nodes)</span><br><span class="line">? (12/14) Would you like to use Maven or Gradle for building the backend? Maven</span><br><span class="line">? (13/14) Which other technologies would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (14/14) Would you like to enable internationalization support? Yes</span><br><span class="line">? Please choose the native language of the application? Chinese (Simplified)</span><br><span class="line">? Please choose additional languages to install (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (15/14) Which testing frameworks would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)Gatling</span><br></pre></td></tr></table></figure><p>同样还需要修改数据库配置<code>\src\main\resources\config\application-dev.yml</code>，在application.yml中可以看到，系统已经自动帮我们注册了 </p><p><img src="https://i.imgur.com/tuXzdBk.jpg" alt=""></p><p> 启动项目（参考uaa）</p><h5 id="创建网关-Gateway"><a href="#创建网关-Gateway" class="headerlink" title="创建网关(Gateway)"></a>创建网关(Gateway)</h5><p>创建一个网关，用来做为所有请求的入口</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#创建文件夹存放项目</span><br><span class="line">mkdir gateway</span><br><span class="line">#切换到文件夹</span><br><span class="line">cd gateway</span><br><span class="line">#创建微服务网关</span><br><span class="line">yo jhipster</span><br><span class="line">#仅供参考</span><br><span class="line">? (1/14) Which *type* of application would you like to create? Microservice gateway</span><br><span class="line">? (2/14) What is the base name of your application? gateway</span><br><span class="line">? (3/14) Would you like to install other generators from the JHipster Market Place? No</span><br><span class="line">? (3/14) As you are running in a microservice architecture, on which port would like your server to run? It should be unique to avoid port conflicts. 8080</span><br><span class="line">? (4/14) What is your default Java package name? cn.jhipster.gateway</span><br><span class="line">? (5/14) Which *type* of authentication would you like to use? [BETA] Authentication with JHipster UAA server (the server must be generated separately)</span><br><span class="line">? (6/14) What is the folder path of your UAA application?. ../uaa</span><br><span class="line">? (7/14) Which Service Discovery and Configuration solution would you like to use? JHipster Registry (using Eureka and Spring Cloud Config)</span><br><span class="line">? (8/14) Which *type* of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle, MSSQL)</span><br><span class="line">? (9/14) Which *production* database would you like to use? MySQL</span><br><span class="line">? (10/14) Which *development* database would you like to use? MySQL</span><br><span class="line">? (11/14) Do you want to use Hibernate 2nd level cache? Yes, with HazelCast (distributed cache, for multiple nodes)</span><br><span class="line">? (12/14) Would you like to use Maven or Gradle for building the backend? Maven</span><br><span class="line">? (13/14) Which other technologies would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (14/14) Would you like to use the LibSass stylesheet preprocessor for your CSS? No</span><br><span class="line">? (15/14) Would you like to enable internationalization support? Yes</span><br><span class="line">? Please choose the native language of the application? Chinese (Simplified)</span><br><span class="line">? Please choose additional languages to install (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (16/14) Which testing frameworks would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)Gatling</span><br></pre></td></tr></table></figure><p>同样需要修改数据库配置并启动项目 </p><p><img src="https://i.imgur.com/fqB3sGs.jpg" alt=""></p><p>打开<a href="http://localhost:8761，就可以查看到我们创建的服务。" target="_blank" rel="noopener">http://localhost:8761，就可以查看到我们创建的服务。</a> 将它和网关服务进行对比，可以看出网关页面管理里面多了些菜单。</p><p> <strong>软件推荐</strong>：</p><p> 由于创建都是敲命令实现的，而系统原生的cmd使用起来并不怎么友好，可以使用cmder这款软件进行操作。<code>cmder</code>是一个跨平台的命令行增强工具,可以集成windows batch, power shell, git, linux bash等多种命令行于一体,使用起来还是十分方便的 </p><p><strong>相关介绍：</strong> <a href="https://www.zhengjie.me/blog/465.html" target="_blank" rel="noopener">https://www.zhengjie.me/blog/465.html</a></p>]]></content>
+    <content type="html"><![CDATA[<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>jHipster 集成了springcloud的注册中心（eureka server）和配置中心（config server），eureka server 能够将我们自己开发的微服务（Microservices）都纳入到它自身当中，config server 能够集中管理应用程序各个环境下的配置，默认使用git 仓库存储配置内容。 <br><br><br>Microservices没有前端页面，前端页面由网关产生（gateway），权限控制可以通过UAA进行管理，并且要在JHipster Registry中注册、发现和管理。<br><br><br> <code>JHipster Registry</code> 是微服架构必不可少的。它把所有的组件连接在一起，使他们能够互相通信。<br><br><br> <code>Microservices</code> 它只有后台代码。它更注重的是在API上。一个微服结构可以有许多微服应用，每个包含几个相关的实体和业务规则。<br><br><code>Gateway</code> 它为所有微服务提供了HTTP路由和负载均衡，服务质量，安全和API文档。<br><br> <code>UAA</code>是一个使用OAuth2认证协议、为JHipster微服务提供用户账户和授权的服务。</p><p><img src="https://i.imgur.com/Vbap5GR.png" alt=""></p><h4 id="微服务安装"><a href="#微服务安装" class="headerlink" title="微服务安装"></a>微服务安装</h4><h5 id="安装JHipster-Registry"><a href="#安装JHipster-Registry" class="headerlink" title="安装JHipster Registry"></a>安装JHipster Registry</h5><p>由于 JHipster Registry 是一个标准的jhipster，所以我们只需要克隆下来运行它即可。没有必要打开idea或者修改它： <br></p><h6 id="第一种方式"><a href="#第一种方式" class="headerlink" title="第一种方式"></a>第一种方式</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/jhipster/jhipster-registry</span><br><span class="line">#cd到jhipster-registry文件夹，运行</span><br><span class="line">mvnw</span><br></pre></td></tr></table></figure><p>执行mvnw命令后，系统将自动编译运行。 </p><h6 id="第二种方式"><a href="#第二种方式" class="headerlink" title="第二种方式"></a>第二种方式</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/jhipster/jhipster-registry.git</span><br><span class="line"># 编译启动</span><br><span class="line">mvn clean package</span><br><span class="line">java -jar target/jhipster-registry-*.war</span><br></pre></td></tr></table></figure><p>打开<a href="http://localhost:8761/，并且登录，默认账户admin，密码admin。" target="_blank" rel="noopener">http://localhost:8761/，并且登录，默认账户admin，密码admin。</a></p><p>Instances Registered是自动注册的服务，当我们创建服务后，将自动注册到这里</p><p><img src="https://i.imgur.com/eROMVxV.jpg" alt=""></p><h5 id="安装uaa"><a href="#安装uaa" class="headerlink" title="安装uaa"></a>安装uaa</h5><p>部署完jHipster registry ，我们需要创建一个用于控制访问权限的项目。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#创建文件夹存放项目</span><br><span class="line">mkdir uaa</span><br><span class="line">#切换到文件夹</span><br><span class="line">cd uaa</span><br><span class="line">#创建UAA服务</span><br><span class="line">yo jhipster</span><br><span class="line">#仅供参考</span><br><span class="line">? (1/14) Which *type* of application would you like to create? [BETA] JHipster UAA server (for microservice OAuth2 authentication)</span><br><span class="line">? (2/14) What is the base name of your application? uaa</span><br><span class="line">? (3/14) Would you like to install other generators from the JHipster Market Place? No</span><br><span class="line">? (3/14) As you are running in a microservice architecture, on which port would like your server to run? It should be unique to avoid port conflicts. 9999</span><br><span class="line">? (4/14) What is your default Java package name? cn.jhipter.uaa</span><br><span class="line">? (5/14) Which Service Discovery and Configuration solution would you like to use? JHipster Registry (using Eureka and Spring Cloud Config)</span><br><span class="line">? (6/14) Which *type* of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle, MSSQL)</span><br><span class="line">? (7/14) Which *production* database would you like to use? MySQL</span><br><span class="line">? (8/14) Which *development* database would you like to use? MySQL</span><br><span class="line">? (9/14) Do you want to use Hibernate 2nd level cache? Yes, with HazelCast (distributed cache, for multiple nodes)</span><br><span class="line">? (10/14) Would you like to use Maven or Gradle for building the backend? Maven</span><br><span class="line">? (11/14) Which other technologies would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (12/14) Would you like to enable internationalization support? Yes</span><br><span class="line">#国际化支持，选择简体中文</span><br><span class="line">? Please choose the native language of the application? Chinese (Simplified)</span><br><span class="line">? Please choose additional languages to install (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (13/14) Which testing frameworks would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)Gatling</span><br></pre></td></tr></table></figure><p>通过<code>mvnw</code>编译启动项目</p><h5 id="创建Microservices-Application"><a href="#创建Microservices-Application" class="headerlink" title="创建Microservices Application"></a>创建Microservices Application</h5><p>操作同uaa</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#创建文件夹存放项目</span><br><span class="line">mkdir app</span><br><span class="line">#切换到文件夹</span><br><span class="line">cd app</span><br><span class="line">#创建微服务</span><br><span class="line">yo jhipster</span><br><span class="line">#仅供参考</span><br><span class="line">? (1/14) Which *type* of application would you like to create? Microservice application</span><br><span class="line">? (2/14) What is the base name of your application? app</span><br><span class="line">? (3/14) Would you like to install other generators from the JHipster Market Place? No</span><br><span class="line">? (3/14) As you are running in a microservice architecture, on which port would like your server to run? It should be unique to avoid port conflicts. 8081</span><br><span class="line">? (4/14) What is your default Java package name? cn.jhipster.app</span><br><span class="line">? (5/14) Which *type* of authentication would you like to use? [BETA] Authentication with JHipster UAA server (the server must be generated separately)</span><br><span class="line">? (6/14) What is the folder path of your UAA application?. ../uaa</span><br><span class="line">? (7/14) Which Service Discovery and Configuration solution would you like to use? JHipster Registry (using Eureka and Spring Cloud Config)</span><br><span class="line">? (8/14) Which *type* of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle)</span><br><span class="line">? (9/14) Which *production* database would you like to use? MySQL</span><br><span class="line">? (10/14) Which *development* database would you like to use? MySQL</span><br><span class="line">? (11/14) Do you want to use Hibernate 2nd level cache? Yes, with HazelCast (distributed cache, for multiple nodes)</span><br><span class="line">? (12/14) Would you like to use Maven or Gradle for building the backend? Maven</span><br><span class="line">? (13/14) Which other technologies would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (14/14) Would you like to enable internationalization support? Yes</span><br><span class="line">? Please choose the native language of the application? Chinese (Simplified)</span><br><span class="line">? Please choose additional languages to install (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (15/14) Which testing frameworks would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)Gatling</span><br></pre></td></tr></table></figure><p>同样还需要修改数据库配置<code>\src\main\resources\config\application-dev.yml</code>，在application.yml中可以看到，系统已经自动帮我们注册了 </p><p><img src="https://i.imgur.com/tuXzdBk.jpg" alt=""></p><p> 启动项目（参考uaa）</p><h5 id="创建网关-Gateway"><a href="#创建网关-Gateway" class="headerlink" title="创建网关(Gateway)"></a>创建网关(Gateway)</h5><p>创建一个网关，用来做为所有请求的入口</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#创建文件夹存放项目</span><br><span class="line">mkdir gateway</span><br><span class="line">#切换到文件夹</span><br><span class="line">cd gateway</span><br><span class="line">#创建微服务网关</span><br><span class="line">yo jhipster</span><br><span class="line">#仅供参考</span><br><span class="line">? (1/14) Which *type* of application would you like to create? Microservice gateway</span><br><span class="line">? (2/14) What is the base name of your application? gateway</span><br><span class="line">? (3/14) Would you like to install other generators from the JHipster Market Place? No</span><br><span class="line">? (3/14) As you are running in a microservice architecture, on which port would like your server to run? It should be unique to avoid port conflicts. 8080</span><br><span class="line">? (4/14) What is your default Java package name? cn.jhipster.gateway</span><br><span class="line">? (5/14) Which *type* of authentication would you like to use? [BETA] Authentication with JHipster UAA server (the server must be generated separately)</span><br><span class="line">? (6/14) What is the folder path of your UAA application?. ../uaa</span><br><span class="line">? (7/14) Which Service Discovery and Configuration solution would you like to use? JHipster Registry (using Eureka and Spring Cloud Config)</span><br><span class="line">? (8/14) Which *type* of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle, MSSQL)</span><br><span class="line">? (9/14) Which *production* database would you like to use? MySQL</span><br><span class="line">? (10/14) Which *development* database would you like to use? MySQL</span><br><span class="line">? (11/14) Do you want to use Hibernate 2nd level cache? Yes, with HazelCast (distributed cache, for multiple nodes)</span><br><span class="line">? (12/14) Would you like to use Maven or Gradle for building the backend? Maven</span><br><span class="line">? (13/14) Which other technologies would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (14/14) Would you like to use the LibSass stylesheet preprocessor for your CSS? No</span><br><span class="line">? (15/14) Would you like to enable internationalization support? Yes</span><br><span class="line">? Please choose the native language of the application? Chinese (Simplified)</span><br><span class="line">? Please choose additional languages to install (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)</span><br><span class="line">? (16/14) Which testing frameworks would you like to use? (Press &lt;space&gt; to select, &lt;a&gt; to toggle all, &lt;i&gt; to inverse selection)Gatling</span><br></pre></td></tr></table></figure><p>同样需要修改数据库配置并启动项目 </p><p><img src="https://i.imgur.com/fqB3sGs.jpg" alt=""></p><p>打开<a href="http://localhost:8761，就可以查看到我们创建的服务。" target="_blank" rel="noopener">http://localhost:8761，就可以查看到我们创建的服务。</a> 将它和网关服务进行对比，可以看出网关页面管理里面多了些菜单。</p><p> <strong>软件推荐</strong>：</p><p> 由于创建都是敲命令实现的，而系统原生的cmd使用起来并不怎么友好，可以使用cmder这款软件进行操作。<code>cmder</code>是一个跨平台的命令行增强工具,可以集成windows batch, power shell, git, linux bash等多种命令行于一体,使用起来还是十分方便的 </p><p><strong>相关介绍：</strong> <a href="https://www.zhengjie.me/blog/465.html">https://www.zhengjie.me/blog/465.html</a></p>]]></content>
     
     <summary type="html">
     
@@ -142,19 +142,19 @@
     
     </summary>
     
-      <category term="JHipster" scheme="blog.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="JHipster入门" scheme="blog.zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
+      <category term="JHipster入门" scheme="www.zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
     
-      <category term="jhipster微服务" scheme="blog.zhengjie.me/tags/jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="jhipster微服务" scheme="www.zhengjie.me/tags/jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
   <entry>
     <title>解决JHipster启动出现空白页的问题</title>
-    <link href="blog.zhengjie.me/blog/443.html"/>
-    <id>blog.zhengjie.me/blog/443.html</id>
+    <link href="www.zhengjie.me/blog/443.html"/>
+    <id>www.zhengjie.me/blog/443.html</id>
     <published>2018-08-07T04:23:15.000Z</published>
     <updated>2018-08-29T12:01:54.569Z</updated>
     
@@ -170,17 +170,17 @@
     
     </summary>
     
-      <category term="JHipster" scheme="blog.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="Jhipster空白页问题" scheme="blog.zhengjie.me/tags/Jhipster%E7%A9%BA%E7%99%BD%E9%A1%B5%E9%97%AE%E9%A2%98/"/>
+      <category term="Jhipster空白页问题" scheme="www.zhengjie.me/tags/Jhipster%E7%A9%BA%E7%99%BD%E9%A1%B5%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
   <entry>
     <title>美化cmd，Windows神器推荐Cmder</title>
-    <link href="blog.zhengjie.me/blog/465.html"/>
-    <id>blog.zhengjie.me/blog/465.html</id>
+    <link href="www.zhengjie.me/blog/465.html"/>
+    <id>www.zhengjie.me/blog/465.html</id>
     <published>2018-08-06T08:24:28.000Z</published>
     <updated>2018-08-29T12:05:03.966Z</updated>
     
@@ -196,19 +196,19 @@
     
     </summary>
     
-      <category term="随笔" scheme="blog.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="cmd" scheme="blog.zhengjie.me/tags/cmd/"/>
+      <category term="cmd" scheme="www.zhengjie.me/tags/cmd/"/>
     
-      <category term="cmder" scheme="blog.zhengjie.me/tags/cmder/"/>
+      <category term="cmder" scheme="www.zhengjie.me/tags/cmder/"/>
     
   </entry>
   
   <entry>
     <title>JHipster 创建实体，并且增加关联关系</title>
-    <link href="blog.zhengjie.me/blog/438.html"/>
-    <id>blog.zhengjie.me/blog/438.html</id>
+    <link href="www.zhengjie.me/blog/438.html"/>
+    <id>www.zhengjie.me/blog/438.html</id>
     <published>2018-08-06T06:52:29.000Z</published>
     <updated>2018-08-29T12:14:00.272Z</updated>
     
@@ -228,19 +228,19 @@
     
     </summary>
     
-      <category term="JHipster" scheme="blog.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="JHipster入门" scheme="blog.zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
+      <category term="JHipster入门" scheme="www.zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
     
-      <category term="JHipster创建实体详细教程" scheme="blog.zhengjie.me/tags/JHipster%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/"/>
+      <category term="JHipster创建实体详细教程" scheme="www.zhengjie.me/tags/JHipster%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>在windows中安装JHipster并创建应用</title>
-    <link href="blog.zhengjie.me/blog/433.html"/>
-    <id>blog.zhengjie.me/blog/433.html</id>
+    <link href="www.zhengjie.me/blog/433.html"/>
+    <id>www.zhengjie.me/blog/433.html</id>
     <published>2018-08-04T03:33:21.000Z</published>
     <updated>2018-08-29T12:22:19.003Z</updated>
     
@@ -255,17 +255,17 @@
     
     </summary>
     
-      <category term="JHipster" scheme="blog.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="JHipster安装" scheme="blog.zhengjie.me/tags/JHipster%E5%AE%89%E8%A3%85/"/>
+      <category term="JHipster安装" scheme="www.zhengjie.me/tags/JHipster%E5%AE%89%E8%A3%85/"/>
     
   </entry>
   
   <entry>
     <title>Docker? 为什么要使用Docker？</title>
-    <link href="blog.zhengjie.me/blog/430.html"/>
-    <id>blog.zhengjie.me/blog/430.html</id>
+    <link href="www.zhengjie.me/blog/430.html"/>
+    <id>www.zhengjie.me/blog/430.html</id>
     <published>2018-07-08T03:17:11.000Z</published>
     <updated>2018-08-29T12:28:04.817Z</updated>
     
@@ -280,21 +280,21 @@
     
     </summary>
     
-      <category term="docker" scheme="blog.zhengjie.me/categories/docker/"/>
+      <category term="docker" scheme="www.zhengjie.me/categories/docker/"/>
     
     
-      <category term="docker使用范围" scheme="blog.zhengjie.me/tags/docker%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4/"/>
+      <category term="docker使用范围" scheme="www.zhengjie.me/tags/docker%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4/"/>
     
-      <category term="docker入门" scheme="blog.zhengjie.me/tags/docker%E5%85%A5%E9%97%A8/"/>
+      <category term="docker入门" scheme="www.zhengjie.me/tags/docker%E5%85%A5%E9%97%A8/"/>
     
-      <category term="为什么使用docker" scheme="blog.zhengjie.me/tags/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8docker/"/>
+      <category term="为什么使用docker" scheme="www.zhengjie.me/tags/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8docker/"/>
     
   </entry>
   
   <entry>
     <title>Java开发-必学的Linux命令整合</title>
-    <link href="blog.zhengjie.me/blog/429.html"/>
-    <id>blog.zhengjie.me/blog/429.html</id>
+    <link href="www.zhengjie.me/blog/429.html"/>
+    <id>www.zhengjie.me/blog/429.html</id>
     <published>2018-07-01T13:23:37.000Z</published>
     <updated>2018-08-29T02:10:04.356Z</updated>
     
@@ -310,21 +310,21 @@
     
     </summary>
     
-      <category term="随笔" scheme="blog.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="java学习linux命令" scheme="blog.zhengjie.me/tags/java%E5%AD%A6%E4%B9%A0linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="java学习linux命令" scheme="www.zhengjie.me/tags/java%E5%AD%A6%E4%B9%A0linux%E5%91%BD%E4%BB%A4/"/>
     
-      <category term="Linux命令" scheme="blog.zhengjie.me/tags/Linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="Linux命令" scheme="www.zhengjie.me/tags/Linux%E5%91%BD%E4%BB%A4/"/>
     
-      <category term="linux学习" scheme="blog.zhengjie.me/tags/linux%E5%AD%A6%E4%B9%A0/"/>
+      <category term="linux学习" scheme="www.zhengjie.me/tags/linux%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>掌握这10条规范，轻松搞定Git！</title>
-    <link href="blog.zhengjie.me/blog/428.html"/>
-    <id>blog.zhengjie.me/blog/428.html</id>
+    <link href="www.zhengjie.me/blog/428.html"/>
+    <id>www.zhengjie.me/blog/428.html</id>
     <published>2018-06-04T09:31:20.000Z</published>
     <updated>2018-08-29T12:41:16.762Z</updated>
     
@@ -339,31 +339,31 @@
     
     </summary>
     
-      <category term="Git" scheme="blog.zhengjie.me/categories/Git/"/>
+      <category term="Git" scheme="www.zhengjie.me/categories/Git/"/>
     
     
-      <category term="Git" scheme="blog.zhengjie.me/tags/Git/"/>
+      <category term="Git" scheme="www.zhengjie.me/tags/Git/"/>
     
-      <category term="git stash临时保存本地操作" scheme="blog.zhengjie.me/tags/git-stash%E4%B8%B4%E6%97%B6%E4%BF%9D%E5%AD%98%E6%9C%AC%E5%9C%B0%E6%93%8D%E4%BD%9C/"/>
+      <category term="git stash临时保存本地操作" scheme="www.zhengjie.me/tags/git-stash%E4%B8%B4%E6%97%B6%E4%BF%9D%E5%AD%98%E6%9C%AC%E5%9C%B0%E6%93%8D%E4%BD%9C/"/>
     
-      <category term="git入门" scheme="blog.zhengjie.me/tags/git%E5%85%A5%E9%97%A8/"/>
+      <category term="git入门" scheme="www.zhengjie.me/tags/git%E5%85%A5%E9%97%A8/"/>
     
-      <category term="git合并与删除分支" scheme="blog.zhengjie.me/tags/git%E5%90%88%E5%B9%B6%E4%B8%8E%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF/"/>
+      <category term="git合并与删除分支" scheme="www.zhengjie.me/tags/git%E5%90%88%E5%B9%B6%E4%B8%8E%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF/"/>
     
-      <category term="git恢复stash内容" scheme="blog.zhengjie.me/tags/git%E6%81%A2%E5%A4%8Dstash%E5%86%85%E5%AE%B9/"/>
+      <category term="git恢复stash内容" scheme="www.zhengjie.me/tags/git%E6%81%A2%E5%A4%8Dstash%E5%86%85%E5%AE%B9/"/>
     
-      <category term="git撤销修改" scheme="blog.zhengjie.me/tags/git%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/"/>
+      <category term="git撤销修改" scheme="www.zhengjie.me/tags/git%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/"/>
     
-      <category term="git版本回退" scheme="blog.zhengjie.me/tags/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/"/>
+      <category term="git版本回退" scheme="www.zhengjie.me/tags/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/"/>
     
-      <category term="git解决冲突" scheme="blog.zhengjie.me/tags/git%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81/"/>
+      <category term="git解决冲突" scheme="www.zhengjie.me/tags/git%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81/"/>
     
   </entry>
   
   <entry>
     <title>Spring boot整合SwaggerUI构建API文档</title>
-    <link href="blog.zhengjie.me/blog/383.html"/>
-    <id>blog.zhengjie.me/blog/383.html</id>
+    <link href="www.zhengjie.me/blog/383.html"/>
+    <id>www.zhengjie.me/blog/383.html</id>
     <published>2018-04-05T07:40:34.000Z</published>
     <updated>2018-08-29T12:46:56.884Z</updated>
     
@@ -379,17 +379,17 @@
     
     </summary>
     
-      <category term="Spring boot" scheme="blog.zhengjie.me/categories/Spring-boot/"/>
+      <category term="Spring boot" scheme="www.zhengjie.me/categories/Spring-boot/"/>
     
     
-      <category term="spring boot构建 SwaggerUI" scheme="blog.zhengjie.me/tags/spring-boot%E6%9E%84%E5%BB%BA-SwaggerUI/"/>
+      <category term="spring boot构建 SwaggerUI" scheme="www.zhengjie.me/tags/spring-boot%E6%9E%84%E5%BB%BA-SwaggerUI/"/>
     
   </entry>
   
   <entry>
     <title>Spring boot配置文件</title>
-    <link href="blog.zhengjie.me/blog/331.html"/>
-    <id>blog.zhengjie.me/blog/331.html</id>
+    <link href="www.zhengjie.me/blog/331.html"/>
+    <id>www.zhengjie.me/blog/331.html</id>
     <published>2018-03-16T07:37:21.000Z</published>
     <updated>2018-08-29T13:11:31.556Z</updated>
     
@@ -404,17 +404,17 @@
     
     </summary>
     
-      <category term="Spring boot" scheme="blog.zhengjie.me/categories/Spring-boot/"/>
+      <category term="Spring boot" scheme="www.zhengjie.me/categories/Spring-boot/"/>
     
     
-      <category term="spring boot配置文件详解" scheme="blog.zhengjie.me/tags/spring-boot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/"/>
+      <category term="spring boot配置文件详解" scheme="www.zhengjie.me/tags/spring-boot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/"/>
     
   </entry>
   
   <entry>
     <title>解决Spring boot无数据库启动失败的问题</title>
-    <link href="blog.zhengjie.me/blog/327.html"/>
-    <id>blog.zhengjie.me/blog/327.html</id>
+    <link href="www.zhengjie.me/blog/327.html"/>
+    <id>www.zhengjie.me/blog/327.html</id>
     <published>2018-03-16T05:32:13.000Z</published>
     <updated>2018-08-29T13:13:57.210Z</updated>
     
@@ -430,21 +430,21 @@
     
     </summary>
     
-      <category term="Spring boot" scheme="blog.zhengjie.me/categories/Spring-boot/"/>
+      <category term="Spring boot" scheme="www.zhengjie.me/categories/Spring-boot/"/>
     
     
-      <category term="spring boot禁止自动注入数据库" scheme="blog.zhengjie.me/tags/spring-boot%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="spring boot禁止自动注入数据库" scheme="www.zhengjie.me/tags/spring-boot%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
   <entry>
     <title>编写Dockerfile发布Spring boot项目</title>
-    <link href="blog.zhengjie.me/blog/271.html"/>
-    <id>blog.zhengjie.me/blog/271.html</id>
+    <link href="www.zhengjie.me/blog/271.html"/>
+    <id>www.zhengjie.me/blog/271.html</id>
     <published>2018-03-07T14:07:30.000Z</published>
     <updated>2018-08-29T13:20:23.593Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>在公司写了两个月的oa项目，要上线初步测试，需要提供一个spring boot的docker镜像和前端整合，于是 查阅资料编写了一个dockerfile 现将步骤记录于此，方便自己，也希望能帮助其他人 </p><ol><li>在服务器上创建一个文件夹，将jar包和资源文件上传到该文件夹下</li><li>在该文件夹下新建一个Docker文件</li></ol><p>由于开发环境和生产环境的所使用的数据库是不一样的，所以在这里我指定了一个外部配置文件</p><h4 id="编写Dockerfile"><a href="#编写Dockerfile" class="headerlink" title="编写Dockerfile"></a>编写Dockerfile</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#基于镜像</span><br><span class="line">FROM azul/zulu-openjdk:8</span><br><span class="line">#创建一个放资源目录的文件夹</span><br><span class="line">VOLUME /etc/resources</span><br><span class="line">#将打包好的jar包添加到容器根目录</span><br><span class="line">ADD netbank.jar app.jar</span><br><span class="line">#将资源文件添加的资源文件夹</span><br><span class="line">ADD application.properties /etc/resources/application.properties</span><br><span class="line">RUN bash -c &apos;touch /app.jar&apos;</span><br><span class="line">#端口设置</span><br><span class="line">EXPOSE 8080</span><br><span class="line">#启动命令   --指定了外部application.properties</span><br><span class="line">CMD [&quot;java&quot;,&quot;-Dspring.config.location=/etc/resources/application.properties&quot;,&quot;-jar&quot;,&quot;app.jar&quot;]</span><br></pre></td></tr></table></figure><p>使用xshell或其他工具，定位到该目录</p><h4 id="执行命令，生成镜像"><a href="#执行命令，生成镜像" class="headerlink" title="执行命令，生成镜像"></a>执行命令，生成镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build ./ -t springboot:1.0</span><br><span class="line">dcoker images    -查看镜像</span><br></pre></td></tr></table></figure><p><strong>./ </strong>  表明从当前路径中寻找Dockerfile文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name 容器名 -p 8080:8080 -itd 镜像id</span><br></pre></td></tr></table></figure><p>进入容器配置配置资源文件</p><blockquote></blockquote><p>参考: <a href="https://www.zhengjie.me/blog/233.html" target="_blank" rel="noopener">https://www.zhengjie.me/blog/233.html</a> </p><blockquote></blockquote><p>参考资料Dockerfile详解: <a href="https://www.cnblogs.com/sorex/p/6481407.html" target="_blank" rel="noopener">https://www.cnblogs.com/sorex/p/6481407.html</a> </p>]]></content>
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>在公司写了两个月的oa项目，要上线初步测试，需要提供一个spring boot的docker镜像和前端整合，于是 查阅资料编写了一个dockerfile 现将步骤记录于此，方便自己，也希望能帮助其他人 </p><ol><li>在服务器上创建一个文件夹，将jar包和资源文件上传到该文件夹下</li><li>在该文件夹下新建一个Docker文件</li></ol><p>由于开发环境和生产环境的所使用的数据库是不一样的，所以在这里我指定了一个外部配置文件</p><h4 id="编写Dockerfile"><a href="#编写Dockerfile" class="headerlink" title="编写Dockerfile"></a>编写Dockerfile</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#基于镜像</span><br><span class="line">FROM azul/zulu-openjdk:8</span><br><span class="line">#创建一个放资源目录的文件夹</span><br><span class="line">VOLUME /etc/resources</span><br><span class="line">#将打包好的jar包添加到容器根目录</span><br><span class="line">ADD netbank.jar app.jar</span><br><span class="line">#将资源文件添加的资源文件夹</span><br><span class="line">ADD application.properties /etc/resources/application.properties</span><br><span class="line">RUN bash -c &apos;touch /app.jar&apos;</span><br><span class="line">#端口设置</span><br><span class="line">EXPOSE 8080</span><br><span class="line">#启动命令   --指定了外部application.properties</span><br><span class="line">CMD [&quot;java&quot;,&quot;-Dspring.config.location=/etc/resources/application.properties&quot;,&quot;-jar&quot;,&quot;app.jar&quot;]</span><br></pre></td></tr></table></figure><p>使用xshell或其他工具，定位到该目录</p><h4 id="执行命令，生成镜像"><a href="#执行命令，生成镜像" class="headerlink" title="执行命令，生成镜像"></a>执行命令，生成镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build ./ -t springboot:1.0</span><br><span class="line">dcoker images    -查看镜像</span><br></pre></td></tr></table></figure><p><strong>./ </strong>  表明从当前路径中寻找Dockerfile文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name 容器名 -p 8080:8080 -itd 镜像id</span><br></pre></td></tr></table></figure><p>进入容器配置配置资源文件</p><blockquote></blockquote><p>参考: <a href="https://www.zhengjie.me/blog/233.html">https://www.zhengjie.me/blog/233.html</a> </p><blockquote></blockquote><p>参考资料Dockerfile详解: <a href="https://www.cnblogs.com/sorex/p/6481407.html" target="_blank" rel="noopener">https://www.cnblogs.com/sorex/p/6481407.html</a> </p>]]></content>
     
     <summary type="html">
     
@@ -455,19 +455,19 @@
     
     </summary>
     
-      <category term="docker" scheme="blog.zhengjie.me/categories/docker/"/>
+      <category term="docker" scheme="www.zhengjie.me/categories/docker/"/>
     
     
-      <category term="docker" scheme="blog.zhengjie.me/tags/docker/"/>
+      <category term="docker" scheme="www.zhengjie.me/tags/docker/"/>
     
-      <category term="编写Dockerfile发布spring boot" scheme="blog.zhengjie.me/tags/%E7%BC%96%E5%86%99Dockerfile%E5%8F%91%E5%B8%83spring-boot/"/>
+      <category term="编写Dockerfile发布spring boot" scheme="www.zhengjie.me/tags/%E7%BC%96%E5%86%99Dockerfile%E5%8F%91%E5%B8%83spring-boot/"/>
     
   </entry>
   
   <entry>
     <title>在docker容器中使用mysql</title>
-    <link href="blog.zhengjie.me/blog/237.html"/>
-    <id>blog.zhengjie.me/blog/237.html</id>
+    <link href="www.zhengjie.me/blog/237.html"/>
+    <id>www.zhengjie.me/blog/237.html</id>
     <published>2018-03-05T05:11:50.000Z</published>
     <updated>2018-08-29T13:34:02.196Z</updated>
     
@@ -482,25 +482,25 @@
     
     </summary>
     
-      <category term="docker" scheme="blog.zhengjie.me/categories/docker/"/>
+      <category term="docker" scheme="www.zhengjie.me/categories/docker/"/>
     
-      <category term="MySQL" scheme="blog.zhengjie.me/categories/docker/MySQL/"/>
+      <category term="MySQL" scheme="www.zhengjie.me/categories/docker/MySQL/"/>
     
     
-      <category term="docker" scheme="blog.zhengjie.me/tags/docker/"/>
+      <category term="docker" scheme="www.zhengjie.me/tags/docker/"/>
     
-      <category term="docker容器使用mysql" scheme="blog.zhengjie.me/tags/docker%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8mysql/"/>
+      <category term="docker容器使用mysql" scheme="www.zhengjie.me/tags/docker%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8mysql/"/>
     
   </entry>
   
   <entry>
     <title>基于centos的docker安装与卸载</title>
-    <link href="blog.zhengjie.me/blog/232.html"/>
-    <id>blog.zhengjie.me/blog/232.html</id>
+    <link href="www.zhengjie.me/blog/232.html"/>
+    <id>www.zhengjie.me/blog/232.html</id>
     <published>2018-02-28T05:59:58.000Z</published>
     <updated>2018-08-29T13:38:48.054Z</updated>
     
-    <content type="html"><![CDATA[<h5 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h5><ol><li>系统内核需要大于3.10 uname -r </li><li>最好确保yum为最新 <code>yum update</code></li></ol><h5 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-io   或者 yum install docker-engine     --安装docker</span><br><span class="line">systemctl start docker.service    --启动docker服务</span><br><span class="line">systemctl enable docker    --设置开机自启</span><br></pre></td></tr></table></figure><h5 id="卸载docker"><a href="#卸载docker" class="headerlink" title="卸载docker"></a>卸载docker</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">列出所有docker安装包：yum list installed | grep docker</span><br><span class="line">[root@admin ~]# yum list installed | grep docker</span><br><span class="line">docker.x86_64                     2:1.12.6-71.git3e8e77d.el7.centos.1  @extras</span><br><span class="line">docker-client.x86_64              2:1.12.6-71.git3e8e77d.el7.centos.1  @extras</span><br><span class="line">docker-common.x86_64              2:1.12.6-71.git3e8e77d.el7.centos.1  @extras</span><br><span class="line">删除所有安装包</span><br><span class="line">[root@admin ~]# yum -y remove docker-common.x86_64</span><br><span class="line">删除所有镜像容器等</span><br><span class="line">[root@admin ~]# rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure><h5 id="其他docker操作参考实例"><a href="#其他docker操作参考实例" class="headerlink" title="其他docker操作参考实例"></a>其他docker操作参考实例</h5><blockquote><p><a href="https://www.zhengjie.me/blog/233.html" target="_blank" rel="noopener">在docker中使用tomcat发布web项目</a><br>Windows下安装docker： <a href="https://www.linuxidc.com/Linux/2016-07/133506.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2016-07/133506.htm</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h5 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h5><ol><li>系统内核需要大于3.10 uname -r </li><li>最好确保yum为最新 <code>yum update</code></li></ol><h5 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-io   或者 yum install docker-engine     --安装docker</span><br><span class="line">systemctl start docker.service    --启动docker服务</span><br><span class="line">systemctl enable docker    --设置开机自启</span><br></pre></td></tr></table></figure><h5 id="卸载docker"><a href="#卸载docker" class="headerlink" title="卸载docker"></a>卸载docker</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">列出所有docker安装包：yum list installed | grep docker</span><br><span class="line">[root@admin ~]# yum list installed | grep docker</span><br><span class="line">docker.x86_64                     2:1.12.6-71.git3e8e77d.el7.centos.1  @extras</span><br><span class="line">docker-client.x86_64              2:1.12.6-71.git3e8e77d.el7.centos.1  @extras</span><br><span class="line">docker-common.x86_64              2:1.12.6-71.git3e8e77d.el7.centos.1  @extras</span><br><span class="line">删除所有安装包</span><br><span class="line">[root@admin ~]# yum -y remove docker-common.x86_64</span><br><span class="line">删除所有镜像容器等</span><br><span class="line">[root@admin ~]# rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure><h5 id="其他docker操作参考实例"><a href="#其他docker操作参考实例" class="headerlink" title="其他docker操作参考实例"></a>其他docker操作参考实例</h5><blockquote><p><a href="https://www.zhengjie.me/blog/233.html">在docker中使用tomcat发布web项目</a><br>Windows下安装docker： <a href="https://www.linuxidc.com/Linux/2016-07/133506.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2016-07/133506.htm</a></p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -513,17 +513,17 @@
     
     </summary>
     
-      <category term="docker" scheme="blog.zhengjie.me/categories/docker/"/>
+      <category term="docker" scheme="www.zhengjie.me/categories/docker/"/>
     
     
-      <category term="docker安装，docker卸载" scheme="blog.zhengjie.me/tags/docker%E5%AE%89%E8%A3%85%EF%BC%8Cdocker%E5%8D%B8%E8%BD%BD/"/>
+      <category term="docker安装，docker卸载" scheme="www.zhengjie.me/tags/docker%E5%AE%89%E8%A3%85%EF%BC%8Cdocker%E5%8D%B8%E8%BD%BD/"/>
     
   </entry>
   
   <entry>
     <title>mysql开启远程访问权限</title>
-    <link href="blog.zhengjie.me/blog/169.html"/>
-    <id>blog.zhengjie.me/blog/169.html</id>
+    <link href="www.zhengjie.me/blog/169.html"/>
+    <id>www.zhengjie.me/blog/169.html</id>
     <published>2018-01-22T14:14:47.000Z</published>
     <updated>2018-08-29T02:10:04.356Z</updated>
     
@@ -544,17 +544,17 @@
     
     </summary>
     
-      <category term="MySQL" scheme="blog.zhengjie.me/categories/MySQL/"/>
+      <category term="MySQL" scheme="www.zhengjie.me/categories/MySQL/"/>
     
     
-      <category term="mysql，mysql配置远程访问" scheme="blog.zhengjie.me/tags/mysql%EF%BC%8Cmysql%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/"/>
+      <category term="mysql，mysql配置远程访问" scheme="www.zhengjie.me/tags/mysql%EF%BC%8Cmysql%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/"/>
     
   </entry>
   
   <entry>
     <title>git生成ssh keys步骤与使用</title>
-    <link href="blog.zhengjie.me/blog/64.html"/>
-    <id>blog.zhengjie.me/blog/64.html</id>
+    <link href="www.zhengjie.me/blog/64.html"/>
+    <id>www.zhengjie.me/blog/64.html</id>
     <published>2018-01-10T08:51:02.000Z</published>
     <updated>2018-08-29T13:45:03.409Z</updated>
     
@@ -570,17 +570,17 @@
     
     </summary>
     
-      <category term="Git" scheme="blog.zhengjie.me/categories/Git/"/>
+      <category term="Git" scheme="www.zhengjie.me/categories/Git/"/>
     
     
-      <category term="Git，git生成ssh key，git入门" scheme="blog.zhengjie.me/tags/Git%EF%BC%8Cgit%E7%94%9F%E6%88%90ssh-key%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
+      <category term="Git，git生成ssh key，git入门" scheme="www.zhengjie.me/tags/Git%EF%BC%8Cgit%E7%94%9F%E6%88%90ssh-key%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
   <entry>
     <title>git常用命令</title>
-    <link href="blog.zhengjie.me/blog/21.html"/>
-    <id>blog.zhengjie.me/blog/21.html</id>
+    <link href="www.zhengjie.me/blog/21.html"/>
+    <id>www.zhengjie.me/blog/21.html</id>
     <published>2018-01-07T15:41:44.000Z</published>
     <updated>2018-08-29T14:51:05.180Z</updated>
     
@@ -596,10 +596,10 @@
     
     </summary>
     
-      <category term="Git" scheme="blog.zhengjie.me/categories/Git/"/>
+      <category term="Git" scheme="www.zhengjie.me/categories/Git/"/>
     
     
-      <category term="git命令，git入门" scheme="blog.zhengjie.me/tags/git%E5%91%BD%E4%BB%A4%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
+      <category term="git命令，git入门" scheme="www.zhengjie.me/tags/git%E5%91%BD%E4%BB%A4%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
