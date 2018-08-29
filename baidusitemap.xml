@@ -4,7 +4,7 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/430.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/430.html</loc>
     <lastmod>2018-08-29T04:21:30.145Z</lastmod>
     <data>
         <display>
@@ -20,7 +20,7 @@
          
            
              
-              <breadCrumb title="docker" url="hgpt.coding.me/hexo/categories/docker/"/>
+              <breadCrumb title="docker" url="blog.zhengjie.me/hexo/categories/docker/"/>
           
         </display>
     </data>
@@ -30,21 +30,41 @@
     
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/438.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/492.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
-        <title>JHipster 创建实体，并且增加关联关系</title>
-        <pubTime>2018-08-06T06:52:29.000Z</pubTime>
+        <title>Java 8 Optional 类</title>
+        <pubTime>2018-08-09T13:06:36.000Z</pubTime>
+        
+        <tag>Optional 类</tag>
+         
+         
+           
+             
+              <breadCrumb title="随笔" url="blog.zhengjie.me/hexo/categories/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>blog.zhengjie.me/hexo/blog/478.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Jhipster 创建微服务</title>
+        <pubTime>2018-08-08T07:58:15.000Z</pubTime>
         
         <tag>JHipster入门</tag>
          
-        <tag>JHipster创建实体详细教程</tag>
+        <tag>jhipster微服务</tag>
          
          
            
              
-              <breadCrumb title="JHipster" url="hgpt.coding.me/hexo/categories/JHipster/"/>
+              <breadCrumb title="JHipster" url="blog.zhengjie.me/hexo/categories/JHipster/"/>
           
         </display>
     </data>
@@ -52,19 +72,19 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/433.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/443.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
-        <title>在windows中安装JHipster并创建应用</title>
-        <pubTime>2018-08-04T03:33:21.000Z</pubTime>
+        <title>解决JHipster启动出现空白页的问题</title>
+        <pubTime>2018-08-07T04:23:15.000Z</pubTime>
         
-        <tag>JHipster安装</tag>
+        <tag>Jhipster空白页问题</tag>
          
          
            
              
-              <breadCrumb title="JHipster" url="hgpt.coding.me/hexo/categories/JHipster/"/>
+              <breadCrumb title="JHipster" url="blog.zhengjie.me/hexo/categories/JHipster/"/>
           
         </display>
     </data>
@@ -72,29 +92,7 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/271.html</loc>
-    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
-    <data>
-        <display>
-        <title>编写Dockerfile发布Spring boot项目</title>
-        <pubTime>2018-03-07T14:07:30.000Z</pubTime>
-        
-        <tag>docker</tag>
-         
-        <tag>编写Dockerfile发布spring boot</tag>
-         
-         
-           
-             
-              <breadCrumb title="docker" url="hgpt.coding.me/hexo/categories/docker/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>hgpt.coding.me/hexo/blog/465.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/465.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
@@ -108,7 +106,7 @@
          
            
              
-              <breadCrumb title="随笔" url="hgpt.coding.me/hexo/categories/%E9%9A%8F%E7%AC%94/"/>
+              <breadCrumb title="随笔" url="blog.zhengjie.me/hexo/categories/%E9%9A%8F%E7%AC%94/"/>
           
         </display>
     </data>
@@ -116,19 +114,21 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/331.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/438.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
-        <title>Spring boot配置文件</title>
-        <pubTime>2018-03-16T07:37:21.000Z</pubTime>
+        <title>JHipster 创建实体，并且增加关联关系</title>
+        <pubTime>2018-08-06T06:52:29.000Z</pubTime>
         
-        <tag>spring boot配置文件详解</tag>
+        <tag>JHipster入门</tag>
+         
+        <tag>JHipster创建实体详细教程</tag>
          
          
            
              
-              <breadCrumb title="Spring boot" url="hgpt.coding.me/hexo/categories/Spring-boot/"/>
+              <breadCrumb title="JHipster" url="blog.zhengjie.me/hexo/categories/JHipster/"/>
           
         </display>
     </data>
@@ -136,19 +136,19 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/443.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/433.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
-        <title>解决JHipster启动出现空白页的问题</title>
-        <pubTime>2018-08-07T04:23:15.000Z</pubTime>
+        <title>在windows中安装JHipster并创建应用</title>
+        <pubTime>2018-08-04T03:33:21.000Z</pubTime>
         
-        <tag>Jhipster空白页问题</tag>
+        <tag>JHipster安装</tag>
          
          
            
              
-              <breadCrumb title="JHipster" url="hgpt.coding.me/hexo/categories/JHipster/"/>
+              <breadCrumb title="JHipster" url="blog.zhengjie.me/hexo/categories/JHipster/"/>
           
         </display>
     </data>
@@ -156,19 +156,21 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/21.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/503.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
-        <title>git常用命令</title>
-        <pubTime>2018-01-07T15:41:44.000Z</pubTime>
+        <title>Jhipster 微服务与微服务相互通信</title>
+        <pubTime>2018-08-13T03:52:27.000Z</pubTime>
         
-        <tag>Git，git命令，git入门</tag>
+        <tag>Jhipster微服务调用微服务</tag>
+         
+        <tag>微服务相互通信</tag>
          
          
            
              
-              <breadCrumb title="Git" url="hgpt.coding.me/hexo/categories/Git/"/>
+              <breadCrumb title="JHipster" url="blog.zhengjie.me/hexo/categories/JHipster/"/>
           
         </display>
     </data>
@@ -176,27 +178,7 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/492.html</loc>
-    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
-    <data>
-        <display>
-        <title>Java 8 Optional 类</title>
-        <pubTime>2018-08-09T13:06:36.000Z</pubTime>
-        
-        <tag>Optional 类</tag>
-         
-         
-           
-             
-              <breadCrumb title="随笔" url="hgpt.coding.me/hexo/categories/%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>hgpt.coding.me/hexo/blog/429.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/429.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
@@ -212,7 +194,7 @@
          
            
              
-              <breadCrumb title="随笔" url="hgpt.coding.me/hexo/categories/%E9%9A%8F%E7%AC%94/"/>
+              <breadCrumb title="随笔" url="blog.zhengjie.me/hexo/categories/%E9%9A%8F%E7%AC%94/"/>
           
         </display>
     </data>
@@ -220,52 +202,7 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/237.html</loc>
-    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
-    <data>
-        <display>
-        <title>在docker容器中使用mysql</title>
-        <pubTime>2018-03-05T05:11:50.000Z</pubTime>
-        
-        <tag>docker</tag>
-         
-        <tag>docker容器使用mysql</tag>
-         
-         
-           
-             
-              <breadCrumb title="docker" url="hgpt.coding.me/hexo/categories/docker/"/>
-          
-             
-              <breadCrumb title="MySQL" url="hgpt.coding.me/hexo/categories/docker/MySQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>hgpt.coding.me/hexo/blog/64.html</loc>
-    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
-    <data>
-        <display>
-        <title>git生成ssh keys步骤与使用</title>
-        <pubTime>2018-01-10T08:51:02.000Z</pubTime>
-        
-        <tag>Git，git生成ssh key，git入门</tag>
-         
-         
-           
-             
-              <breadCrumb title="Git" url="hgpt.coding.me/hexo/categories/Git/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>hgpt.coding.me/hexo/blog/428.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/428.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
@@ -291,7 +228,7 @@
          
            
              
-              <breadCrumb title="Git" url="hgpt.coding.me/hexo/categories/Git/"/>
+              <breadCrumb title="Git" url="blog.zhengjie.me/hexo/categories/Git/"/>
           
         </display>
     </data>
@@ -299,29 +236,7 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/478.html</loc>
-    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
-    <data>
-        <display>
-        <title>Jhipster 创建微服务</title>
-        <pubTime>2018-08-08T07:58:15.000Z</pubTime>
-        
-        <tag>JHipster入门</tag>
-         
-        <tag>jhipster微服务</tag>
-         
-         
-           
-             
-              <breadCrumb title="JHipster" url="hgpt.coding.me/hexo/categories/JHipster/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>hgpt.coding.me/hexo/blog/498.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/498.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
@@ -333,7 +248,7 @@
          
            
              
-              <breadCrumb title="JHipster" url="hgpt.coding.me/hexo/categories/JHipster/"/>
+              <breadCrumb title="JHipster" url="blog.zhengjie.me/hexo/categories/JHipster/"/>
           
         </display>
     </data>
@@ -341,21 +256,19 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/503.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/331.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
-        <title>Jhipster 微服务与微服务相互通信</title>
-        <pubTime>2018-08-13T03:52:27.000Z</pubTime>
+        <title>Spring boot配置文件</title>
+        <pubTime>2018-03-16T07:37:21.000Z</pubTime>
         
-        <tag>Jhipster微服务调用微服务</tag>
-         
-        <tag>微服务相互通信</tag>
+        <tag>spring boot配置文件详解</tag>
          
          
            
              
-              <breadCrumb title="JHipster" url="hgpt.coding.me/hexo/categories/JHipster/"/>
+              <breadCrumb title="Spring boot" url="blog.zhengjie.me/hexo/categories/Spring-boot/"/>
           
         </display>
     </data>
@@ -363,47 +276,7 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/169.html</loc>
-    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
-    <data>
-        <display>
-        <title>mysql开启远程访问权限</title>
-        <pubTime>2018-01-22T14:14:47.000Z</pubTime>
-        
-        <tag>mysql，mysql配置远程访问</tag>
-         
-         
-           
-             
-              <breadCrumb title="MySQL" url="hgpt.coding.me/hexo/categories/MySQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>hgpt.coding.me/hexo/blog/383.html</loc>
-    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
-    <data>
-        <display>
-        <title>Spring boot整合SwaggerUI构建API文档</title>
-        <pubTime>2018-04-05T07:40:34.000Z</pubTime>
-        
-        <tag>spring boot构建 SwaggerUI</tag>
-         
-         
-           
-             
-              <breadCrumb title="Spring boot" url="hgpt.coding.me/hexo/categories/Spring-boot/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>hgpt.coding.me/hexo/blog/327.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/327.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
@@ -415,7 +288,7 @@
          
            
              
-              <breadCrumb title="Spring boot" url="hgpt.coding.me/hexo/categories/Spring-boot/"/>
+              <breadCrumb title="Spring boot" url="blog.zhengjie.me/hexo/categories/Spring-boot/"/>
           
         </display>
     </data>
@@ -423,7 +296,7 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/326.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/326.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
@@ -435,7 +308,7 @@
          
            
              
-              <breadCrumb title="Spring boot" url="hgpt.coding.me/hexo/categories/Spring-boot/"/>
+              <breadCrumb title="Spring boot" url="blog.zhengjie.me/hexo/categories/Spring-boot/"/>
           
         </display>
     </data>
@@ -443,7 +316,54 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/232.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/271.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>编写Dockerfile发布Spring boot项目</title>
+        <pubTime>2018-03-07T14:07:30.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>编写Dockerfile发布spring boot</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="blog.zhengjie.me/hexo/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>blog.zhengjie.me/hexo/blog/237.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>在docker容器中使用mysql</title>
+        <pubTime>2018-03-05T05:11:50.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>docker容器使用mysql</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="blog.zhengjie.me/hexo/categories/docker/"/>
+          
+             
+              <breadCrumb title="MySQL" url="blog.zhengjie.me/hexo/categories/docker/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>blog.zhengjie.me/hexo/blog/232.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
@@ -455,7 +375,7 @@
          
            
              
-              <breadCrumb title="docker" url="hgpt.coding.me/hexo/categories/docker/"/>
+              <breadCrumb title="docker" url="blog.zhengjie.me/hexo/categories/docker/"/>
           
         </display>
     </data>
@@ -463,7 +383,67 @@
 
     
   <url>
-    <loc>hgpt.coding.me/hexo/blog/494.html</loc>
+    <loc>blog.zhengjie.me/hexo/blog/169.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>mysql开启远程访问权限</title>
+        <pubTime>2018-01-22T14:14:47.000Z</pubTime>
+        
+        <tag>mysql，mysql配置远程访问</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="blog.zhengjie.me/hexo/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>blog.zhengjie.me/hexo/blog/64.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>git生成ssh keys步骤与使用</title>
+        <pubTime>2018-01-10T08:51:02.000Z</pubTime>
+        
+        <tag>Git，git生成ssh key，git入门</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="blog.zhengjie.me/hexo/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>blog.zhengjie.me/hexo/blog/21.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>git常用命令</title>
+        <pubTime>2018-01-07T15:41:44.000Z</pubTime>
+        
+        <tag>Git，git命令，git入门</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="blog.zhengjie.me/hexo/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>blog.zhengjie.me/hexo/blog/494.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
         <display>
@@ -475,7 +455,27 @@
          
            
              
-              <breadCrumb title="JHipster" url="hgpt.coding.me/hexo/categories/JHipster/"/>
+              <breadCrumb title="JHipster" url="blog.zhengjie.me/hexo/categories/JHipster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>blog.zhengjie.me/hexo/blog/383.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Spring boot整合SwaggerUI构建API文档</title>
+        <pubTime>2018-04-05T07:40:34.000Z</pubTime>
+        
+        <tag>spring boot构建 SwaggerUI</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot" url="blog.zhengjie.me/hexo/categories/Spring-boot/"/>
           
         </display>
     </data>
