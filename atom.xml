@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="www.zhengjie.me/"/>
+  <link href="http://www.zhengjie.me/"/>
   <updated>2018-08-29T09:35:20.938Z</updated>
-  <id>www.zhengjie.me/</id>
+  <id>http://www.zhengjie.me/</id>
   
   <author>
     <name>郑杰</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Jhipster 微服务与微服务相互通信</title>
-    <link href="www.zhengjie.me/blog/503.html"/>
-    <id>www.zhengjie.me/blog/503.html</id>
+    <link href="http://www.zhengjie.me/blog/503.html"/>
+    <id>http://www.zhengjie.me/blog/503.html</id>
     <published>2018-08-13T03:52:27.000Z</published>
     <updated>2018-08-29T09:35:20.938Z</updated>
     
@@ -37,19 +37,19 @@
     
     </summary>
     
-      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="http://www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="Jhipster微服务调用微服务" scheme="www.zhengjie.me/tags/Jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="Jhipster微服务调用微服务" scheme="http://www.zhengjie.me/tags/Jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
-      <category term="微服务相互通信" scheme="www.zhengjie.me/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9B%B8%E4%BA%92%E9%80%9A%E4%BF%A1/"/>
+      <category term="微服务相互通信" scheme="http://www.zhengjie.me/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9B%B8%E4%BA%92%E9%80%9A%E4%BF%A1/"/>
     
   </entry>
   
   <entry>
     <title>Jhipster 如何彻底删除Entity</title>
-    <link href="www.zhengjie.me/blog/498.html"/>
-    <id>www.zhengjie.me/blog/498.html</id>
+    <link href="http://www.zhengjie.me/blog/498.html"/>
+    <id>http://www.zhengjie.me/blog/498.html</id>
     <published>2018-08-10T08:56:00.000Z</published>
     <updated>2018-08-29T11:37:22.231Z</updated>
     
@@ -66,17 +66,17 @@
     
     </summary>
     
-      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="http://www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="jhipster删除实体" scheme="www.zhengjie.me/tags/jhipster%E5%88%A0%E9%99%A4%E5%AE%9E%E4%BD%93/"/>
+      <category term="jhipster删除实体" scheme="http://www.zhengjie.me/tags/jhipster%E5%88%A0%E9%99%A4%E5%AE%9E%E4%BD%93/"/>
     
   </entry>
   
   <entry>
     <title>Jhipster创建实体，Gateway数据菜单为空</title>
-    <link href="www.zhengjie.me/blog/494.html"/>
-    <id>www.zhengjie.me/blog/494.html</id>
+    <link href="http://www.zhengjie.me/blog/494.html"/>
+    <id>http://www.zhengjie.me/blog/494.html</id>
     <published>2018-08-10T02:05:35.000Z</published>
     <updated>2018-08-29T11:42:42.364Z</updated>
     
@@ -92,17 +92,17 @@
     
     </summary>
     
-      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="http://www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="jhipster Gateway数据菜单为空" scheme="www.zhengjie.me/tags/jhipster-Gateway%E6%95%B0%E6%8D%AE%E8%8F%9C%E5%8D%95%E4%B8%BA%E7%A9%BA/"/>
+      <category term="jhipster Gateway数据菜单为空" scheme="http://www.zhengjie.me/tags/jhipster-Gateway%E6%95%B0%E6%8D%AE%E8%8F%9C%E5%8D%95%E4%B8%BA%E7%A9%BA/"/>
     
   </entry>
   
   <entry>
     <title>Java 8 Optional 类</title>
-    <link href="www.zhengjie.me/blog/492.html"/>
-    <id>www.zhengjie.me/blog/492.html</id>
+    <link href="http://www.zhengjie.me/blog/492.html"/>
+    <id>http://www.zhengjie.me/blog/492.html</id>
     <published>2018-08-09T13:06:36.000Z</published>
     <updated>2018-08-29T11:44:31.365Z</updated>
     
@@ -117,17 +117,17 @@
     
     </summary>
     
-      <category term="随笔" scheme="www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="Optional 类" scheme="www.zhengjie.me/tags/Optional-%E7%B1%BB/"/>
+      <category term="Optional 类" scheme="http://www.zhengjie.me/tags/Optional-%E7%B1%BB/"/>
     
   </entry>
   
   <entry>
     <title>Jhipster 创建微服务</title>
-    <link href="www.zhengjie.me/blog/478.html"/>
-    <id>www.zhengjie.me/blog/478.html</id>
+    <link href="http://www.zhengjie.me/blog/478.html"/>
+    <id>http://www.zhengjie.me/blog/478.html</id>
     <published>2018-08-08T07:58:15.000Z</published>
     <updated>2018-08-29T11:58:20.257Z</updated>
     
@@ -142,19 +142,19 @@
     
     </summary>
     
-      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="http://www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="JHipster入门" scheme="www.zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
+      <category term="JHipster入门" scheme="http://www.zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
     
-      <category term="jhipster微服务" scheme="www.zhengjie.me/tags/jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="jhipster微服务" scheme="http://www.zhengjie.me/tags/jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
   <entry>
     <title>解决JHipster启动出现空白页的问题</title>
-    <link href="www.zhengjie.me/blog/443.html"/>
-    <id>www.zhengjie.me/blog/443.html</id>
+    <link href="http://www.zhengjie.me/blog/443.html"/>
+    <id>http://www.zhengjie.me/blog/443.html</id>
     <published>2018-08-07T04:23:15.000Z</published>
     <updated>2018-08-29T12:01:54.569Z</updated>
     
@@ -170,17 +170,17 @@
     
     </summary>
     
-      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="http://www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="Jhipster空白页问题" scheme="www.zhengjie.me/tags/Jhipster%E7%A9%BA%E7%99%BD%E9%A1%B5%E9%97%AE%E9%A2%98/"/>
+      <category term="Jhipster空白页问题" scheme="http://www.zhengjie.me/tags/Jhipster%E7%A9%BA%E7%99%BD%E9%A1%B5%E9%97%AE%E9%A2%98/"/>
     
   </entry>
   
   <entry>
     <title>美化cmd，Windows神器推荐Cmder</title>
-    <link href="www.zhengjie.me/blog/465.html"/>
-    <id>www.zhengjie.me/blog/465.html</id>
+    <link href="http://www.zhengjie.me/blog/465.html"/>
+    <id>http://www.zhengjie.me/blog/465.html</id>
     <published>2018-08-06T08:24:28.000Z</published>
     <updated>2018-08-29T12:05:03.966Z</updated>
     
@@ -196,19 +196,19 @@
     
     </summary>
     
-      <category term="随笔" scheme="www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="cmd" scheme="www.zhengjie.me/tags/cmd/"/>
+      <category term="cmd" scheme="http://www.zhengjie.me/tags/cmd/"/>
     
-      <category term="cmder" scheme="www.zhengjie.me/tags/cmder/"/>
+      <category term="cmder" scheme="http://www.zhengjie.me/tags/cmder/"/>
     
   </entry>
   
   <entry>
     <title>JHipster 创建实体，并且增加关联关系</title>
-    <link href="www.zhengjie.me/blog/438.html"/>
-    <id>www.zhengjie.me/blog/438.html</id>
+    <link href="http://www.zhengjie.me/blog/438.html"/>
+    <id>http://www.zhengjie.me/blog/438.html</id>
     <published>2018-08-06T06:52:29.000Z</published>
     <updated>2018-08-29T12:14:00.272Z</updated>
     
@@ -228,19 +228,19 @@
     
     </summary>
     
-      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="http://www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="JHipster入门" scheme="www.zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
+      <category term="JHipster入门" scheme="http://www.zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
     
-      <category term="JHipster创建实体详细教程" scheme="www.zhengjie.me/tags/JHipster%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/"/>
+      <category term="JHipster创建实体详细教程" scheme="http://www.zhengjie.me/tags/JHipster%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>在windows中安装JHipster并创建应用</title>
-    <link href="www.zhengjie.me/blog/433.html"/>
-    <id>www.zhengjie.me/blog/433.html</id>
+    <link href="http://www.zhengjie.me/blog/433.html"/>
+    <id>http://www.zhengjie.me/blog/433.html</id>
     <published>2018-08-04T03:33:21.000Z</published>
     <updated>2018-08-29T12:22:19.003Z</updated>
     
@@ -255,17 +255,17 @@
     
     </summary>
     
-      <category term="JHipster" scheme="www.zhengjie.me/categories/JHipster/"/>
+      <category term="JHipster" scheme="http://www.zhengjie.me/categories/JHipster/"/>
     
     
-      <category term="JHipster安装" scheme="www.zhengjie.me/tags/JHipster%E5%AE%89%E8%A3%85/"/>
+      <category term="JHipster安装" scheme="http://www.zhengjie.me/tags/JHipster%E5%AE%89%E8%A3%85/"/>
     
   </entry>
   
   <entry>
     <title>Docker? 为什么要使用Docker？</title>
-    <link href="www.zhengjie.me/blog/430.html"/>
-    <id>www.zhengjie.me/blog/430.html</id>
+    <link href="http://www.zhengjie.me/blog/430.html"/>
+    <id>http://www.zhengjie.me/blog/430.html</id>
     <published>2018-07-08T03:17:11.000Z</published>
     <updated>2018-08-29T12:28:04.817Z</updated>
     
@@ -280,21 +280,21 @@
     
     </summary>
     
-      <category term="docker" scheme="www.zhengjie.me/categories/docker/"/>
+      <category term="docker" scheme="http://www.zhengjie.me/categories/docker/"/>
     
     
-      <category term="docker使用范围" scheme="www.zhengjie.me/tags/docker%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4/"/>
+      <category term="docker使用范围" scheme="http://www.zhengjie.me/tags/docker%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4/"/>
     
-      <category term="docker入门" scheme="www.zhengjie.me/tags/docker%E5%85%A5%E9%97%A8/"/>
+      <category term="docker入门" scheme="http://www.zhengjie.me/tags/docker%E5%85%A5%E9%97%A8/"/>
     
-      <category term="为什么使用docker" scheme="www.zhengjie.me/tags/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8docker/"/>
+      <category term="为什么使用docker" scheme="http://www.zhengjie.me/tags/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8docker/"/>
     
   </entry>
   
   <entry>
     <title>Java开发-必学的Linux命令整合</title>
-    <link href="www.zhengjie.me/blog/429.html"/>
-    <id>www.zhengjie.me/blog/429.html</id>
+    <link href="http://www.zhengjie.me/blog/429.html"/>
+    <id>http://www.zhengjie.me/blog/429.html</id>
     <published>2018-07-01T13:23:37.000Z</published>
     <updated>2018-08-29T02:10:04.356Z</updated>
     
@@ -310,21 +310,21 @@
     
     </summary>
     
-      <category term="随笔" scheme="www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="java学习linux命令" scheme="www.zhengjie.me/tags/java%E5%AD%A6%E4%B9%A0linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="java学习linux命令" scheme="http://www.zhengjie.me/tags/java%E5%AD%A6%E4%B9%A0linux%E5%91%BD%E4%BB%A4/"/>
     
-      <category term="Linux命令" scheme="www.zhengjie.me/tags/Linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="Linux命令" scheme="http://www.zhengjie.me/tags/Linux%E5%91%BD%E4%BB%A4/"/>
     
-      <category term="linux学习" scheme="www.zhengjie.me/tags/linux%E5%AD%A6%E4%B9%A0/"/>
+      <category term="linux学习" scheme="http://www.zhengjie.me/tags/linux%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>掌握这10条规范，轻松搞定Git！</title>
-    <link href="www.zhengjie.me/blog/428.html"/>
-    <id>www.zhengjie.me/blog/428.html</id>
+    <link href="http://www.zhengjie.me/blog/428.html"/>
+    <id>http://www.zhengjie.me/blog/428.html</id>
     <published>2018-06-04T09:31:20.000Z</published>
     <updated>2018-08-29T12:41:16.762Z</updated>
     
@@ -339,31 +339,31 @@
     
     </summary>
     
-      <category term="Git" scheme="www.zhengjie.me/categories/Git/"/>
+      <category term="Git" scheme="http://www.zhengjie.me/categories/Git/"/>
     
     
-      <category term="Git" scheme="www.zhengjie.me/tags/Git/"/>
+      <category term="Git" scheme="http://www.zhengjie.me/tags/Git/"/>
     
-      <category term="git stash临时保存本地操作" scheme="www.zhengjie.me/tags/git-stash%E4%B8%B4%E6%97%B6%E4%BF%9D%E5%AD%98%E6%9C%AC%E5%9C%B0%E6%93%8D%E4%BD%9C/"/>
+      <category term="git stash临时保存本地操作" scheme="http://www.zhengjie.me/tags/git-stash%E4%B8%B4%E6%97%B6%E4%BF%9D%E5%AD%98%E6%9C%AC%E5%9C%B0%E6%93%8D%E4%BD%9C/"/>
     
-      <category term="git入门" scheme="www.zhengjie.me/tags/git%E5%85%A5%E9%97%A8/"/>
+      <category term="git入门" scheme="http://www.zhengjie.me/tags/git%E5%85%A5%E9%97%A8/"/>
     
-      <category term="git合并与删除分支" scheme="www.zhengjie.me/tags/git%E5%90%88%E5%B9%B6%E4%B8%8E%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF/"/>
+      <category term="git合并与删除分支" scheme="http://www.zhengjie.me/tags/git%E5%90%88%E5%B9%B6%E4%B8%8E%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF/"/>
     
-      <category term="git恢复stash内容" scheme="www.zhengjie.me/tags/git%E6%81%A2%E5%A4%8Dstash%E5%86%85%E5%AE%B9/"/>
+      <category term="git恢复stash内容" scheme="http://www.zhengjie.me/tags/git%E6%81%A2%E5%A4%8Dstash%E5%86%85%E5%AE%B9/"/>
     
-      <category term="git撤销修改" scheme="www.zhengjie.me/tags/git%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/"/>
+      <category term="git撤销修改" scheme="http://www.zhengjie.me/tags/git%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/"/>
     
-      <category term="git版本回退" scheme="www.zhengjie.me/tags/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/"/>
+      <category term="git版本回退" scheme="http://www.zhengjie.me/tags/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/"/>
     
-      <category term="git解决冲突" scheme="www.zhengjie.me/tags/git%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81/"/>
+      <category term="git解决冲突" scheme="http://www.zhengjie.me/tags/git%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81/"/>
     
   </entry>
   
   <entry>
     <title>Spring boot整合SwaggerUI构建API文档</title>
-    <link href="www.zhengjie.me/blog/383.html"/>
-    <id>www.zhengjie.me/blog/383.html</id>
+    <link href="http://www.zhengjie.me/blog/383.html"/>
+    <id>http://www.zhengjie.me/blog/383.html</id>
     <published>2018-04-05T07:40:34.000Z</published>
     <updated>2018-08-29T12:46:56.884Z</updated>
     
@@ -379,17 +379,17 @@
     
     </summary>
     
-      <category term="Spring boot" scheme="www.zhengjie.me/categories/Spring-boot/"/>
+      <category term="Spring boot" scheme="http://www.zhengjie.me/categories/Spring-boot/"/>
     
     
-      <category term="spring boot构建 SwaggerUI" scheme="www.zhengjie.me/tags/spring-boot%E6%9E%84%E5%BB%BA-SwaggerUI/"/>
+      <category term="spring boot构建 SwaggerUI" scheme="http://www.zhengjie.me/tags/spring-boot%E6%9E%84%E5%BB%BA-SwaggerUI/"/>
     
   </entry>
   
   <entry>
     <title>Spring boot配置文件</title>
-    <link href="www.zhengjie.me/blog/331.html"/>
-    <id>www.zhengjie.me/blog/331.html</id>
+    <link href="http://www.zhengjie.me/blog/331.html"/>
+    <id>http://www.zhengjie.me/blog/331.html</id>
     <published>2018-03-16T07:37:21.000Z</published>
     <updated>2018-08-29T13:11:31.556Z</updated>
     
@@ -404,17 +404,17 @@
     
     </summary>
     
-      <category term="Spring boot" scheme="www.zhengjie.me/categories/Spring-boot/"/>
+      <category term="Spring boot" scheme="http://www.zhengjie.me/categories/Spring-boot/"/>
     
     
-      <category term="spring boot配置文件详解" scheme="www.zhengjie.me/tags/spring-boot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/"/>
+      <category term="spring boot配置文件详解" scheme="http://www.zhengjie.me/tags/spring-boot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/"/>
     
   </entry>
   
   <entry>
     <title>解决Spring boot无数据库启动失败的问题</title>
-    <link href="www.zhengjie.me/blog/327.html"/>
-    <id>www.zhengjie.me/blog/327.html</id>
+    <link href="http://www.zhengjie.me/blog/327.html"/>
+    <id>http://www.zhengjie.me/blog/327.html</id>
     <published>2018-03-16T05:32:13.000Z</published>
     <updated>2018-08-29T13:13:57.210Z</updated>
     
@@ -430,17 +430,17 @@
     
     </summary>
     
-      <category term="Spring boot" scheme="www.zhengjie.me/categories/Spring-boot/"/>
+      <category term="Spring boot" scheme="http://www.zhengjie.me/categories/Spring-boot/"/>
     
     
-      <category term="spring boot禁止自动注入数据库" scheme="www.zhengjie.me/tags/spring-boot%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="spring boot禁止自动注入数据库" scheme="http://www.zhengjie.me/tags/spring-boot%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
   <entry>
     <title>编写Dockerfile发布Spring boot项目</title>
-    <link href="www.zhengjie.me/blog/271.html"/>
-    <id>www.zhengjie.me/blog/271.html</id>
+    <link href="http://www.zhengjie.me/blog/271.html"/>
+    <id>http://www.zhengjie.me/blog/271.html</id>
     <published>2018-03-07T14:07:30.000Z</published>
     <updated>2018-08-29T13:20:23.593Z</updated>
     
@@ -455,19 +455,19 @@
     
     </summary>
     
-      <category term="docker" scheme="www.zhengjie.me/categories/docker/"/>
+      <category term="docker" scheme="http://www.zhengjie.me/categories/docker/"/>
     
     
-      <category term="docker" scheme="www.zhengjie.me/tags/docker/"/>
+      <category term="docker" scheme="http://www.zhengjie.me/tags/docker/"/>
     
-      <category term="编写Dockerfile发布spring boot" scheme="www.zhengjie.me/tags/%E7%BC%96%E5%86%99Dockerfile%E5%8F%91%E5%B8%83spring-boot/"/>
+      <category term="编写Dockerfile发布spring boot" scheme="http://www.zhengjie.me/tags/%E7%BC%96%E5%86%99Dockerfile%E5%8F%91%E5%B8%83spring-boot/"/>
     
   </entry>
   
   <entry>
     <title>在docker容器中使用mysql</title>
-    <link href="www.zhengjie.me/blog/237.html"/>
-    <id>www.zhengjie.me/blog/237.html</id>
+    <link href="http://www.zhengjie.me/blog/237.html"/>
+    <id>http://www.zhengjie.me/blog/237.html</id>
     <published>2018-03-05T05:11:50.000Z</published>
     <updated>2018-08-29T13:34:02.196Z</updated>
     
@@ -482,21 +482,21 @@
     
     </summary>
     
-      <category term="docker" scheme="www.zhengjie.me/categories/docker/"/>
+      <category term="docker" scheme="http://www.zhengjie.me/categories/docker/"/>
     
-      <category term="MySQL" scheme="www.zhengjie.me/categories/docker/MySQL/"/>
+      <category term="MySQL" scheme="http://www.zhengjie.me/categories/docker/MySQL/"/>
     
     
-      <category term="docker" scheme="www.zhengjie.me/tags/docker/"/>
+      <category term="docker" scheme="http://www.zhengjie.me/tags/docker/"/>
     
-      <category term="docker容器使用mysql" scheme="www.zhengjie.me/tags/docker%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8mysql/"/>
+      <category term="docker容器使用mysql" scheme="http://www.zhengjie.me/tags/docker%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8mysql/"/>
     
   </entry>
   
   <entry>
     <title>基于centos的docker安装与卸载</title>
-    <link href="www.zhengjie.me/blog/232.html"/>
-    <id>www.zhengjie.me/blog/232.html</id>
+    <link href="http://www.zhengjie.me/blog/232.html"/>
+    <id>http://www.zhengjie.me/blog/232.html</id>
     <published>2018-02-28T05:59:58.000Z</published>
     <updated>2018-08-29T13:38:48.054Z</updated>
     
@@ -513,17 +513,17 @@
     
     </summary>
     
-      <category term="docker" scheme="www.zhengjie.me/categories/docker/"/>
+      <category term="docker" scheme="http://www.zhengjie.me/categories/docker/"/>
     
     
-      <category term="docker安装，docker卸载" scheme="www.zhengjie.me/tags/docker%E5%AE%89%E8%A3%85%EF%BC%8Cdocker%E5%8D%B8%E8%BD%BD/"/>
+      <category term="docker安装，docker卸载" scheme="http://www.zhengjie.me/tags/docker%E5%AE%89%E8%A3%85%EF%BC%8Cdocker%E5%8D%B8%E8%BD%BD/"/>
     
   </entry>
   
   <entry>
     <title>mysql开启远程访问权限</title>
-    <link href="www.zhengjie.me/blog/169.html"/>
-    <id>www.zhengjie.me/blog/169.html</id>
+    <link href="http://www.zhengjie.me/blog/169.html"/>
+    <id>http://www.zhengjie.me/blog/169.html</id>
     <published>2018-01-22T14:14:47.000Z</published>
     <updated>2018-08-29T02:10:04.356Z</updated>
     
@@ -544,17 +544,17 @@
     
     </summary>
     
-      <category term="MySQL" scheme="www.zhengjie.me/categories/MySQL/"/>
+      <category term="MySQL" scheme="http://www.zhengjie.me/categories/MySQL/"/>
     
     
-      <category term="mysql，mysql配置远程访问" scheme="www.zhengjie.me/tags/mysql%EF%BC%8Cmysql%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/"/>
+      <category term="mysql，mysql配置远程访问" scheme="http://www.zhengjie.me/tags/mysql%EF%BC%8Cmysql%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/"/>
     
   </entry>
   
   <entry>
     <title>git生成ssh keys步骤与使用</title>
-    <link href="www.zhengjie.me/blog/64.html"/>
-    <id>www.zhengjie.me/blog/64.html</id>
+    <link href="http://www.zhengjie.me/blog/64.html"/>
+    <id>http://www.zhengjie.me/blog/64.html</id>
     <published>2018-01-10T08:51:02.000Z</published>
     <updated>2018-08-29T13:45:03.409Z</updated>
     
@@ -570,17 +570,17 @@
     
     </summary>
     
-      <category term="Git" scheme="www.zhengjie.me/categories/Git/"/>
+      <category term="Git" scheme="http://www.zhengjie.me/categories/Git/"/>
     
     
-      <category term="Git，git生成ssh key，git入门" scheme="www.zhengjie.me/tags/Git%EF%BC%8Cgit%E7%94%9F%E6%88%90ssh-key%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
+      <category term="Git，git生成ssh key，git入门" scheme="http://www.zhengjie.me/tags/Git%EF%BC%8Cgit%E7%94%9F%E6%88%90ssh-key%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
   <entry>
     <title>git常用命令</title>
-    <link href="www.zhengjie.me/blog/21.html"/>
-    <id>www.zhengjie.me/blog/21.html</id>
+    <link href="http://www.zhengjie.me/blog/21.html"/>
+    <id>http://www.zhengjie.me/blog/21.html</id>
     <published>2018-01-07T15:41:44.000Z</published>
     <updated>2018-08-29T14:51:05.180Z</updated>
     
@@ -596,10 +596,10 @@
     
     </summary>
     
-      <category term="Git" scheme="www.zhengjie.me/categories/Git/"/>
+      <category term="Git" scheme="http://www.zhengjie.me/categories/Git/"/>
     
     
-      <category term="git命令，git入门" scheme="www.zhengjie.me/tags/git%E5%91%BD%E4%BB%A4%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
+      <category term="git命令，git入门" scheme="http://www.zhengjie.me/tags/git%E5%91%BD%E4%BB%A4%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
