@@ -1,4 +1,1204 @@
-<!DOCTYPE html><html class="theme-next mist use-motion" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css"><script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script><link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=6.4.0"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.0"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=6.4.0"><link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Mist",version:"6.4.0",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><meta name="description" content="当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要  一个数据库表 一个Liquibase变更set 一个JPA实体 一个Spring data jpa repository 一个带有基础增删改查的rest controller 一个angular路由、组件以及服务 一个HTML视图 集成测试 性能测试  如果我们有多个实体，你可能还想"><meta name="keywords" content="JHipster入门,JHipster创建实体详细教程"><meta property="og:type" content="article"><meta property="og:title" content="JHipster 创建实体，并且增加关联关系"><meta property="og:url" content="https:zhengjie.me/blog/438.html"><meta property="og:site_name" content="与卿画眉共浮生"><meta property="og:description" content="当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要  一个数据库表 一个Liquibase变更set 一个JPA实体 一个Spring data jpa repository 一个带有基础增删改查的rest controller 一个angular路由、组件以及服务 一个HTML视图 集成测试 性能测试  如果我们有多个实体，你可能还想"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505-300x151.jpg"><meta property="og:image" content="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144943.jpg"><meta property="og:image" content="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806145007.jpg"><meta property="og:updated_time" content="2018-08-29T02:10:04.356Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="JHipster 创建实体，并且增加关联关系"><meta name="twitter:description" content="当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要  一个数据库表 一个Liquibase变更set 一个JPA实体 一个Spring data jpa repository 一个带有基础增删改查的rest controller 一个angular路由、组件以及服务 一个HTML视图 集成测试 性能测试  如果我们有多个实体，你可能还想"><meta name="twitter:image" content="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505-300x151.jpg"><link rel="alternate" href="/atom.xml" title="与卿画眉共浮生" type="application/atom+xml"><link rel="canonical" href="https:zhengjie.me/blog/438.html"><script type="text/javascript" id="page.configurations">CONFIG.page={sidebar:""}</script><title>JHipster 创建实体，并且增加关联关系 | 与卿画眉共浮生</title><noscript><style type="text/css">.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div> <a href="https://github.com/dqjdda" class="github-corner" aria-label="View source on Github"><svg width="90" height="90" viewBox="0 0 250 250" style="fill:#151513;color:#fff;position:absolute;top:0;border:0;right:0" aria-hidden="true"><path d="M0 0 115 115 130 115 142 142 250 250 250 0Z"></path><path d="M128.3 109C113.8 99.7 119 89.6 119 89.6 122 82.7 120.5 78.6 120.5 78.6 119.2 72 123.4 76.3 123.4 76.3 127.3 80.9 125.5 87.3 125.5 87.3 122.9 97.6 130.6 101.9 134.4 103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115 115C114.9 115.1 118.7 116.5 119.8 115.4L133.7 101.6C136.9 99.2 139.9 98.4 142.2 98.6 133.8 88 127.5 74.4 143.8 58 148.5 53.4 154 51.2 159.7 51 160.3 49.4 163.2 43.6 171.4 40.1 171.4 40.1 176.1 42.5 178.8 56.2 183.1 58.6 187.2 61.8 190.9 65.4 194.5 69 197.7 73.2 200.1 77.6 213.8 80.2 216.3 84.9 216.3 84.9 212.7 93.1 206.9 96 205.4 96.6 205.1 102.4 203 107.8 198.3 112.5 181.9 128.9 168.3 122.5 157.7 114.1 157.9 116.9 156.7 120.9 152.7 124.9L141 136.5C139.8 137.7 141.6 141.9 141.8 141.8Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">与卿画眉共浮生</span><span class="logo-line-after"><i></i></span></a></div></div><div class="site-nav-toggle"> <button aria-label="切换导航栏"><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签<span class="badge">37</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档<span class="badge">22</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https:zhengjie.me/blog/438.html"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="郑杰"><meta itemprop="description" content="生命在于折腾"><meta itemprop="image" content="/images/avatar.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="与卿画眉共浮生"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">JHipster 创建实体，并且增加关联关系</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2018-08-06 14:52:29" itemprop="dateCreated datePublished" datetime="2018-08-06T14:52:29+08:00">2018-08-06</time> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i></span> <span class="post-meta-item-text">更新于</span> <time title="修改时间：2018-08-29 10:10:04" itemprop="dateModified" datetime="2018-08-29T10:10:04+08:00">2018-08-29</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JHipster/" itemprop="url" rel="index"><span itemprop="name">JHipster</span></a></span></span> <span id="/blog/438.html" class="leancloud_visitors" data-flag-title="JHipster 创建实体，并且增加关联关系"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数：</span><span class="leancloud-visitors-count"></span></span><div class="post-symbolscount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">本文字数：</span> <span title="本文字数">3.1k</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-clock-o"></i></span> <span class="post-meta-item-text">阅读时长 &asymp;</span> <span title="阅读时长">3 分钟</span></div></div></header><div class="post-body" itemprop="articleBody"><p>当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要</p><ul><li>一个数据库表</li><li>一个Liquibase变更set</li><li>一个JPA实体</li><li>一个Spring data jpa repository</li><li>一个带有基础增删改查的rest controller</li><li>一个angular路由、组件以及服务</li><li>一个HTML视图</li><li>集成测试</li><li>性能测试</li></ul><p>如果我们有多个实体，你可能还想创建他们之间的关系，比如这个例子，你需要：</p><ul><li>一个数据库外键</li><li>指定Javascript和HTML代码管理此关系</li></ul><p>实体sub-generator(子生成器)，将会为每个实体创建所有需要的文件并且提供增删改查后端，sub-generator通过<code>jhipster entity &lt;entityName&gt; --[options]</code>运行。 注意：在Windows中，需要使用如下代码运行：</p><ol><li>yo jhipster:entity User –table-name user</li></ol><p>它支持的选项有：</p><ul><li><code>--table-name &lt;table_name&gt;</code> 通过JHipster会生成一个表，他的名称基于你的实体名称，如果你想要修改为不同的名称使用此选项</li><li><code>--angular-suffix &lt;suffix&gt;</code> 如果你想所有的都带有自定义的后缀，可使用此选项</li><li><code>--regenerate</code> 将会不做任何询问生成已存在的实体</li><li><code>--skip-server</code> 不会服务端代码</li><li><code>--skip-client</code>不会生成客户端代码</li><li><code>--db</code> 跳过服务端代码生成时指定数据库</li></ul><h4 id="实体字段"><a href="#实体字段" class="headerlink" title="实体字段"></a>实体字段</h4><p>对于每个实体，你可以添加很多字段。你需要输入字段名称和类型，JHipster将会生成你所需的代码和配置。这些字段名称不能包含关键字</p><h4 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h4><p>JHipster支持很多字段类型，这些支持依赖于你的后台数据库，所有我们使用Java类型去描述他们：一个Java <code>String</code>在Oracle和Cassandra中不同，这是Jhipster生成健壮和正确的数据库代码的一种方式。</p><ul><li><code>String</code> 它的默认长度取决于后端，如果你使用JPA默认长度<code>255</code>，你可以通过检验规则来修改它</li><li><code>Integer</code></li><li><code>Long</code></li><li><code>Float</code></li><li><code>Double</code></li><li><code>BigDecimal</code></li><li><code>LocalDate</code> 用于在Java中正确的管理日期</li><li><code>Instant</code> 用于时间戳</li><li><code>ZoneDateTime</code> 给定时区的本地时间</li><li><code>Enumeration</code> 枚举对象，当选择此类型时，子生成器将会询问你对应的枚举值并创建enum类</li><li><code>Blob</code> 用于存储二进制数据，当被选中时，子生成器会询问你存储的数据类型，是图片对象还是CLOB</li></ul><h4 id="下面尝试下如何创建"><a href="#下面尝试下如何创建" class="headerlink" title="下面尝试下如何创建"></a>下面尝试下如何创建</h4><ol><li>创建一个Role的实体</li><li><p>yo jhipster:entity Role –table-name rol</p></li><li><p>要为实体添加字段吗？</p></li><li><p>Do you want to add a field to your entity? (Y/n) y</p></li><li><p>字段名称是什么？</p></li><li><p>What is the name of your field? name</p></li><li><p>选择字段类型</p></li><li><p>What is the type of your field? String</p></li><li><p>为字段添加一些验证</p></li><li>Do you want to add validation rules to your field? (y/N) y</li><li>1、唯一约束</li><li>2、最小长度</li><li>3、最大长度</li><li><p>4、正则表达</p></li><li><p>是否继续添加字段</p></li><li><p>Do you want to add a field to your entity? (Y/n) n</p></li><li><p>是否关联实体</p></li><li><p>Do you want to add a relationship to another entity? No</p></li><li><p>生成DTO（DOT详解）</p></li><li><p>Do you want to use a Data Transfer Object (DTO)? [BETA] Yes, generate a DTO with MapStruct</p></li><li><p>生成Service</p></li><li>Do you want to use separate service class for your business logic?</li><li><p>Yes, generate a separate service interface and implementation</p></li><li><p>添加分页</p></li><li>Do you want pagination on your entity? Yes, with a simple pager</li><li>不分页</li><li>简单分页，基于bootstrap pager</li><li>完成分页系统，基于Bootstrap pagination component</li><li>滚动分页，基于infinite scroll directive</li></ol><h4 id="给User和Role添加关联关系"><a href="#给User和Role添加关联关系" class="headerlink" title="给User和Role添加关联关系"></a>给User和Role添加关联关系</h4><p>在上面的代码中就可以直接添加关联关系，这里我们演示修改实体，并且添加关联关系。</p><ol><li>再次输入</li><li><p>yo jhipster:entity Role –table-name role</p></li><li><p>你想更新实体吗？这将替换此实体的现有文件，所有自定义代码都将被覆盖</p></li><li>Do you want to update the entity? This will replace the existing files for this entity, all your custom code will be overwritten (Use arrow keys)</li><li>Yes, re generate the entity（是的，重新生成实体）</li><li>Yes, add more fields and relationships（为实体添加新的字段）</li><li><p>Yes, remove fields and relationships（是的，删除字段和关系）</p></li><li><p>添加新的字段？</p></li><li><p>Do you want to add a field to your entity? (Y/n) n</p></li><li><p>是否关联其他实体</p></li><li><p>Do you want to add a relationship to another entity? (Y/n) y</p></li><li><p>实体的名称是什么？</p></li><li><p>What is the name of the other entity? User</p></li><li><p>关联关系的名称是什么？</p></li><li><p>What is the name of the relationship? user</p></li><li><p>选择关系类型</p></li><li>What is the type of the relationship? (Use arrow keys) many-to-one</li><li>many-to-one</li><li>many-to-many</li><li><p>one-to-one</p></li><li><p>展示他们的关系时，使用User的哪个字段</p></li><li><p>When you display this relationship with Angular, which field from ‘User’ do you want to use? (id) username</p></li><li><p>是否要为此关系添加任何验证规则？</p></li><li><p>Do you want to add any validation rules to this relationship? (y/N) n</p></li><li><p>是否关联其他实体</p></li><li>Do you want to add a relationship to another entity? (Y/n) n</li></ol><p>通过上面的命令，我们新增了Role，并且关联了User，并且为我们提供了后端的增删改查。 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505-300x151.jpg" alt=""></a> <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144943.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144943.jpg" alt=""></a> <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806145007.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806145007.jpg" alt=""></a></p></div><div><div><div style="text-align:center;color:#ccc;font-size:14px">-------------本文结束<i class="fa fa-handshake-o"></i> 感谢你的阅读-------------</div></div></div><div><ul class="post-copyright"><li class="post-copyright-author"> <strong>本文作者：</strong> 郑杰</li><li class="post-copyright-link"> <strong>本文链接：</strong> <a href="438.html" title="JHipster 创建实体，并且增加关联关系">438.html</a></li><li class="post-copyright-license"> <strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/JHipster入门/" rel="tag"><i class="fa fa-tag"></i> JHipster入门</a><a href="/tags/JHipster创建实体详细教程/" rel="tag"><i class="fa fa-tag"></i> JHipster创建实体详细教程</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/blog/433.html" rel="next" title="在windows中安装JHipster并创建应用"><i class="fa fa-chevron-left"></i> 在windows中安装JHipster并创建应用</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/blog/465.html" rel="prev" title="美化cmd，Windows神器推荐Cmder">美化cmd，Windows神器推荐Cmder<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="郑杰"><p class="site-author-name" itemprop="name">郑杰</p><p class="site-description motion-element" itemprop="description">生命在于折腾</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">22</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">7</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">37</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/dqjdda" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="https://gitee.com/hgpt" target="_blank" title="码云"><i class="fa fa-fw fa-globe"></i> 码云</a></span><span class="links-of-author-item"><a href="https://www.jianshu.com/u/d5638c3f1fec" target="_blank" title="简书"><i class="fa fa-fw fa-globe"></i> 简书</a></span><span class="links-of-author-item"><a href="https://blog.csdn.net/zj7321" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i> CSDN</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class="links-of-blogroll-title"><i class="fa fa-fw fa-link"></i> Links</div><ul class="links-of-blogroll-list"><li class="links-of-blogroll-item"> <a href="http://www.ssrsdev.top:8080/blog/index.php" title="上善若水" target="_blank">上善若水</a></li><li class="links-of-blogroll-item"> <a href="https://www.chensubao.com/" title="chensubao" target="_blank">chensubao</a></li><li class="links-of-blogroll-item"> <a href="http://hutool.mydoc.io/" title="Java工具包" target="_blank">Java工具包</a></li></ul></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#实体字段"><span class="nav-number">1.</span> <span class="nav-text">实体字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字段类型"><span class="nav-number">2.</span> <span class="nav-text">字段类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下面尝试下如何创建"><span class="nav-number">3.</span> <span class="nav-text">下面尝试下如何创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#给User和Role添加关联关系"><span class="nav-number">4.</span> <span class="nav-text">给User和Role添加关联关系</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2018</span><span class="with-love" id="animate"><i class="fa fa-github-alt"></i></span> <span class="author" itemprop="copyrightHolder">郑杰</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-area-chart"></i></span> <span class="post-meta-item-text">站点总字数：</span> <span title="站点总字数">40k</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-coffee"></i></span> <span class="post-meta-item-text">站点阅读时长 &asymp;</span> <span title="站点阅读时长">36 分钟</span></div><div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div> <span class="post-meta-divider">|</span><div class="theme-info">Theme by <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.0</div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div><div id="needsharebutton-float"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script><script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script><script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script><script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script><script type="text/javascript">
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-flash.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要  一个数据库表 一个Liquibase变更set 一个JPA实体 一个Spring data jpa repository 一个带有基础增删改查的rest controller 一个angular路由、组件以及服务 一个HTML视图 集成测试 性能测试  如果我们有多个实体，你可能还想">
+<meta name="keywords" content="JHipster入门,JHipster创建实体详细教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JHipster 创建实体，并且增加关联关系">
+<meta property="og:url" content="https:zhengjie.me/blog/438.html">
+<meta property="og:site_name" content="与卿画眉共浮生">
+<meta property="og:description" content="当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要  一个数据库表 一个Liquibase变更set 一个JPA实体 一个Spring data jpa repository 一个带有基础增删改查的rest controller 一个angular路由、组件以及服务 一个HTML视图 集成测试 性能测试  如果我们有多个实体，你可能还想">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505-300x151.jpg">
+<meta property="og:image" content="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144943.jpg">
+<meta property="og:image" content="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806145007.jpg">
+<meta property="og:updated_time" content="2018-08-29T02:10:04.356Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JHipster 创建实体，并且增加关联关系">
+<meta name="twitter:description" content="当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要  一个数据库表 一个Liquibase变更set 一个JPA实体 一个Spring data jpa repository 一个带有基础增删改查的rest controller 一个angular路由、组件以及服务 一个HTML视图 集成测试 性能测试  如果我们有多个实体，你可能还想">
+<meta name="twitter:image" content="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505-300x151.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="与卿画眉共浮生" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https:zhengjie.me/blog/438.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JHipster 创建实体，并且增加关联关系 | 与卿画眉共浮生</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/dqjdda" class="github-corner" aria-label="View source on Github"><svg width="90" height="90" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">与卿画眉共浮生</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">37</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">7</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">22</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https:zhengjie.me/blog/438.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="郑杰">
+      <meta itemprop="description" content="生命在于折腾">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="与卿画眉共浮生">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JHipster 创建实体，并且增加关联关系
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-06 14:52:29" itemprop="dateCreated datePublished" datetime="2018-08-06T14:52:29+08:00">2018-08-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-29 10:10:04" itemprop="dateModified" datetime="2018-08-29T10:10:04+08:00">2018-08-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JHipster/" itemprop="url" rel="index"><span itemprop="name">JHipster</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/438.html" class="leancloud_visitors" data-flag-title="JHipster 创建实体，并且增加关联关系">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要</p>
+<ul>
+<li>一个数据库表</li>
+<li>一个Liquibase变更set</li>
+<li>一个JPA实体</li>
+<li>一个Spring data jpa repository</li>
+<li>一个带有基础增删改查的rest controller</li>
+<li>一个angular路由、组件以及服务</li>
+<li>一个HTML视图</li>
+<li>集成测试</li>
+<li>性能测试</li>
+</ul>
+<p>如果我们有多个实体，你可能还想创建他们之间的关系，比如这个例子，你需要：</p>
+<ul>
+<li>一个数据库外键</li>
+<li>指定Javascript和HTML代码管理此关系</li>
+</ul>
+<p>实体sub-generator(子生成器)，将会为每个实体创建所有需要的文件并且提供增删改查后端，sub-generator通过<code>jhipster entity &lt;entityName&gt; --[options]</code>运行。 注意：在Windows中，需要使用如下代码运行：</p>
+<ol>
+<li>yo jhipster:entity User –table-name user</li>
+</ol>
+<p>它支持的选项有：</p>
+<ul>
+<li><code>--table-name &lt;table_name&gt;</code> 通过JHipster会生成一个表，他的名称基于你的实体名称，如果你想要修改为不同的名称使用此选项</li>
+<li><code>--angular-suffix &lt;suffix&gt;</code> 如果你想所有的都带有自定义的后缀，可使用此选项</li>
+<li><code>--regenerate</code> 将会不做任何询问生成已存在的实体</li>
+<li><code>--skip-server</code> 不会服务端代码</li>
+<li><code>--skip-client</code>不会生成客户端代码</li>
+<li><code>--db</code> 跳过服务端代码生成时指定数据库</li>
+</ul>
+<h4 id="实体字段"><a href="#实体字段" class="headerlink" title="实体字段"></a>实体字段</h4><p>对于每个实体，你可以添加很多字段。你需要输入字段名称和类型，JHipster将会生成你所需的代码和配置。这些字段名称不能包含关键字</p>
+<h4 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h4><p>JHipster支持很多字段类型，这些支持依赖于你的后台数据库，所有我们使用Java类型去描述他们：一个Java <code>String</code>在Oracle和Cassandra中不同，这是Jhipster生成健壮和正确的数据库代码的一种方式。</p>
+<ul>
+<li><code>String</code> 它的默认长度取决于后端，如果你使用JPA默认长度<code>255</code>，你可以通过检验规则来修改它</li>
+<li><code>Integer</code></li>
+<li><code>Long</code></li>
+<li><code>Float</code></li>
+<li><code>Double</code></li>
+<li><code>BigDecimal</code></li>
+<li><code>LocalDate</code> 用于在Java中正确的管理日期</li>
+<li><code>Instant</code> 用于时间戳</li>
+<li><code>ZoneDateTime</code> 给定时区的本地时间</li>
+<li><code>Enumeration</code> 枚举对象，当选择此类型时，子生成器将会询问你对应的枚举值并创建enum类</li>
+<li><code>Blob</code> 用于存储二进制数据，当被选中时，子生成器会询问你存储的数据类型，是图片对象还是CLOB</li>
+</ul>
+<h4 id="下面尝试下如何创建"><a href="#下面尝试下如何创建" class="headerlink" title="下面尝试下如何创建"></a>下面尝试下如何创建</h4><ol>
+<li>创建一个Role的实体</li>
+<li><p>yo jhipster:entity Role –table-name rol</p>
+</li>
+<li><p>要为实体添加字段吗？</p>
+</li>
+<li><p>Do you want to add a field to your entity? (Y/n) y</p>
+</li>
+<li><p>字段名称是什么？</p>
+</li>
+<li><p>What is the name of your field? name</p>
+</li>
+<li><p>选择字段类型</p>
+</li>
+<li><p>What is the type of your field? String</p>
+</li>
+<li><p>为字段添加一些验证</p>
+</li>
+<li>Do you want to add validation rules to your field? (y/N) y</li>
+<li>1、唯一约束</li>
+<li>2、最小长度</li>
+<li>3、最大长度</li>
+<li><p>4、正则表达</p>
+</li>
+<li><p>是否继续添加字段</p>
+</li>
+<li><p>Do you want to add a field to your entity? (Y/n) n</p>
+</li>
+<li><p>是否关联实体</p>
+</li>
+<li><p>Do you want to add a relationship to another entity? No</p>
+</li>
+<li><p>生成DTO（DOT详解）</p>
+</li>
+<li><p>Do you want to use a Data Transfer Object (DTO)? [BETA] Yes, generate a DTO with MapStruct</p>
+</li>
+<li><p>生成Service</p>
+</li>
+<li>Do you want to use separate service class for your business logic?</li>
+<li><p>Yes, generate a separate service interface and implementation</p>
+</li>
+<li><p>添加分页</p>
+</li>
+<li>Do you want pagination on your entity? Yes, with a simple pager</li>
+<li>不分页</li>
+<li>简单分页，基于bootstrap pager</li>
+<li>完成分页系统，基于Bootstrap pagination component</li>
+<li>滚动分页，基于infinite scroll directive</li>
+</ol>
+<h4 id="给User和Role添加关联关系"><a href="#给User和Role添加关联关系" class="headerlink" title="给User和Role添加关联关系"></a>给User和Role添加关联关系</h4><p>在上面的代码中就可以直接添加关联关系，这里我们演示修改实体，并且添加关联关系。</p>
+<ol>
+<li>再次输入</li>
+<li><p>yo jhipster:entity Role –table-name role</p>
+</li>
+<li><p>你想更新实体吗？这将替换此实体的现有文件，所有自定义代码都将被覆盖</p>
+</li>
+<li>Do you want to update the entity? This will replace the existing files for this entity, all your custom code will be overwritten (Use arrow keys)</li>
+<li>Yes, re generate the entity（是的，重新生成实体）</li>
+<li>Yes, add more fields and relationships（为实体添加新的字段）</li>
+<li><p>Yes, remove fields and relationships（是的，删除字段和关系）</p>
+</li>
+<li><p>添加新的字段？</p>
+</li>
+<li><p>Do you want to add a field to your entity? (Y/n) n</p>
+</li>
+<li><p>是否关联其他实体</p>
+</li>
+<li><p>Do you want to add a relationship to another entity? (Y/n) y</p>
+</li>
+<li><p>实体的名称是什么？</p>
+</li>
+<li><p>What is the name of the other entity? User</p>
+</li>
+<li><p>关联关系的名称是什么？</p>
+</li>
+<li><p>What is the name of the relationship? user</p>
+</li>
+<li><p>选择关系类型</p>
+</li>
+<li>What is the type of the relationship? (Use arrow keys) many-to-one</li>
+<li>many-to-one</li>
+<li>many-to-many</li>
+<li><p>one-to-one</p>
+</li>
+<li><p>展示他们的关系时，使用User的哪个字段</p>
+</li>
+<li><p>When you display this relationship with Angular, which field from ‘User’ do you want to use? (id) username</p>
+</li>
+<li><p>是否要为此关系添加任何验证规则？</p>
+</li>
+<li><p>Do you want to add any validation rules to this relationship? (y/N) n</p>
+</li>
+<li><p>是否关联其他实体</p>
+</li>
+<li>Do you want to add a relationship to another entity? (Y/n) n</li>
+</ol>
+<p>通过上面的命令，我们新增了Role，并且关联了User，并且为我们提供了后端的增删改查。 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505-300x151.jpg" alt=""></a> <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144943.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144943.jpg" alt=""></a> <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806145007.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806145007.jpg" alt=""></a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 <i class="fa fa-handshake-o
+"></i> 感谢你的阅读-------------</div>
+    
+</div>
+  
+  </div>
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>郑杰</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="438.html" title="JHipster 创建实体，并且增加关联关系">438.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+     
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JHipster入门/" rel="tag"><i class="fa fa-tag"></i> JHipster入门</a>
+          
+            <a href="/tags/JHipster创建实体详细教程/" rel="tag"><i class="fa fa-tag"></i> JHipster创建实体详细教程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/433.html" rel="next" title="在windows中安装JHipster并创建应用">
+                <i class="fa fa-chevron-left"></i> 在windows中安装JHipster并创建应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/465.html" rel="prev" title="美化cmd，Windows神器推荐Cmder">
+                美化cmd，Windows神器推荐Cmder <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="郑杰" />
+            
+              <p class="site-author-name" itemprop="name">郑杰</p>
+              <p class="site-description motion-element" itemprop="description">生命在于折腾</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/dqjdda" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitee.com/hgpt" target="_blank" title="码云"><i class="fa fa-fw fa-globe"></i>码云</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/d5638c3f1fec" target="_blank" title="简书"><i class="fa fa-fw fa-globe"></i>简书</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/zj7321" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ssrsdev.top:8080/blog/index.php" title="上善若水" target="_blank">上善若水</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.chensubao.com/" title="chensubao" target="_blank">chensubao</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://hutool.mydoc.io/" title="Java工具包" target="_blank">Java工具包</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#实体字段"><span class="nav-number">1.</span> <span class="nav-text">实体字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字段类型"><span class="nav-number">2.</span> <span class="nav-text">字段类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下面尝试下如何创建"><span class="nav-number">3.</span> <span class="nav-text">下面尝试下如何创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#给User和Role添加关联关系"><span class="nav-number">4.</span> <span class="nav-text">给User和Role添加关联关系</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-github-alt"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">郑杰</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">40k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">36 分钟</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme by <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
     var isXml = true;
@@ -316,7 +1516,16 @@
         onPopupClose();
       }
     });
-  </script><script>
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
     
     function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
@@ -372,4 +1581,52 @@
           
         })
     });
-  </script><script src="/lib/needsharebutton/needsharebutton.js"></script><script>flOptions={iconStyle:"default",boxForm:"horizontal",position:"topRight",networks:"Weibo,Wechat,QQZone,Douban,Twitter,Facebook"},new needShareButton("#needsharebutton-float",flOptions)</script><script type="text/javascript" src="/js/src/js.cookie.js?v=6.4.0"></script><script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.4.0"></script></body></html>
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,QQZone,Douban,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.4.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.4.0"></script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
