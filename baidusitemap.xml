@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/430.html</loc>
+    <lastmod>2018-08-29T04:21:30.145Z</lastmod>
+    <data>
+        <display>
+        <title>Docker? 为什么要使用Docker？</title>
+        <pubTime>2018-07-08T03:17:11.000Z</pubTime>
+        
+        <tag>docker使用范围</tag>
+         
+        <tag>docker入门</tag>
+         
+        <tag>为什么使用docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="https:zhengjie.me/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
+    <loc>https:zhengjie.me/blog/438.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>JHipster 创建实体，并且增加关联关系</title>
+        <pubTime>2018-08-06T06:52:29.000Z</pubTime>
+        
+        <tag>JHipster入门</tag>
+         
+        <tag>JHipster创建实体详细教程</tag>
+         
+         
+           
+             
+              <breadCrumb title="JHipster" url="https:zhengjie.me/categories/JHipster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/433.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>在windows中安装JHipster并创建应用</title>
+        <pubTime>2018-08-04T03:33:21.000Z</pubTime>
+        
+        <tag>JHipster安装</tag>
+         
+         
+           
+             
+              <breadCrumb title="JHipster" url="https:zhengjie.me/categories/JHipster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/271.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>编写Dockerfile发布Spring boot项目</title>
+        <pubTime>2018-03-07T14:07:30.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>编写Dockerfile发布spring boot</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="https:zhengjie.me/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/465.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>美化cmd，Windows神器推荐Cmder</title>
+        <pubTime>2018-08-06T08:24:28.000Z</pubTime>
+        
+        <tag>cmd</tag>
+         
+        <tag>cmder</tag>
+         
+         
+           
+             
+              <breadCrumb title="随笔" url="https:zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/443.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>解决JHipster启动出现空白页的问题</title>
+        <pubTime>2018-08-07T04:23:15.000Z</pubTime>
+        
+        <tag>Jhipster空白页问题</tag>
+         
+         
+           
+             
+              <breadCrumb title="JHipster" url="https:zhengjie.me/categories/JHipster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/331.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Spring boot配置文件</title>
+        <pubTime>2018-03-16T07:37:21.000Z</pubTime>
+        
+        <tag>spring boot配置文件详解</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot" url="https:zhengjie.me/categories/Spring-boot/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/21.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>git常用命令</title>
+        <pubTime>2018-01-07T15:41:44.000Z</pubTime>
+        
+        <tag>Git，git命令，git入门</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="https:zhengjie.me/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/64.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>git生成ssh keys步骤与使用</title>
+        <pubTime>2018-01-10T08:51:02.000Z</pubTime>
+        
+        <tag>Git，git生成ssh key，git入门</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="https:zhengjie.me/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/492.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Java 8 Optional 类</title>
+        <pubTime>2018-08-09T13:06:36.000Z</pubTime>
+        
+        <tag>Optional 类</tag>
+         
+         
+           
+             
+              <breadCrumb title="随笔" url="https:zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/237.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>在docker容器中使用mysql</title>
+        <pubTime>2018-03-05T05:11:50.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>docker容器使用mysql</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="https:zhengjie.me/categories/docker/"/>
+          
+             
+              <breadCrumb title="MySQL" url="https:zhengjie.me/categories/docker/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/494.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Jhipster创建实体，Gateway数据菜单为空</title>
+        <pubTime>2018-08-10T02:05:35.000Z</pubTime>
+        
+        <tag>jhipster Gateway数据菜单为空</tag>
+         
+         
+           
+             
+              <breadCrumb title="JHipster" url="https:zhengjie.me/categories/JHipster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/428.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>掌握这10条规范，轻松搞定Git！</title>
+        <pubTime>2018-06-04T09:31:20.000Z</pubTime>
+        
+        <tag>Git</tag>
+         
+        <tag>git stash临时保存本地操作</tag>
+         
+        <tag>git入门</tag>
+         
+        <tag>git合并与删除分支</tag>
+         
+        <tag>git恢复stash内容</tag>
+         
+        <tag>git撤销修改</tag>
+         
+        <tag>git版本回退</tag>
+         
+        <tag>git解决冲突</tag>
+         
+         
+           
+             
+              <breadCrumb title="Git" url="https:zhengjie.me/categories/Git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/478.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Jhipster 创建微服务</title>
+        <pubTime>2018-08-08T07:58:15.000Z</pubTime>
+        
+        <tag>JHipster入门</tag>
+         
+        <tag>jhipster微服务</tag>
+         
+         
+           
+             
+              <breadCrumb title="JHipster" url="https:zhengjie.me/categories/JHipster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/498.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Jhipster 如何彻底删除Entity</title>
+        <pubTime>2018-08-10T08:56:00.000Z</pubTime>
+        
+        <tag>jhipster删除实体</tag>
+         
+         
+           
+             
+              <breadCrumb title="JHipster" url="https:zhengjie.me/categories/JHipster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/503.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Jhipster 微服务与微服务相互通信</title>
+        <pubTime>2018-08-13T03:52:27.000Z</pubTime>
+        
+        <tag>Jhipster微服务调用微服务</tag>
+         
+        <tag>微服务相互通信</tag>
+         
+         
+           
+             
+              <breadCrumb title="JHipster" url="https:zhengjie.me/categories/JHipster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/169.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>mysql开启远程访问权限</title>
+        <pubTime>2018-01-22T14:14:47.000Z</pubTime>
+        
+        <tag>mysql，mysql配置远程访问</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="https:zhengjie.me/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/326.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Spring boot配置Druid</title>
+        <pubTime>2018-03-16T03:55:10.000Z</pubTime>
+        
+        <tag>spring boot配置阿里云数据库连接池</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot" url="https:zhengjie.me/categories/Spring-boot/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/383.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Spring boot整合SwaggerUI构建API文档</title>
+        <pubTime>2018-04-05T07:40:34.000Z</pubTime>
+        
+        <tag>spring boot构建 SwaggerUI</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot" url="https:zhengjie.me/categories/Spring-boot/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/327.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>解决Spring boot无数据库启动失败的问题</title>
+        <pubTime>2018-03-16T05:32:13.000Z</pubTime>
+        
+        <tag>spring boot禁止自动注入数据库</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot" url="https:zhengjie.me/categories/Spring-boot/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/232.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>基于centos的docker安装与卸载</title>
+        <pubTime>2018-02-28T05:59:58.000Z</pubTime>
+        
+        <tag>docker安装，docker卸载，docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="https:zhengjie.me/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https:zhengjie.me/blog/429.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>Java开发-必学的Linux命令整合</title>
+        <pubTime>2018-07-01T13:23:37.000Z</pubTime>
+        
+        <tag>java学习linux命令</tag>
+         
+        <tag>Linux命令</tag>
+         
+        <tag>linux学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="随笔" url="https:zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+</urlset>

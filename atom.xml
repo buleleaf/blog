@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https:zhengjie.me/"/>
-  <updated>2018-08-28T06:02:36.321Z</updated>
+  <updated>2018-08-29T02:10:04.356Z</updated>
   <id>https:zhengjie.me/</id>
   
   <author>
@@ -17,23 +17,619 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https:zhengjie.me/2018/08/28/hello-world/"/>
-    <id>https:zhengjie.me/2018/08/28/hello-world/</id>
-    <published>2018-08-28T06:02:36.321Z</published>
-    <updated>2018-08-28T06:02:36.321Z</updated>
+    <title>Jhipster 微服务与微服务相互通信</title>
+    <link href="https:zhengjie.me/blog/503.html"/>
+    <id>https:zhengjie.me/blog/503.html</id>
+    <published>2018-08-13T03:52:27.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>现有两个微服务A和B，A负责管理用户信息，B负责角色管理。 （1）A服务发送请求，绑定角色，B服务收到请求后，调用A服务查询用户是否存在，判断用户是否重复绑定，条件通过则绑定用户，最后反馈信息给A服务 （2）A服务发送请求获取自己所有的权限，B服务收到请求后，调用A服务查询用户是否存在，存在则查询数据反馈信息给A服务 上面两个例子将用户和角色进行解耦，两者相互通信，那么微服务与微服务之间如何实现相互通信，这里将用一个简单的例子来说明。</p><h5 id="1、在B服务的controller中添加Rest方法，为A服务提供调用"><a href="#1、在B服务的controller中添加Rest方法，为A服务提供调用" class="headerlink" title="1、在B服务的controller中添加Rest方法，为A服务提供调用"></a>1、在B服务的controller中添加Rest方法，为A服务提供调用</h5><ol><li>@GetMapping(value = “/roles/getRoles/{userID}”)</li><li>@Timed</li><li>public ResponseEntity getRolesByUserID(@PathVariable(value = “userID”) Long userID){</li><li>log.debug(“REST request to get Roles by UserID : {}”, userID);</li><li>//这里演示不做验证，直接New一个 Role返回Name</li><li>Role role = new Role();</li><li>role.setName(“超级管理员”);</li><li>return new ResponseEntity(role.getName(),HttpStatus.OK);</li><li>}</li></ol><h5 id="2、在A服务中声明一个接口，在接口中添加B服务中Controller的Rest方法"><a href="#2、在A服务中声明一个接口，在接口中添加B服务中Controller的Rest方法" class="headerlink" title="2、在A服务中声明一个接口，在接口中添加B服务中Controller的Rest方法"></a>2、在A服务中声明一个接口，在接口中添加B服务中Controller的Rest方法</h5><p><code>@AuthorizedFeignClient(name = &quot;b&quot;)</code>，指定与哪个微服务通信</p><ol><li>import cn.netbank.cloud.app.client.AuthorizedFeignClient;</li><li>import org.springframework.web.bind.annotation.GetMapping;</li><li><p>import org.springframework.web.bind.annotation.PathVariable;</p></li><li><p>@AuthorizedFeignClient(name = “b”)</p></li><li><p>public interface UserClient {</p></li><li><p>@GetMapping(value = “/api/roles/getRoles/{userID}”)</p></li><li>String getRolesByUserID(@PathVariable(value = “userID”) Long userID);</li><li>}</li></ol><h5 id="3、在A服务的Controller中注入UserClient"><a href="#3、在A服务的Controller中注入UserClient" class="headerlink" title="3、在A服务的Controller中注入UserClient"></a>3、在A服务的Controller中注入<code>UserClient</code></h5><ol><li>@Resource</li><li>private UserClient userClient;</li></ol><h5 id="4、在A服务中的Controller的编写Rest方法"><a href="#4、在A服务中的Controller的编写Rest方法" class="headerlink" title="4、在A服务中的Controller的编写Rest方法"></a>4、在A服务中的Controller的编写Rest方法</h5><ol><li>@GetMapping(value = “/users/getRoles/{userID}”)</li><li>@Timed</li><li>public ResponseEntity getRolesByUserID(@PathVariable(value =”userID”) Long userID){</li><li>log.debug(“REST request to Get Roles : {}”, userID);</li><li>//调用接口中的方法</li><li>String roleName = userClient.getRolesByUserID(userID);</li><li>return new ResponseEntity(roleName,HttpStatus.OK);</li><li>}</li></ol><h5 id="5、在swagger-ui中调试"><a href="#5、在swagger-ui中调试" class="headerlink" title="5、在swagger ui中调试"></a>5、在swagger ui中调试</h5><p><a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180813115116.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180813115116.jpg" alt=""></a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+        &lt;p&gt;现有两个微服务A和B，A负责管理用户信息，B负责角色管理。 （1）A服务发送请求，绑定角色，B服务收到请求后，调用A服务查询用户是否存在，判断用户是否重复绑定，条件通过则绑定用户，最后反馈信息给A服务 （2）A服务发送请求获取自己所有的权限，B服务收到请求后，调用A服务查询
       
     
     </summary>
     
+      <category term="JHipster" scheme="https:zhengjie.me/categories/JHipster/"/>
+    
+    
+      <category term="Jhipster微服务调用微服务" scheme="https:zhengjie.me/tags/Jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+      <category term="微服务相互通信" scheme="https:zhengjie.me/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9B%B8%E4%BA%92%E9%80%9A%E4%BF%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jhipster 如何彻底删除Entity</title>
+    <link href="https:zhengjie.me/blog/498.html"/>
+    <id>https:zhengjie.me/blog/498.html</id>
+    <published>2018-08-10T08:56:00.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>Jhipster为我们提供了实体的相关命令，但是从图中可以看到并没有删除实体的操作 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180810162824.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180810162824.jpg" alt=""></a> 而且我们再次输入：yo jhipster:entity User 时，提供的选项中也没有清除这一选项 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180810163317.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180810163317.jpg" alt=""></a> 这也就意味着，我们将手动删除这个实体相关的所有文件（entity: domain, repository, rest, test, Angularjs controller &amp; services, HTML view, link in menu, HTML view），可能还将面临清理不彻底的问题 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180810163514.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180810163514.jpg" alt=""></a> 一旦我们清理不彻底，下次更新这个微服务时，我们删除的这个实体又会自动生成 那么如何才能彻底删除？我在国外的一个网站上终于找到了一种方式，那就是脚本删除，命令如下：</p><ol><li><p>#!/usr/bin/env bash</p></li><li><p>echo;</p></li><li>if [ -z “$1” ];</li><li>then</li><li>printf “Required argument GROUP_ID你输入的 GROUP_ID 是 is not set. \nUsage: ./delete-entity.sh GROUP_ID ENTITY_NAME.\n”;</li><li>exit 1;</li><li>else</li><li>GROUP_ID=$1;</li><li>echo “你输入的包路径是 ‘$1’.”;</li><li><p>fi</p></li><li><p>if [ -z “$2” ];</p></li><li>then</li><li>printf “Required argument ENTITY_NAME is not set. \nUsage: ./delete-entity.sh GROUP_ID ENTITY_NAME .\n”;</li><li>exit 1;</li><li>else</li><li>ENTITY_NAME=$2;</li><li>JAVA_ENTITY_NAME=<code>echo ${ENTITY_NAME:0:1} | tr  &#39;\[a-z\]&#39; &#39;\[A-Z\]&#39;</code>${ENTITY_NAME:1}</li><li>echo “你输入的实体名称是 ‘$2’.”</li><li>echo “即将删除您的实体相关信息：”;</li><li><p>echo “domain, repository, rest, test, controller &amp; services, DTO, Mapper …”;</p></li><li><p>fi</p></li><li><p>JAVA_ENTITY_NAME=<code>echo ${ENTITY_NAME:0:1} | tr  &#39;\[a-z\]&#39; &#39;\[A-Z\]&#39;</code>${ENTITY_NAME:1}</p></li><li><p>UNDERSCORED_FOLDER_NAME=<code>echo ${ENTITY_NAME} | sed -r &#39;s/(\[a-z0-9\])(\[A-Z\])/\1-\\L\2/g&#39;</code></p></li><li><p>QUESTION=$’如果你想在将来重新生成实体，你可以选择保留实体自定义配置文件(.jhipster/‘${JAVA_ENTITY_NAME}’.json)\n你想删除实体定义文件吗？(yes or no)’</p></li><li><p>while true; do</p></li><li>read -p “${QUESTION}” yn</li><li>case $yn in</li><li>[Yy]* ) rm -rf ./.jhipster/${ENTITY_NAME}.json; break;;</li><li>[Nn]* ) break;;</li><li><ul><li>) echo “Please answer yes or no.”;;</li></ul></li><li>esac</li><li><p>done</p></li><li><p>echo;</p></li><li><p>echo “Starting to delete files…”;</p></li><li><p>echo;</p></li><li><p>echo “Starting to delete files…”;</p></li><li><p>rm -rf src/main/resources/config/liquibase/changelog/*_added_entity_${JAVA_ENTITY_NAME}.xml</p></li><li>rm -rf src/main/java/${GROUP_ID}domain/${JAVA_ENTITY_NAME}.java</li><li>rm -rf src/main/java/${GROUP_ID}repository/${JAVA_ENTITY_NAME}Repository.java</li><li>rm -rf src/main/java/${GROUP_ID}service/${JAVA_ENTITY_NAME}Service.java</li><li>rm -rf src/main/java/${GROUP_ID}service/impl/${JAVA_ENTITY_NAME}ServiceImpl.java</li><li>rm -rf src/main/java/${GROUP_ID}repository/search/${JAVA_ENTITY_NAME}SearchRepository.java</li><li>rm -rf src/main/java/${GROUP_ID}web/rest/${JAVA_ENTITY_NAME}Resource.java</li><li>rm -rf src/main/java/${GROUP_ID}web/rest/dto/${JAVA_ENTITY_NAME}DTO.java</li><li>rm -rf src/main/java/${GROUP_ID}web/rest/mapper/${JAVA_ENTITY_NAME}Mapper.java</li><li><p>rm -rf target/generated-sources/${GROUP_ID}web/rest/mapper/${JAVA_ENTITY_NAME}MapperImpl.java</p></li><li><p>rm -rf src/main/webapp/app/entities/${UNDERSCORED_FOLDER_NAME}/*</p></li><li><p>rm -rf src/test/java/${GROUP_ID}web/rest/${JAVA_ENTITY_NAME}ResourceIntTest.java</p></li><li>rm -rf src/test/gatling/simulations/${JAVA_ENTITY_NAME}GatlingTest.scala</li><li>rm -rf src/test/javascript/spec/app/entities/${UNDERSCORED_FOLDER_NAME}/*</li><li><p>rm -rf src/test/javascript/spec/app/entities/${UNDERSCORED_FOLDER_NAME}</p></li><li><p>rm -rf src/main/webapp/i18n/en/${ENTITY_NAME}.json</p></li><li>rm -rf src/main/webapp/i18n/fr/${ENTITY_NAME}.json</li><li>rm -rf src/main/webapp/i18n/ru/${ENTITY_NAME}.json</li><li><p>rm -rf src/main/webapp/i18n/uz/${ENTITY_NAME}.json</p></li><li><p>echo “Deleting entity ‘${ENTITY_NAME}’ is completed.”;</p></li><li>echo;</li><li>echo “—————————————————–”;</li><li>echo “Do not forget to manually correct these files also:  “;</li><li>echo “—————————————————–”;</li><li>echo “ –&gt; src/main/webapp/index.html”</li><li>echo “ –&gt; src/main/webapp/scripts/compopnents/navbar.html”</li><li>echo “ –&gt; src/main/webapp/i18n/**/global.json”</li><li>echo “ –&gt; src/main/resources/config/liquibase/master.xml (if you use liquibase)”</li><li>echo “ –&gt; src/main/resources/config/mongeez/master.xml   (if you use mongodb)”</li></ol><p>复制该代码，保存delete-entity.sh，文件后缀为.sh，我们将这个文件置于这个项目的根目录中，只需要执行：<code>delete-entity.sh [package]/ [entityName]</code> 如：<code>delete-entity.sh me/zhengjie/ User</code> 注意：<code>package在这里不能使用.，不然会找不到文件，需要使用/,最后也需要加上/</code> 弹出如下窗口，输入yes，即可彻底删除 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/delete-entity.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/delete-entity.jpg" alt=""></a> 注意：有些东西是需要手动更新的，如</p><ol><li>src/main/webapp/index.html</li><li>src/main/webapp/scripts/compopnents/navbar.html</li><li>src/main/webapp/i18n/**/global.json</li><li>src/main/resources/config/liquibase/master.xml (if you use liquibase)</li><li>src/main/resources/config/mongeez/master.xml   (if you use mongodb)</li></ol><p>重启项目，发现报错 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180813103242.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180813103242.jpg" alt=""></a> 进入目录，<code>src/main/resources/config/liquibase/master.xml</code> 删除文件中报错的行即可。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Jhipster为我们提供了实体的相关命令，但是从图中可以看到并没有删除实体的操作 &lt;a href=&quot;https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180810162824.jpg&quot; target=&quot;_b
+      
+    
+    </summary>
+    
+      <category term="JHipster" scheme="https:zhengjie.me/categories/JHipster/"/>
+    
+    
+      <category term="jhipster删除实体" scheme="https:zhengjie.me/tags/jhipster%E5%88%A0%E9%99%A4%E5%AE%9E%E4%BD%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jhipster创建实体，Gateway数据菜单为空</title>
+    <link href="https:zhengjie.me/blog/494.html"/>
+    <id>https:zhengjie.me/blog/494.html</id>
+    <published>2018-08-10T02:05:35.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>在微服务创建entity后还需要在Gateway中同步一次，只有这样Gateway中才会生成相应的页面，不然访问他的数据菜单会是一个空的。</code> 切换到app文件夹，根据提示创建一个实体，可参考链接: <a href="https://www.zhengjie.me/blog/438.html" target="_blank" rel="noopener">JHipster 创建实体，并且增加关联关系</a></p><ol><li>cd app</li><li>yo jhipster:entity Role –table-name role</li><li>……</li><li>Overwrite src\main\resources\config\liquibase\master.xml? (ynaxdH)  Y</li></ol><p>创建完成后，打开网关服务，查看数据菜单，发现并没有我们添加的实体 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180808155711.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180808155711.jpg" alt=""></a> 这是因为我们只是在app中添加了Role，并没有将Role同步到<em>gateway</em>中</p><ol><li>cd gateway</li><li>yo jhipster:entity Role</li><li>#是否从一个已经存在的微服生成</li><li>Do you want to generate this entity from an existing microservice? Y</li><li>#输入我们微服务的根路径（相对路径和绝对路径都可以）</li><li>Enter the path to the microservice root directory: ../app</li><li>#是否更新实体</li><li>Do you want to update the entity? Y</li><li>Overwrite src\main\webapp\app\layouts\navbar\navbar.component.html? (ynaxdH) y</li></ol><p>再次打开<code>http://10.93.0.96:8080/#/</code>，就能够查就能够对我们的实体进行操作了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;在微服务创建entity后还需要在Gateway中同步一次，只有这样Gateway中才会生成相应的页面，不然访问他的数据菜单会是一个空的。&lt;/code&gt; 切换到app文件夹，根据提示创建一个实体，可参考链接: &lt;a href=&quot;https://www.zheng
+      
+    
+    </summary>
+    
+      <category term="JHipster" scheme="https:zhengjie.me/categories/JHipster/"/>
+    
+    
+      <category term="jhipster Gateway数据菜单为空" scheme="https:zhengjie.me/tags/jhipster-Gateway%E6%95%B0%E6%8D%AE%E8%8F%9C%E5%8D%95%E4%B8%BA%E7%A9%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 8 Optional 类</title>
+    <link href="https:zhengjie.me/blog/492.html"/>
+    <id>https:zhengjie.me/blog/492.html</id>
+    <published>2018-08-09T13:06:36.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>Optional 类是一个可以为null的容器对象。如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。 Optional 是个容器：它可以保存类型T的值，或者仅仅保存null。Optional提供很多有用的方法，这样我们就不用显式进行空值检测。 Optional 类的引入很好的解决空指针异常。</p><h4 id="类声明"><a href="#类声明" class="headerlink" title="类声明"></a>类声明</h4><p>以下是一个 java.util.Optional 类的声明：</p><ol><li>public final class Optional<t></t></li><li>extends Object</li></ol><hr><h4 id="Optional-实例"><a href="#Optional-实例" class="headerlink" title="Optional 实例"></a>Optional 实例</h4><p>我们可以通过以下实例来更好的了解 Optional 类的使用：</p><ol><li><p>import java.util.Optional;</p></li><li><p>public class Java8Tester {</p></li><li><p>public static void main(String args[]){</p></li><li><p>Java8Tester java8Tester = new Java8Tester();</p></li><li>Integer value1 = null;</li><li><p>Integer value2 = new Integer(10);</p></li><li><p>// Optional.ofNullable - 允许传递为 null 参数</p></li><li><p>Optional<integer> a = Optional.ofNullable(value1);</integer></p></li><li><p>// Optional.of - 如果传递的参数是 null，抛出异常 NullPointerException</p></li><li>Optional<integer> b = Optional.of(value2);</integer></li><li>System.out.println(java8Tester.sum(a,b));</li><li><p>}</p></li><li><p>public Integer sum(Optional<integer> a, Optional<integer> b){</integer></integer></p></li><li><p>// Optional.isPresent - 判断值是否存在</p></li><li><p>System.out.println(“第一个参数值存在: “ + a.isPresent());</p></li><li><p>System.out.println(“第二个参数值存在: “ + b.isPresent());</p></li><li><p>// Optional.orElse - 如果值存在，返回它，否则返回默认值</p></li><li><p>Integer value1 = a.orElse(new Integer(0));</p></li><li><p>//Optional.get - 获取值，值需要存在</p></li><li>Integer value2 = b.get();</li><li>return value1 + value2;</li><li>}</li><li>}</li></ol><p>执行以上脚本，输出结果为：</p><ol><li>$ javac Java8Tester.java</li><li>$ java Java8Tester</li><li>第一个参数值存在: false</li><li>第二个参数值存在: true</li><li>10</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Optional 类是一个可以为null的容器对象。如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。 Optional 是个容器：它可以保存类型T的值，或者仅仅保存null。Optional提供很多有用的方法，这样我们就不用显式进行空值
+      
+    
+    </summary>
+    
+      <category term="随笔" scheme="https:zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="Optional 类" scheme="https:zhengjie.me/tags/Optional-%E7%B1%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jhipster 创建微服务</title>
+    <link href="https:zhengjie.me/blog/478.html"/>
+    <id>https:zhengjie.me/blog/478.html</id>
+    <published>2018-08-08T07:58:15.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h4><p>jHipster 集成了springcloud的注册中心（eureka server）和配置中心（config server），eureka server 能够将我们自己开发的微服务（Microservices）都纳入到它自身当中，config server 能够集中管理应用程序各个环境下的配置，默认使用git 仓库存储配置内容。 Microservices没有前端页面，前端页面由网关产生（gateway），权限控制可以通过UAA进行管理，并且要在JHipster Registry中注册、发现和管理。 <code>JHipster Registry</code> 是微服架构必不可少的。它把所有的组件连接在一起，使他们能够互相通信。 <code>Microservices</code> 它只有后台代码。它更注重的是在API上。一个微服结构可以有许多微服应用，每个包含几个相关的实体和业务规则。 <code>Gateway</code> 它为所有微服务提供了HTTP路由和负载均衡，服务质量，安全和API文档。 <code>UAA</code>是一个使用OAuth2认证协议、为JHipster微服务提供用户账户和授权的服务。 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/microservices_architecture_detail.002.png" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/microservices_architecture_detail.002.png" alt=""></a></p><h4 id="二、微服务安装"><a href="#二、微服务安装" class="headerlink" title="二、微服务安装"></a>二、微服务安装</h4><h5 id="1、安装JHipster-Registry"><a href="#1、安装JHipster-Registry" class="headerlink" title="1、安装JHipster Registry"></a><strong>1、安装JHipster Registry</strong></h5><p>由于 JHipster Registry 是一个标准的jhipster，所以我们只需要克隆下来运行它即可。没有必要打开idea或者修改它： （1）第一种方式</p><ol><li>git clone <a href="https://github.com/jhipster/jhipster-registry" target="_blank" rel="noopener">https://github.com/jhipster/jhipster-registry</a></li><li>#cd到jhipster-registry文件夹，运行</li><li>mvnw</li></ol><p>执行mvnw命令后，系统将自动编译运行。 （2）第二种方式</p><ol><li>git clone <a href="https://github.com/jhipster/jhipster-registry.git" target="_blank" rel="noopener">https://github.com/jhipster/jhipster-registry.git</a></li><li><h1 id="编译启动"><a href="#编译启动" class="headerlink" title="编译启动"></a>编译启动</h1></li><li>mvn clean package</li><li>java -jar target/jhipster-registry-*.war</li></ol><p>打开<a href="http://localhost:8761/，并且登录，默认账户admin，密码admin。" target="_blank" rel="noopener">http://localhost:8761/，并且登录，默认账户admin，密码admin。</a></p><p>Instances Registered是自动注册的服务，当我们创建服务后，将自动注册到这里</p><p><a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180808152545.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180808152545.jpg" alt=""></a></p><h5 id="2、安装uaa"><a href="#2、安装uaa" class="headerlink" title="2、安装uaa"></a><strong>2、安装</strong>uaa</h5><p>部署完jHipster registry ，我们需要创建一个用于控制访问权限的项目。</p><ol><li>#创建文件夹存放项目</li><li>mkdir uaa</li><li>#切换到文件夹</li><li>cd uaa</li><li>#创建UAA服务</li><li><p>yo jhipster</p></li><li><p>#仅供参考</p></li><li>? (1/14) Which *type* of application would you like to create? [BETA] JHipster UAA server (for microservice OAuth2 authentication)</li><li>? (2/14) What is the base name of your application? uaa</li><li>? (3/14) Would you like to install other generators from the JHipster Market Place? No</li><li>? (3/14) As you are running in a microservice architecture, on which port would like your server to run? It should be unique to avoid port conflicts. 9999</li><li>? (4/14) What is your default Java package name? cn.jhipter.uaa</li><li>? (5/14) Which Service Discovery and Configuration solution would you like to use? JHipster Registry (using Eureka and Spring Cloud Config)</li><li>? (6/14) Which *type* of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle, MSSQL)</li><li>? (7/14) Which *production* database would you like to use? MySQL</li><li>? (8/14) Which *development* database would you like to use? MySQL</li><li>? (9/14) Do you want to use Hibernate 2nd level cache? Yes, with HazelCast (distributed cache, for multiple nodes)</li><li>? (10/14) Would you like to use Maven or Gradle for building the backend? Maven</li><li>? (11/14) Which other technologies would you like to use? (Press <space> to select, <a> to toggle all, <i> to inverse selection)</i></a></space></li><li>? (12/14) Would you like to enable internationalization support? Yes</li><li>#国际化支持，选择简体中文</li><li>? Please choose the native language of the application? Chinese (Simplified)</li><li>? Please choose additional languages to install (Press <space> to select, <a> to toggle all, <i> to inverse selection)</i></a></space></li><li>? (13/14) Which testing frameworks would you like to use? (Press <space> to select, <a> to toggle all, <i> to inverse selection)Gatling</i></a></space></li></ol><p>通过<code>mvnw</code>编译启动项目</p><h5 id="3、创建一个Microservices-Application"><a href="#3、创建一个Microservices-Application" class="headerlink" title="3、创建一个Microservices Application"></a>3、创建一个Microservices Application</h5><p>操作同uaa</p><ol><li>#创建文件夹存放项目</li><li>mkdir app</li><li>#切换到文件夹</li><li>cd app</li><li>#创建微服务</li><li><p>yo jhipster</p></li><li><p>#仅供参考</p></li><li>? (1/14) Which *type* of application would you like to create? Microservice application</li><li>? (2/14) What is the base name of your application? app</li><li>? (3/14) Would you like to install other generators from the JHipster Market Place? No</li><li>? (3/14) As you are running in a microservice architecture, on which port would like your server to run? It should be unique to avoid port conflicts. 8081</li><li>? (4/14) What is your default Java package name? cn.jhipster.app</li><li>? (5/14) Which *type* of authentication would you like to use? [BETA] Authentication with JHipster UAA server (the server must be generated separately)</li><li>? (6/14) What is the folder path of your UAA application?. ../uaa</li><li>? (7/14) Which Service Discovery and Configuration solution would you like to use? JHipster Registry (using Eureka and Spring Cloud Config)</li><li>? (8/14) Which *type* of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle)</li><li>? (9/14) Which *production* database would you like to use? MySQL</li><li>? (10/14) Which *development* database would you like to use? MySQL</li><li>? (11/14) Do you want to use Hibernate 2nd level cache? Yes, with HazelCast (distributed cache, for multiple nodes)</li><li>? (12/14) Would you like to use Maven or Gradle for building the backend? Maven</li><li>? (13/14) Which other technologies would you like to use? (Press <space> to select, <a> to toggle all, <i> to inverse selection)</i></a></space></li><li>? (14/14) Would you like to enable internationalization support? Yes</li><li>? Please choose the native language of the application? Chinese (Simplified)</li><li>? Please choose additional languages to install (Press <space> to select, <a> to toggle all, <i> to inverse selection)</i></a></space></li><li>? (15/14) Which testing frameworks would you like to use? (Press <space> to select, <a> to toggle all, <i> to inverse selection)Gatling</i></a></space></li></ol><p>同样还需要修改数据库配置<code>\src\main\resources\config\application-dev.yml</code>，在application.yml中可以看到，系统已经自动帮我们注册了 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180808154254.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180808154254.jpg" alt=""></a> 启动项目（参考uaa）</p><h5 id="4、创建一个网关"><a href="#4、创建一个网关" class="headerlink" title="4、创建一个网关"></a>4、创建一个网关</h5><p>创建一个网关，用来做为所有请求的入口</p><ol><li>#创建文件夹存放项目</li><li>mkdir gateway</li><li>#切换到文件夹</li><li>cd gateway</li><li>#创建微服务网关</li><li><p>yo jhipster</p></li><li><p>#仅供参考</p></li><li>? (1/14) Which *type* of application would you like to create? Microservice gateway</li><li>? (2/14) What is the base name of your application? gateway</li><li>? (3/14) Would you like to install other generators from the JHipster Market Place? No</li><li>? (3/14) As you are running in a microservice architecture, on which port would like your server to run? It should be unique to avoid port conflicts. 8080</li><li>? (4/14) What is your default Java package name? cn.jhipster.gateway</li><li>? (5/14) Which *type* of authentication would you like to use? [BETA] Authentication with JHipster UAA server (the server must be generated separately)</li><li>? (6/14) What is the folder path of your UAA application?. ../uaa</li><li>? (7/14) Which Service Discovery and Configuration solution would you like to use? JHipster Registry (using Eureka and Spring Cloud Config)</li><li>? (8/14) Which *type* of database would you like to use? SQL (H2, MySQL, MariaDB, PostgreSQL, Oracle, MSSQL)</li><li>? (9/14) Which *production* database would you like to use? MySQL</li><li>? (10/14) Which *development* database would you like to use? MySQL</li><li>? (11/14) Do you want to use Hibernate 2nd level cache? Yes, with HazelCast (distributed cache, for multiple nodes)</li><li>? (12/14) Would you like to use Maven or Gradle for building the backend? Maven</li><li>? (13/14) Which other technologies would you like to use? (Press <space> to select, <a> to toggle all, <i> to inverse selection)</i></a></space></li><li>? (14/14) Would you like to use the LibSass stylesheet preprocessor for your CSS? No</li><li>? (15/14) Would you like to enable internationalization support? Yes</li><li>? Please choose the native language of the application? Chinese (Simplified)</li><li>? Please choose additional languages to install (Press <space> to select, <a> to toggle all, <i> to inverse selection)</i></a></space></li><li>? (16/14) Which testing frameworks would you like to use? (Press <space> to select, <a> to toggle all, <i> to inverse selection)Gatling</i></a></space></li></ol><p>同样需要修改数据库配置并启动项目 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/1-3.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/1-3.jpg" alt=""></a> 打开<a href="http://localhost:8761，就可以查看到我们创建的服务。" target="_blank" rel="noopener">http://localhost:8761，就可以查看到我们创建的服务。</a> 将它和网关服务进行对比，可以看出网关页面管理里面多了些菜单。 <strong>软件推荐</strong>： 由于创建都是敲命令实现的，而系统原生的cmd使用起来并不怎么友好，可以使用cmder这款软件进行操作。<code>cmder</code>是一个跨平台的命令行增强工具,可以集成windows batch, power shell, git, linux bash等多种命令行于一体,使用起来还是十分方便的 <strong>相关介绍：</strong> <a href="https://www.zhengjie.me/blog/465.html" target="_blank" rel="noopener">https://www.zhengjie.me/blog/465.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;一、简介&quot;&gt;&lt;a href=&quot;#一、简介&quot; class=&quot;headerlink&quot; title=&quot;一、简介&quot;&gt;&lt;/a&gt;一、简介&lt;/h4&gt;&lt;p&gt;jHipster 集成了springcloud的注册中心（eureka server）和配置中心（config server
+      
+    
+    </summary>
+    
+      <category term="JHipster" scheme="https:zhengjie.me/categories/JHipster/"/>
+    
+    
+      <category term="JHipster入门" scheme="https:zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="jhipster微服务" scheme="https:zhengjie.me/tags/jhipster%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决JHipster启动出现空白页的问题</title>
+    <link href="https:zhengjie.me/blog/443.html"/>
+    <id>https:zhengjie.me/blog/443.html</id>
+    <published>2018-08-07T04:23:15.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="场景重现"><a href="#场景重现" class="headerlink" title="场景重现"></a>场景重现</h4><p>从git上拉取了一个JHipster项目，启动后，访问localhost:8080，出现的是空白的页面。</p><h4 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h4><p>能启动，但是访问页面都是空白的，访问swagger-ui得不到样式，排除代码问题，初步确认为是前端部分没有构建。 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/1-2.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/1-2-300x35.jpg" alt=""></a>  </p><h4 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h4><p>1、切换到项目根目录 2、依次执行命令</p><ol><li>yarn</li><li>yarn add node-sass</li><li>yarn start</li></ol><p>yarn add node-sass 是安装依赖的node-sass包，在安装yarn时，如果node-sass没有安装成功，前端构建就会报错。 yarn start 会自动启动这个项目并打开浏览器页面。 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180807122139.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180807122139-300x143.jpg" alt=""></a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;场景重现&quot;&gt;&lt;a href=&quot;#场景重现&quot; class=&quot;headerlink&quot; title=&quot;场景重现&quot;&gt;&lt;/a&gt;场景重现&lt;/h4&gt;&lt;p&gt;从git上拉取了一个JHipster项目，启动后，访问localhost:8080，出现的是空白的页面。&lt;/p&gt;
+&lt;h4 i
+      
+    
+    </summary>
+    
+      <category term="JHipster" scheme="https:zhengjie.me/categories/JHipster/"/>
+    
+    
+      <category term="Jhipster空白页问题" scheme="https:zhengjie.me/tags/Jhipster%E7%A9%BA%E7%99%BD%E9%A1%B5%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>美化cmd，Windows神器推荐Cmder</title>
+    <link href="https:zhengjie.me/blog/465.html"/>
+    <id>https:zhengjie.me/blog/465.html</id>
+    <published>2018-08-06T08:24:28.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在使用JHipster，用的最多的就是在cmd中敲命令，但是Windows自带的doc窗口使用起来真的很不方便，而且也没有敲linux命令的感觉。百度了下，看到了这个工具，真的是相见恨晚</p><h4 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h4><p><code>cmder</code>是一个跨平台的命令行增强工具,可以集成windows batch, power shell, git, linux bash等多种命令行于一体,十分方便。</p><h4 id="界面的差异"><a href="#界面的差异" class="headerlink" title="界面的差异"></a>界面的差异</h4><p>在原生的doc窗口画风是这样的，而且查看文件夹不能使用ls，这对于一部分人来说真的很难受 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180807151725-1.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180807151725-1-300x156.jpg" alt=""></a> 在cmder中可以使用ls查看当前目录的所有文件夹，在cd文件时，会将相同名称的文件显示出来，当然他的强大不止这些 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180807145007-1.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180807145007-1-300x169.jpg" alt=""></a></p><h4 id="cmder安装"><a href="#cmder安装" class="headerlink" title="cmder安装"></a>cmder安装</h4><p>打开官网<a href="http://cmder.net" target="_blank" rel="noopener">http://cmder.net</a> 会有两个版本可供选择，个人推荐安装Full版本 cmder快捷操作及部分说明</p><ol><li>Cmder常用快捷键<ol><li>可以利用<code>Tab</code>，自动路径补全(爽,赞！)；</li><li>可以利用Ctrl+T建立新页签；</li><li>利用Ctrl+W关闭页签;</li><li>还可以透过Ctrl+Tab切换页签;</li><li>Alt+F4：关闭所有页签</li><li>Alt+Shift+1：开启cmd.exe</li><li>Alt+Shift+2：开启powershell.exe</li><li>Alt+Shift+3：开启powershell.exe (系统管理员权限)</li><li>Ctrl+1：快速切换到第1个页签</li><li>Ctrl+n：快速切换到第n个页签( n值无上限)</li><li>Alt + enter： 切换到全屏状态；</li><li>Ctr+r 历史命令搜索;</li><li>End, Home, Ctrl : Traversing text with as usual on Windows</li></ol></li><li>可在视窗内搜寻画面上出现过的任意关键字。</li><li>新增页签按钮，可透过滑鼠新增页签。</li><li>切换页签按钮，可透过滑鼠切换页签。</li><li>锁定视窗，让视窗无法再输入。</li><li>切换视窗是否提供卷轴功能，启动时可查询之前显示过的内容。</li><li>按下滑鼠左键可开启系统选单，滑鼠右键可开启工具选项视窗。 Win+Alt+P ：开启工具选项视窗</li></ol><h4 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h4><ol><li>它可以使用简单的复制（Ctrl+C）粘贴（Ctrl+V）</li><li>它可以执行一些常见但指令超长又难以记忆的语法;比如 ls cls等等，在控制台输入alias可以查看</li></ol><h4 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h4><p><a href="https://www.cnblogs.com/wenber/p/3740948.html" target="_blank" rel="noopener">安装mini版本后出现乱码文字重叠解决方法</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近在使用JHipster，用的最多的就是在cmd中敲命令，但是Windows自带的doc窗口使用起来真的很不方便，而且也没有敲linux命令的感觉。百度了下，看到了这个工具，真的是相见恨晚&lt;/p&gt;
+&lt;h4 id=&quot;简介：&quot;&gt;&lt;a href=&quot;#简介：&quot; class=&quot;he
+      
+    
+    </summary>
+    
+      <category term="随笔" scheme="https:zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="cmd" scheme="https:zhengjie.me/tags/cmd/"/>
+    
+      <category term="cmder" scheme="https:zhengjie.me/tags/cmder/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JHipster 创建实体，并且增加关联关系</title>
+    <link href="https:zhengjie.me/blog/438.html"/>
+    <id>https:zhengjie.me/blog/438.html</id>
+    <published>2018-08-06T06:52:29.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要</p><ul><li>一个数据库表</li><li>一个Liquibase变更set</li><li>一个JPA实体</li><li>一个Spring data jpa repository</li><li>一个带有基础增删改查的rest controller</li><li>一个angular路由、组件以及服务</li><li>一个HTML视图</li><li>集成测试</li><li>性能测试</li></ul><p>如果我们有多个实体，你可能还想创建他们之间的关系，比如这个例子，你需要：</p><ul><li>一个数据库外键</li><li>指定Javascript和HTML代码管理此关系</li></ul><p>实体sub-generator(子生成器)，将会为每个实体创建所有需要的文件并且提供增删改查后端，sub-generator通过<code>jhipster entity &lt;entityName&gt; --[options]</code>运行。 注意：在Windows中，需要使用如下代码运行：</p><ol><li>yo jhipster:entity User –table-name user</li></ol><p>它支持的选项有：</p><ul><li><code>--table-name &lt;table_name&gt;</code> 通过JHipster会生成一个表，他的名称基于你的实体名称，如果你想要修改为不同的名称使用此选项</li><li><code>--angular-suffix &lt;suffix&gt;</code> 如果你想所有的都带有自定义的后缀，可使用此选项</li><li><code>--regenerate</code> 将会不做任何询问生成已存在的实体</li><li><code>--skip-server</code> 不会服务端代码</li><li><code>--skip-client</code>不会生成客户端代码</li><li><code>--db</code> 跳过服务端代码生成时指定数据库</li></ul><h4 id="实体字段"><a href="#实体字段" class="headerlink" title="实体字段"></a>实体字段</h4><p>对于每个实体，你可以添加很多字段。你需要输入字段名称和类型，JHipster将会生成你所需的代码和配置。这些字段名称不能包含关键字</p><h4 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h4><p>JHipster支持很多字段类型，这些支持依赖于你的后台数据库，所有我们使用Java类型去描述他们：一个Java <code>String</code>在Oracle和Cassandra中不同，这是Jhipster生成健壮和正确的数据库代码的一种方式。</p><ul><li><code>String</code> 它的默认长度取决于后端，如果你使用JPA默认长度<code>255</code>，你可以通过检验规则来修改它</li><li><code>Integer</code></li><li><code>Long</code></li><li><code>Float</code></li><li><code>Double</code></li><li><code>BigDecimal</code></li><li><code>LocalDate</code> 用于在Java中正确的管理日期</li><li><code>Instant</code> 用于时间戳</li><li><code>ZoneDateTime</code> 给定时区的本地时间</li><li><code>Enumeration</code> 枚举对象，当选择此类型时，子生成器将会询问你对应的枚举值并创建enum类</li><li><code>Blob</code> 用于存储二进制数据，当被选中时，子生成器会询问你存储的数据类型，是图片对象还是CLOB</li></ul><h4 id="下面尝试下如何创建"><a href="#下面尝试下如何创建" class="headerlink" title="下面尝试下如何创建"></a>下面尝试下如何创建</h4><ol><li>创建一个Role的实体</li><li><p>yo jhipster:entity Role –table-name rol</p></li><li><p>要为实体添加字段吗？</p></li><li><p>Do you want to add a field to your entity? (Y/n) y</p></li><li><p>字段名称是什么？</p></li><li><p>What is the name of your field? name</p></li><li><p>选择字段类型</p></li><li><p>What is the type of your field? String</p></li><li><p>为字段添加一些验证</p></li><li>Do you want to add validation rules to your field? (y/N) y</li><li>1、唯一约束</li><li>2、最小长度</li><li>3、最大长度</li><li><p>4、正则表达</p></li><li><p>是否继续添加字段</p></li><li><p>Do you want to add a field to your entity? (Y/n) n</p></li><li><p>是否关联实体</p></li><li><p>Do you want to add a relationship to another entity? No</p></li><li><p>生成DTO（DOT详解）</p></li><li><p>Do you want to use a Data Transfer Object (DTO)? [BETA] Yes, generate a DTO with MapStruct</p></li><li><p>生成Service</p></li><li>Do you want to use separate service class for your business logic?</li><li><p>Yes, generate a separate service interface and implementation</p></li><li><p>添加分页</p></li><li>Do you want pagination on your entity? Yes, with a simple pager</li><li>不分页</li><li>简单分页，基于bootstrap pager</li><li>完成分页系统，基于Bootstrap pagination component</li><li>滚动分页，基于infinite scroll directive</li></ol><h4 id="给User和Role添加关联关系"><a href="#给User和Role添加关联关系" class="headerlink" title="给User和Role添加关联关系"></a>给User和Role添加关联关系</h4><p>在上面的代码中就可以直接添加关联关系，这里我们演示修改实体，并且添加关联关系。</p><ol><li>再次输入</li><li><p>yo jhipster:entity Role –table-name role</p></li><li><p>你想更新实体吗？这将替换此实体的现有文件，所有自定义代码都将被覆盖</p></li><li>Do you want to update the entity? This will replace the existing files for this entity, all your custom code will be overwritten (Use arrow keys)</li><li>Yes, re generate the entity（是的，重新生成实体）</li><li>Yes, add more fields and relationships（为实体添加新的字段）</li><li><p>Yes, remove fields and relationships（是的，删除字段和关系）</p></li><li><p>添加新的字段？</p></li><li><p>Do you want to add a field to your entity? (Y/n) n</p></li><li><p>是否关联其他实体</p></li><li><p>Do you want to add a relationship to another entity? (Y/n) y</p></li><li><p>实体的名称是什么？</p></li><li><p>What is the name of the other entity? User</p></li><li><p>关联关系的名称是什么？</p></li><li><p>What is the name of the relationship? user</p></li><li><p>选择关系类型</p></li><li>What is the type of the relationship? (Use arrow keys) many-to-one</li><li>many-to-one</li><li>many-to-many</li><li><p>one-to-one</p></li><li><p>展示他们的关系时，使用User的哪个字段</p></li><li><p>When you display this relationship with Angular, which field from ‘User’ do you want to use? (id) username</p></li><li><p>是否要为此关系添加任何验证规则？</p></li><li><p>Do you want to add any validation rules to this relationship? (y/N) n</p></li><li><p>是否关联其他实体</p></li><li>Do you want to add a relationship to another entity? (Y/n) n</li></ol><p>通过上面的命令，我们新增了Role，并且关联了User，并且为我们提供了后端的增删改查。 <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144505-300x151.jpg" alt=""></a> <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144943.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806144943.jpg" alt=""></a> <a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806145007.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806145007.jpg" alt=""></a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;当我们创建完应用时，可能想要创建一些实体类。例如我们想要创建一个User和Role实体类。对于每个实体，我们需要&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个数据库表&lt;/li&gt;
+&lt;li&gt;一个Liquibase变更set&lt;/li&gt;
+&lt;li&gt;一个JPA实体&lt;/li&gt;
+&lt;li&gt;一个Spring
+      
+    
+    </summary>
+    
+      <category term="JHipster" scheme="https:zhengjie.me/categories/JHipster/"/>
+    
+    
+      <category term="JHipster入门" scheme="https:zhengjie.me/tags/JHipster%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="JHipster创建实体详细教程" scheme="https:zhengjie.me/tags/JHipster%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在windows中安装JHipster并创建应用</title>
+    <link href="https:zhengjie.me/blog/433.html"/>
+    <id>https:zhengjie.me/blog/433.html</id>
+    <published>2018-08-04T03:33:21.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p><em>jhipster</em>框架是目前比较流行的一个架构，它为java服务器端开发提供了一整套的解决方案，它能够开发和部署spring boot和anjular web 以及基于spring的微服务应用。在使用<em>jhipster</em>之前，需要先安装nodejs、yeoman和Yeoman，这里提供了两种安装方式：</p><h4 id="第一种方式、传统的安装"><a href="#第一种方式、传统的安装" class="headerlink" title="第一种方式、传统的安装"></a>第一种方式、传统的安装</h4><h5 id="1、安装Nodejs"><a href="#1、安装Nodejs" class="headerlink" title="1、安装Nodejs"></a><strong>1、安装Nodejs</strong></h5><p><a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806111140.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806111140.jpg" alt=""></a> LTS是正式版，Current是测试版，一般开发常用的就是LTS正式版，下载完成后，一直next安装即可，不需要设置环境变量，打开控制台，输入node -v出现版本号，即代表安装成功。 <strong>安装成功后建议设置npm镜像加速</strong></p><ol><li>npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></li><li>npm config set disturl <a href="https://npm.taobao.org/dist" target="_blank" rel="noopener">https://npm.taobao.org/dist</a> –global</li><li>配置后可通过下面方式来验证是否成功</li><li>npm config get registry</li></ol><h5 id="2、安装Yarn"><a href="#2、安装Yarn" class="headerlink" title="2、安装Yarn"></a>2、安装Yarn</h5><p>输入命令：</p><ol><li>npm install -g yarn react-native-cli</li></ol><p>会自动安装好！ 安装完yarn后同理也要设置镜像源：</p><ol><li>yarn config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a> –global</li><li>yarn config set disturl <a href="https://npm.taobao.org/dist" target="_blank" rel="noopener">https://npm.taobao.org/dist</a> –global</li></ol><p>安装完yarn之后就可以用<code>yarn</code>代替<code>npm</code>了</p><h5 id="3、安装-Yeoman（需要全局安装）"><a href="#3、安装-Yeoman（需要全局安装）" class="headerlink" title="3、安装 Yeoman（需要全局安装）"></a>3、安装 Yeoman（需要全局安装）</h5><ol><li>npm install -g yo</li></ol><h5 id="4、安装JHipster"><a href="#4、安装JHipster" class="headerlink" title="4、安装JHipster"></a>4、安装JHipster</h5><ol><li>yarn global add generator-jhipster</li></ol><h4 id="第二种方式、通过官网给我们的一种安装方式（包-管理器安装）"><a href="#第二种方式、通过官网给我们的一种安装方式（包-管理器安装）" class="headerlink" title="第二种方式、通过官网给我们的一种安装方式（包**管理器安装）**"></a>第二种方式、通过<strong>官网给我们的一种安装方式（包**</strong>管理器安装）**</h4><p><a href="https://www.zhengjie.me/wp-content/uploads/2018/08/1-1.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/1-1.jpg" alt=""></a></p><h5 id="1、安装Chocolatey"><a href="#1、安装Chocolatey" class="headerlink" title="1、安装Chocolatey"></a>1、安装Chocolatey</h5><p><code>Chocolatey</code>是一个Windows上的包管理器，类似于linux上的<code>yum</code>和 <code>apt-get</code>。 安装步骤，<a href="https://chocolatey.org/install" target="_blank" rel="noopener">点击这里</a>，官网上提供两种方式，一种是在CMD中，一种是在PowerShell中。 这里我们使用CMD中的安装：</p><blockquote><p>@”%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe” -NoProfile -ExecutionPolicy Bypass -Command “iex ((New-Object System.Net.WebClient).DownloadString(‘<a href="https://chocolatey.org/install.ps1&#39;))&quot;" target="_blank" rel="noopener">https://chocolatey.org/install.ps1&#39;))&quot;</a> &amp;&amp; SET “PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin”</p></blockquote><p>打开<code>CMD</code>敲入命令，敲回车，就会自动安装，并且自动配置环境变量。</p><h5 id="2、安装JHipster"><a href="#2、安装JHipster" class="headerlink" title="2、安装JHipster"></a>2、安装JHipster</h5><ol><li>choco install jhipster</li></ol><p><a href="https://www.zhengjie.me/wp-content/uploads/2018/08/2.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/2.jpg" alt=""></a> 回车以后，他只会提示<em>Do you want to run the script?</em> 这种提示，我们怎么知道他要下载什么，终于他成功的下载了所有的组件，包括我们有的（Node, Yarn, Yeoman, JDK 和 Git），如果我们电脑上有JDK 和 Git，或者不喜欢这种安装方式的可以选择第一种方式。</p><h4 id="安装成功后测试"><a href="#安装成功后测试" class="headerlink" title="安装成功后测试"></a>安装成功后测试</h4><p>安装成功后，我们尝试生成一个应用，输入：</p><ol><li>yo jhipster</li></ol><p><a href="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806112824.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/TIM截图20180806112824.jpg" alt=""></a></p><h4 id="生成应用时的问题"><a href="#生成应用时的问题" class="headerlink" title="生成应用时的问题"></a>生成应用时的问题</h4><p>你选择的问题答案不同可能会影响到接下来的问题显示</p><h5 id="Q1-Which-type-of-application-would-you-like-to-create"><a href="#Q1-Which-type-of-application-would-you-like-to-create" class="headerlink" title="Q1. Which type of application would you like to create?"></a>Q1. Which type of application would you like to create?</h5><ul><li>Monolithic application: 单体应用</li><li>Microservice application: 微服务架构的service</li><li>Microservice gateway: 微服务网关，为微服务请求进行路由和安全</li><li>JHipster UAA server: 基于OAuth2的安全认证微服务，后文详细解释</li></ul><h5 id="Q2-What-is-the-base-name-of-your-application"><a href="#Q2-What-is-the-base-name-of-your-application" class="headerlink" title="Q2. What is the base name of your application?"></a>Q2. What is the base name of your application?</h5><p>你期望的应用的名称</p><h5 id="Q3-What-is-your-default-Java-package-name"><a href="#Q3-What-is-your-default-Java-package-name" class="headerlink" title="Q3. What is your default Java package name?"></a>Q3. What is your default Java package name?</h5><p>应用使用的默认包名，使用Yeoman的时候此值会被存储，当下次使用的时候此值会成为默认值，可覆写此值</p><h5 id="Q4-Do-you-want-to-use-the-JHipster-Registry-to-configure-monitor-and-scale-your-application"><a href="#Q4-Do-you-want-to-use-the-JHipster-Registry-to-configure-monitor-and-scale-your-application" class="headerlink" title="Q4. Do you want to use the JHipster Registry to configure, monitor and scale your application?"></a>Q4. Do you want to use the JHipster Registry to configure, monitor and scale your application?</h5><p><a href="http://www.jhipster.tech/jhipster-registry/" target="_blank" rel="noopener">JHipster Registry</a>是一个开源的工具，用于管理你正在运行的应用（微服务注册中心和统一配置中心），只有在微服务架构时才会使用</p><h5 id="Q5-Which-type-of-authentication-would-you-like-to-use"><a href="#Q5-Which-type-of-authentication-would-you-like-to-use" class="headerlink" title="Q5. Which type of authentication would you like to use?"></a>Q5. Which type of authentication would you like to use?</h5><p>所有可能的答案：</p><ul><li>JWT authentication: 使用JSON Web Token</li><li>HTTP Session Authentication：经典的基于session认证的机制</li><li>OAuth 2.0 / OIDC Authentication: 使用OpenID连接服务，类似于Keycloak或者Okta</li><li>Authentication with JHipster UAA server: 此种方式必须提前生成JHipster UAA Server (Q1的选项)，它是基于OAuth2的验证服务</li></ul><h5 id="Q6-Which-type-of-database-would-you-like-to-use"><a href="#Q6-Which-type-of-database-would-you-like-to-use" class="headerlink" title="Q6. Which type of database would you like to use?"></a>Q6. Which type of database would you like to use?</h5><p>你可以选择的选项：</p><ul><li>No database，仅使用微服务架构时可用</li><li>An SQL database: 使用关系型数据库，将会采用Spring data jpa</li><li>MongoDB</li><li>Cassandra</li><li>Couchbase</li></ul><h5 id="Q7-Which-production-database-would-you-like-to-use"><a href="#Q7-Which-production-database-would-you-like-to-use" class="headerlink" title="Q7. Which production database would you like to use?"></a>Q7. Which production database would you like to use?</h5><p>选择你线上环境使用的数据库，此选项决定<code>src/main/resources/config/application-prod.yml</code>的配置</p><h5 id="Q8-Which-development-database-would-you-like-to-use"><a href="#Q8-Which-development-database-would-you-like-to-use" class="headerlink" title="Q8. Which development database would you like to use?"></a>Q8. Which development database would you like to use?</h5><p>此选项决定你<code>src/main/resources/config/application-dev.yml</code>profile的数据库配置项，你可以选择：</p><ul><li>H2,running in-memory,数据存储在内存中，服务停掉数据消失</li><li>H2,with its data stored on disk,数据存储在硬盘，当前只是BETA测试且不能在Windows机器上工作</li><li>可以和Q7的选项一致</li></ul><h5 id="Q9-Do-you-want-to-use-the-Spring-cache-abstraction"><a href="#Q9-Do-you-want-to-use-the-Spring-cache-abstraction" class="headerlink" title="Q9. Do you want to use the Spring cache abstraction?"></a>Q9. Do you want to use the Spring cache abstraction?</h5><p>由于Spring对于Cache的允许用户使用不同的cache实现，你可以使用chcache(本地缓存)，Hazelcast(分布式缓存)或者Infinispan（另一种分布式缓存）,此选项可以提升你的应用的性能</p><h5 id="Q10-Do-you-want-to-use-Hibernate-2nd-level-cache"><a href="#Q10-Do-you-want-to-use-Hibernate-2nd-level-cache" class="headerlink" title="Q10. Do you want to use Hibernate 2nd level cache?"></a>Q10. Do you want to use Hibernate 2nd level cache?</h5><p>此选项仅当你选择SQL数据库并且在Q9选择了一个缓存实现。Hibernate使用二级缓存可以更好的提升它的性能</p><h5 id="Q11-Would-you-like-to-use-Maven-or-Gradle"><a href="#Q11-Would-you-like-to-use-Maven-or-Gradle" class="headerlink" title="Q11. Would you like to use Maven or Gradle?"></a>Q11. Would you like to use Maven or Gradle?</h5><p>构建此项目时将要使用的工具，<code>Maven</code>或者<code>Gradle</code></p><h5 id="Q12-Which-other-technologies-would-you-like-to-use"><a href="#Q12-Which-other-technologies-would-you-like-to-use" class="headerlink" title="Q12. Which other technologies would you like to use?"></a>Q12. Which other technologies would you like to use?</h5><p>多选，你可以为你的应用添加多种技术，如：</p><ul><li>Social login，社交登录功能</li><li>API first development using swagger-codegen：通过成swagger-codegen而使你的应用采用API优先的开发模式</li><li>Search engine using ElasticSearch: 对于ES的支持(Spring Data Elasticsearch)</li><li>Clustered HTTP sessions using Hazelcast,默认情况下,JHipster只是用Http Session来存储Spring Security的身份验证和授权信息。如果你在集群中运行，使用HTTP Session将会导致一些数据一致的问题，如果你想在集群中复制session，请选择此项</li></ul><h5 id="Q13-WebSockets-using-Spring-Websocket"><a href="#Q13-WebSockets-using-Spring-Websocket" class="headerlink" title="Q13. WebSockets using Spring Websocket"></a>Q13. WebSockets using Spring Websocket</h5><p>启用Websockets支持，将使用Spring WebSocket,JHipster提供了简单的例子展示如和高效的使用</p><h5 id="Q14-Asynchronous-messages-using-Apache-Kafka"><a href="#Q14-Asynchronous-messages-using-Apache-Kafka" class="headerlink" title="Q14. Asynchronous messages using Apache Kafka"></a>Q14. Asynchronous messages using Apache Kafka</h5><p>是否使用Kafka来发布和订阅消息</p><h5 id="Q15-Which-Framework-would-you-like-to-use-for-the-client"><a href="#Q15-Which-Framework-would-you-like-to-use-for-the-client" class="headerlink" title="Q15. Which Framework would you like to use for the client?"></a>Q15. Which Framework would you like to use for the client?</h5><p>选择使用那种客户端技术：</p><ul><li>Angular version 4+</li><li>AngularJS version 1.x</li></ul><h5 id="Q16-Would-you-like-to-use-the-LibSass-stylesheet-preprocessor-for-your-CSS"><a href="#Q16-Would-you-like-to-use-the-LibSass-stylesheet-preprocessor-for-your-CSS" class="headerlink" title="Q16. Would you like to use the LibSass stylesheet preprocessor for your CSS?"></a>Q16. Would you like to use the LibSass stylesheet preprocessor for your CSS?</h5><p>Node-sass对于设计CSS是一个优秀的解决方案，便于高效使用，你需要运行一个Gulp服务，jhipster会自动配置</p><h5 id="Q17-Would-you-like-to-enable-internationalization-support"><a href="#Q17-Would-you-like-to-enable-internationalization-support" class="headerlink" title="Q17. Would you like to enable internationalization support?"></a>Q17. Would you like to enable internationalization support?</h5><p>JHipster对于国际支持非常友好，你可以在客户端和服务端使用。但一般对于国际化要求不多的场景，可以不选择。</p><h5 id="Q18-Which-testing-frameworks-would-you-like-to-use"><a href="#Q18-Which-testing-frameworks-would-you-like-to-use" class="headerlink" title="Q18. Which testing frameworks would you like to use?"></a>Q18. Which testing frameworks would you like to use?</h5><p>默认Jhipster提供了Java单元/集成测试（spring`s Junit）和JavaScript单元测试（Karma.js），你也可以选择：</p><ul><li>Performance tests using Gatling，性能测试 Gatling</li><li>Behaviour tests using Cucumber,行为测试 Cucumber</li><li>Angular integration tests with Protractor, angular集成测试Protractor</li></ul><h5 id="Q19-Would-you-like-to-install-other-generators-from-the-JHipster-Marketplace"><a href="#Q19-Would-you-like-to-install-other-generators-from-the-JHipster-Marketplace" class="headerlink" title="Q19. Would you like to install other generators from the JHipster Marketplace?"></a>Q19. Would you like to install other generators from the JHipster Marketplace?</h5><p>是否需要去JHipster商城安装第三方插件模块</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;em&gt;jhipster&lt;/em&gt;框架是目前比较流行的一个架构，它为java服务器端开发提供了一整套的解决方案，它能够开发和部署spring boot和anjular web 以及基于spring的微服务应用。在使用&lt;em&gt;jhipster&lt;/em&gt;之前，需要先安装node
+      
+    
+    </summary>
+    
+      <category term="JHipster" scheme="https:zhengjie.me/categories/JHipster/"/>
+    
+    
+      <category term="JHipster安装" scheme="https:zhengjie.me/tags/JHipster%E5%AE%89%E8%A3%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker? 为什么要使用Docker？</title>
+    <link href="https:zhengjie.me/blog/430.html"/>
+    <id>https:zhengjie.me/blog/430.html</id>
+    <published>2018-07-08T03:17:11.000Z</published>
+    <updated>2018-08-29T04:21:30.145Z</updated>
+    
+    <content type="html"><![CDATA[<p>Docker 是一个开源的容器引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者和系统管理员在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括 VMs（虚拟机）、bare metal、OpenStack 集群、云端、数据中心和其他的基础应用平台。容器是完全使用沙箱机制，相互之间不会有任何接口。</p><h2 id="为啥要用Docker？"><a href="#为啥要用Docker？" class="headerlink" title="为啥要用Docker？"></a><strong>为啥要用Docker？</strong></h2><p><strong>为啥要用Docker?这要从目前软件行业的痛点来讲起</strong></p><blockquote><p>1、软件更新发布及部署低效，过程繁琐且需要人工介入 2、环境一致性难以保证 3、不同环境之间迁移成本太高</p></blockquote><p><strong>有了Docker可以很大程度解决上面的问题。</strong></p><blockquote><ul><li>首先，Docker的使用简单至极，从开发的角度来看就是三步走：构建，运输，运行。其中关键步骤就是构建环节，即打包镜像文件。但是从测试和运维的角度来看，那就只有两步：复制，运行。有了这个镜像，那么想复制到哪运行都可以，完全和平台无关了。同时Docker这种容器技术隔离出了独立的运行空间，不会和其他应用争用系统资源了以及还不需要考虑应用之间相互影响，想想就开心。</li><li>其次，因为在构建镜像的时候就处理完了服务程序对于系统的所有依赖，所以在你使用的时候，你可以忽略掉原本程序的依赖以及开发语言。对测试和运维而言，更多专注于自己的业务内容上。</li><li>最后，Docker于开发者而言提供了一种开发环境的管理办法，与测试人员而言保证了环境的同步，于运维人员提供了可移植的标准化部署流程。</li></ul></blockquote><h2 id="Docker-能干啥？"><a href="#Docker-能干啥？" class="headerlink" title="Docker 能干啥？"></a><strong>Docker 能干啥？</strong></h2><blockquote><ul><li>构建容易分发简单</li><li>隔离应用解除依赖</li><li>快速部署测完就销</li></ul></blockquote><h2 id="Docker的应用场景在哪？？"><a href="#Docker的应用场景在哪？？" class="headerlink" title="Docker的应用场景在哪？？"></a><strong>Docker的应用场景在哪？？</strong></h2><p><strong>1. 本地依赖(Local Dependency)</strong></p><p>你需要在本地系统快速尝试 Magento，或者为一个项目使用 MySQL？还是希望尝试大部分开源项目？那就使用 Docker 吧，它将帮你节省大量时间。Docker 能提升开发者的开发效率，让我们快速搭建开发环境。 开发环境的机器通常内存比较小，此前使用虚拟的时候，经常需要为开发环境的机器加内存，而通过 Docker 可以轻易的让几十个服务在 Docker 中跑起来。</p><p><strong>2. 搭建环境(Build Environment)</strong></p><p>如果你希望构建源码，但发现没有准备好合适的环境。 那么使用 Docker是一个值得考虑的方案。毕竟如果使用传统的方法一个一个地安装软件，一大堆软件安装下来确实十分费时间，使用容器技术省时省力，何乐而不为？它能让你将运行环境和配置放在代码中然后部署，同一个 Docker 的配置可以在不同的环境中使用，这样就降低了硬件要求和应用环境之间耦合度。这里有一个值得一看的例子： docker golang builder。</p><p><strong>3. 微服务(Microservices)</strong></p><p>你在使用微服务吗？微服务架构将一个整体式的应用拆分成松耦合的单个服务。 那不妨考虑一下 Docker，你可以将每个服务打包为一个docker镜像并使用docker-compose 来模拟生产环境(checkout docker networks)。最开始实践的时候可能会比较费时费力，但长远地来看，最终将产生巨大的生产力。</p><p><a href="https://www.zhengjie.me/wp-content/uploads/2018/08/微信图片_20180806101411.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/微信图片_20180806101411-300x195.jpg" alt=""></a></p><p><strong>4. 自动测试(Automated testing)</strong></p><p>试想这样一个问题，如何编写自动化的集成测试用例，这些测试用例无需花很长时间来开始运行，使用者也可轻松管理。这里不是指在 Docker 中运行测试用例，而是将测试用例与镜像紧密运行在一起。当你针对一个 docker 镜像编写测试用例时会有一个很大的优势。下面简单介绍一下我的测试流程：运行两个 docker 镜像(app + db)，在 MySQL 启动时加载数据，并在 app docker 上使用 API。可查看此脚本以获取快速的示例。</p><p><strong>5. 部署过程(Deployment process)</strong></p><p>你可以使用 docker 镜像进行自我部署。许多主流的主机提供商都支持托管 docker，如果你拥有一个具有 shell 访问权限的专用节点/vm，那么事情将变得更容易。只需要设置好docker，并在你想要的端口上运行你的镜像即可。</p><p><strong>6. 持续部署(Continuous Deployment)</strong></p><p>都说 Docker 天生适合持续集成/持续部署，在部署中使用Docker，持续部署将变得非常简单，并会在进入新的镜像后重新开始。关于这个部分的自动化工作，现在已经有许多方案以供选择，Kubernetes就是一个耳熟能详的名字。Kubernetes是容器集群管理系统，是一个开源的平台，可以实现容器集群的自动化部署、自动扩缩容、维护等功能。<br>·<br><a href="https://www.zhengjie.me/wp-content/uploads/2018/08/1.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/08/1-300x269.jpg" alt=""></a></p><p><strong>7. 多租户环境(Multi-tenancy)</strong></p><p>Docker 有意思的一个使用场景是在多租户的应用中，它可以避免关键应用的重写。如果你将应用程序服务公开给多个租户（租户指一组用户，例如组织），使用单租户方案设计的应用程序如果用上了 sub-domain + docker 可以快速获得提供多租户的服务。 关于这个场景的一个例子是为物联网的应用开发一个快速、易用的多租户环境。这种多租户的基本代码非常复杂，很难处理，重新规划这样一个应用不但消耗时间，也浪费金钱。使用Docker，可以为每一个租户的应用层的多个实例创建隔离的环境，这不仅简单而且成本低廉，当然这一切得益于 Docker 环境的启动速度和其高效的 diff 命令。</p><p><strong>8. 来自一台机器的多个 APP(Multiple apps from one machine)</strong></p><p>这与上面提到的微服务有些联系，但即使你没有使用微服务，只是提供服务，Docker仍可以很好地管理单个机器上的所有服务。你应该使用文件夹挂载来为每个基于数据的 docker 镜像保留数据。</p><p><strong>9. 扩容 QPS(Scaling QPS)</strong></p><p>Docker 通过创建另一个容器来帮助你轻松地进行水平扩展。如果遇到巨大的高峰流量，Docker可以帮助你解决问题 —— 只需添加更多的机器并增加负载均衡器背后运行的容器数量。</p><blockquote><p>原文：<a href="http://www.techug.com/post/docker-for-10-things-adaca4cca7f8.html" target="_blank" rel="noopener">http://www.techug.com/post/docker-for-10-things-adaca4cca7f8.html</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Docker 是一个开源的容器引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者和系统管理员在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括 VMs（虚拟机）、bare metal、OpenStack 集群、云端、数据中心和其他的基础应
+      
+    
+    </summary>
+    
+      <category term="docker" scheme="https:zhengjie.me/categories/docker/"/>
+    
+    
+      <category term="docker使用范围" scheme="https:zhengjie.me/tags/docker%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4/"/>
+    
+      <category term="docker入门" scheme="https:zhengjie.me/tags/docker%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="为什么使用docker" scheme="https:zhengjie.me/tags/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java开发-必学的Linux命令整合</title>
+    <link href="https:zhengjie.me/blog/429.html"/>
+    <id>https:zhengjie.me/blog/429.html</id>
+    <published>2018-07-01T13:23:37.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>作为一个Java开发人员，有些常用的Linux命令必须掌握。即使平时开发过程中不使用Linux（Unix）或者mac系统，也需要熟练掌握Linux命令。因为很多服务器上都是Linux系统。所以，要和服务器机器交互，就要通过shell命令。</p><h3 id="必会Linux命令清单"><a href="#必会Linux命令清单" class="headerlink" title="必会Linux命令清单"></a><strong>必会Linux命令清单</strong></h3><h4 id="查找文件"><a href="#查找文件" class="headerlink" title="查找文件"></a><strong>查找文件</strong></h4><p><code>find / -name filename.txt</code>根据名称查找/目录下的filename.txt文件。 <code>find . -name &quot;*.xml&quot;</code>递归查找所有的xml文件 <code>find . -name &quot;*&quot; |xargs grep &quot;hello&quot;</code>递归查找所有文件内容中包含hello world的xml文件 <code>grep -H &#39;spring&#39; *.xml</code>查找所以有的包含spring的xml文件 <code>find ./ -size 0 | xargs rm -f &amp;</code>删除文件大小为零的文件 <code>ls -l | grep &#39;.jar&#39;</code>查找当前目录中的所有jar文件 <code>grep &#39;test&#39; d*</code>显示所有以d开头的文件中包含test的行。 <code>grep &#39;test&#39; aa bb cc</code>显示在aa，bb，cc文件中匹配test的行。 <code>grep &#39;[a-z]\{5\}&#39; aa</code>显示所有包含每个字符串至少有5个连续小写字符的字符串的行。</p><h4 id="查看一个程序是否运行"><a href="#查看一个程序是否运行" class="headerlink" title="查看一个程序是否运行"></a><strong>查看一个程序是否运行</strong></h4><p><code>ps –ef|grep tomcat</code>查看所有有关tomcat的进程 <code>ps -ef|grep --color java</code>高亮要查询的关键字</p><h4 id="终止进程"><a href="#终止进程" class="headerlink" title="终止进程"></a>终止进程</h4><p><code>kill -9 19979</code>终止线程号位19979的进程</p><h4 id="查看文件，包含隐藏文件"><a href="#查看文件，包含隐藏文件" class="headerlink" title="查看文件，包含隐藏文件"></a>查看文件，包含隐藏文件</h4><h4 id="ls-al"><a href="#ls-al" class="headerlink" title="ls -al"></a><code>ls -al</code></h4><h4 id="当前工作目录"><a href="#当前工作目录" class="headerlink" title="当前工作目录"></a><strong>当前工作目录</strong></h4><h4 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a><code>pwd</code></h4><h4 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h4><p><code>cp source dest</code>复制文件 <code>cp -r sourceFolder targetFolder</code>递归复制整个文件夹 <code>scp sourecFile name@ip:addr</code>远程拷贝</p><h4 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a><strong>创建目录</strong></h4><p><code>mkdir newfolder</code></p><h4 id="删除目录"><a href="#删除目录" class="headerlink" title="删除目录"></a><strong>删除目录</strong></h4><p><code>rmdir deleteEmptyFolder</code>删除空目录<code>rm -rf deleteFile</code>递归删除目录中所有内容</p><h4 id="移动文件"><a href="#移动文件" class="headerlink" title="移动文件"></a><strong>移动文件</strong></h4><p><code>mv /temp/movefile /targetFolder</code></p><h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><p><code>mv oldNameFile newNameFile</code></p><h4 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h4><p><code>su -username</code></p><h4 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h4><p><code>chmod 777 file.java</code>file.java的权限-rwxrwxrwx，r表示读、w表示写、x表示可执行</p><h4 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h4><p><code>tar -czf test.tar.gz /test1 /test2</code></p><h4 id="列出压缩文件列表"><a href="#列出压缩文件列表" class="headerlink" title="列出压缩文件列表"></a>列出压缩文件列表</h4><p><code>tar -tzf test.tar.gz</code></p><h4 id="解压文件"><a href="#解压文件" class="headerlink" title="解压文件"></a>解压文件</h4><p><code>tar -xvzf test.tar.gz</code></p><h4 id="查看文件前10行"><a href="#查看文件前10行" class="headerlink" title="查看文件前10行"></a>查看文件前10行</h4><p><code>head -n 10 example.txt</code></p><h4 id="查看文件后10行"><a href="#查看文件后10行" class="headerlink" title="查看文件后10行"></a>查看文件后10行</h4><p><code>tail -n 10 example.txt</code></p><h4 id="查看日志最近更新"><a href="#查看日志最近更新" class="headerlink" title="查看日志最近更新"></a>查看日志最近更新</h4><p><code>tail -f exmaple.log</code>这个命令会自动显示新增内容，屏幕只显示10行内容的（可设置）。</p><h4 id="使用超级管理员身份执行命令"><a href="#使用超级管理员身份执行命令" class="headerlink" title="使用超级管理员身份执行命令"></a>使用超级管理员身份执行命令</h4><p><code>sudo rm a.txt</code>使用管理员身份删除文件</p><h4 id="查看端口占用情况"><a href="#查看端口占用情况" class="headerlink" title="查看端口占用情况"></a>查看端口占用情况</h4><p><code>netstat -tln | grep 8080</code>查看端口8080的使用情况</p><h4 id="查看端口属于哪个进程"><a href="#查看端口属于哪个进程" class="headerlink" title="查看端口属于哪个进程"></a>查看端口属于哪个进程</h4><p><code>lsof -i :8080</code></p><h4 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h4><p><code>ps aux|grep java</code>查看java进程 <code>ps aux</code>查看所有进程</p><h4 id="以树状格式列出目录"><a href="#以树状格式列出目录" class="headerlink" title="以树状格式列出目录"></a>以树状格式列出目录</h4><p><code>tree a</code> PS：Mac下使用tree命令</p><h4 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h4><p><code>wget http://file.tgz</code> PS ：Mac下安装wget命令 <code>curl http://file.tgz</code></p><h4 id="网络检测"><a href="#网络检测" class="headerlink" title="网络检测"></a>网络检测</h4><p><code>ping www.just-ping.com</code></p><h4 id="远程登录"><a href="#远程登录" class="headerlink" title="远程登录"></a>远程登录</h4><p><code>ssh userName@ip</code></p><h4 id="打印信息"><a href="#打印信息" class="headerlink" title="打印信息"></a>打印信息</h4><p><code>echo $JAVA_HOME</code>打印java home环境变量的值</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;作为一个Java开发人员，有些常用的Linux命令必须掌握。即使平时开发过程中不使用Linux（Unix）或者mac系统，也需要熟练掌握Linux命令。因为很多服务器上都是Linux系统。所以，要和服务器机器交互，就要通过shell命令。&lt;/p&gt;
+&lt;h3 id=&quot;必会Lin
+      
+    
+    </summary>
+    
+      <category term="随笔" scheme="https:zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="java学习linux命令" scheme="https:zhengjie.me/tags/java%E5%AD%A6%E4%B9%A0linux%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="Linux命令" scheme="https:zhengjie.me/tags/Linux%E5%91%BD%E4%BB%A4/"/>
+    
+      <category term="linux学习" scheme="https:zhengjie.me/tags/linux%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>掌握这10条规范，轻松搞定Git！</title>
+    <link href="https:zhengjie.me/blog/428.html"/>
+    <id>https:zhengjie.me/blog/428.html</id>
+    <published>2018-06-04T09:31:20.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="一、-创建与合并分支"><a href="#一、-创建与合并分支" class="headerlink" title="一、 创建与合并分支"></a><strong>一、 创建与合并分支</strong></h4><p>1、 从master分支创建dev分支并切换到dev分支：</p><ol><li>git checkout master</li><li>git checkout -b dev</li></ol><p>其中，git checkout -b dev 等价于：</p><ol><li>git branch dev</li><li>git checkout dev</li></ol><p>查看本地当前的分支，分支前面带“*”表示当前分支，剩下的分支表示本地有的分支：</p><ol><li>git branch</li></ol><p>查看远程全部的分支，白色的表示本地有的，红色的表示本地没有，仅在远程存在：</p><ol><li>git  branch  -a</li></ol><p>2、修改代码、提交代码（当前的操作是在dev分支上进行）</p><ol><li>git add a.html</li><li>git commit -m “提交文件a.html”</li></ol><p>3、分支合并(将dev合并到master)</p><ol><li>git checkout master</li><li>git merge dev</li></ol><p>4、合并完成后，删除dev分支.(删除dev分支时，注意我们当前所在的分支不能是dev分支)</p><ol><li>git branch -d dev</li></ol><p>5、删除后，查看分支(此时看不到dev分支了)</p><ol><li>git branch</li></ol><p>6、总结 ：工作中经常从master创建新的分支，具体操作如下：</p><ol><li>git checkout master</li><li>git checkout -b  issues1234</li><li>git push origin issues1234</li><li>git add ..</li><li>git commit -m “***”</li><li>git push origin issues1234</li></ol><p>注意：将本地分支branch1推到远端的branch2操作步骤：</p><ol><li>git push origin branch1:branch2</li></ol><p>7、删除分支</p><ol><li>git branch -D   issues1234  //本地强制删除分支issues1234    </li><li>git push origin  :issues1234  //推到远程</li></ol><h4 id="二、-解决冲突"><a href="#二、-解决冲突" class="headerlink" title="二、 解决冲突"></a><strong>二、 解决冲突</strong></h4><p>1、发生冲突的文件</p><ol><li>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</li><li>Creating a new branch is quick &amp; simple.</li><li>=======</li><li>Creating a new branch is quick AND simple.</li><li><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><p>feature1</p></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></li></ol><p>其中，git使用<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>标记文件中自己和别人产生冲突的部分。 在<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code>=======</code>之间为自己的代码； <code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>之间为别人的代码。 如果保留自己的代码，将别人的代码删掉即可。 2、冲突解决后提交</p><ol><li>git status</li><li>git add ***</li><li>git commit -m “fix conflict”</li><li>git push origin 分支名</li></ol><h4 id="三、Bug分支"><a href="#三、Bug分支" class="headerlink" title="三、Bug分支"></a><strong>三、Bug分支</strong></h4><p>1、储藏更改:将当前更改的代码储藏起来，等以后恢复使用</p><ol><li>git stash</li></ol><p>2、查看储藏的代码</p><ol><li>git stash list</li></ol><p>注： git stash list //查看全部的stash列表。 3、恢复储藏的代码</p><ol><li>git stash pop //恢复的同时把stash内容删掉</li></ol><p>或者</p><ol><li>git stash apply</li><li>stash，但是stash内容并不删除</li><li>git stash drop</li><li>面操作的基础上，以此来删除stash</li></ol><p>4、将stash空间清空</p><ol><li>git stash clear</li></ol><p>5、git stash pop 和 git stash apply 区别 原来git stash pop stash@{id}命令会在执行后将对应的stash id 从stash list里删除，而 git stash apply stash@{id} 命令则会继续保存stash id。</p><h4 id="四、版本回退"><a href="#四、版本回退" class="headerlink" title="四、版本回退"></a><strong>四、版本回退</strong></h4><p>1、回退至上一个版本</p><ol><li>git reset –hard HEAD</li></ol><p>2、回退至指定版本</p><ol><li>git reset –hard  版本号</li></ol><p>3、查看以往版本号(本地的commit)</p><ol><li>git reflog</li></ol><p>4、查看各版本号及信息(所有的commit：本地commit + 其他同事的commit)</p><ol><li>git log</li></ol><h4 id="五、撤销修改"><a href="#五、撤销修改" class="headerlink" title="五、撤销修改"></a><strong>五、撤销修改</strong></h4><p>1、撤销修改</p><ol><li>git  checkout – a.html</li></ol><p>分两种情况分析：</p><ol><li>还没有执行 git add 操作，执行上面的操作后，会恢复到和版本库中一模一样的版本状态。</li><li>执行了git add ，还没执行 git commit ,再执行上面的操作后，会恢复到git add 结束后的状态</li></ol><p>注：一旦执行了git commit -m “*”，就不能再使用上面的命令回退。</p><h4 id="六、对于已经push的版本，进行回退"><a href="#六、对于已经push的版本，进行回退" class="headerlink" title="六、对于已经push的版本，进行回退"></a><strong>六、对于已经push的版本，进行回退</strong></h4><p>1、第一步：</p><ol><li>git reset –hard 版本号 //本地回退到指定的版本</li></ol><p>2、第二步：</p><ol><li>git push  -f origin dev //将远程的也回退到指定版本</li></ol><h4 id="七、本地同步远程删除的分支"><a href="#七、本地同步远程删除的分支" class="headerlink" title="七、本地同步远程删除的分支"></a><strong>七、本地同步远程删除的分支</strong></h4><ol><li>git fetch origin -p  //用来清除已经没有远程信息的分支，这样git branch -a 就不会拉取远程已经删除的分支了</li></ol><h4 id="八、删除掉没有与远程分支对应的本地分支"><a href="#八、删除掉没有与远程分支对应的本地分支" class="headerlink" title="八、删除掉没有与远程分支对应的本地分支"></a><strong>八、删除掉没有与远程分支对应的本地分支</strong></h4><p>从gitlab上看不到的分支在本地可以通过git branch -a 查到，删掉没有与远程分支对应的本地分支：</p><ol><li>git fetch -p</li></ol><p><strong>九、查看远程库的一些信息，及与本地分支的信息</strong></p><ol><li>git remote show origin</li></ol><h4 id="十、git-stash临时保存本地操作"><a href="#十、git-stash临时保存本地操作" class="headerlink" title="十、git stash临时保存本地操作"></a><strong>十、git stash临时保存本地操作</strong></h4><p>1、使用<code>git stash</code>就可以将你当前未提交到本地（和服务器）的代码推入到Git的栈中，这时候你的工作区间和上一次提交的内容是完全一样的。 2、再切换到别的分支改紧急bug。 3、改完后，切到刚才的分支，使用<code>git stash apply</code>将以前一半的工作应用回来。 也许有的人会说，那我可不可以多次将未提交的代码压入到栈中？答案是可以的。当你多次使用<code>git stash</code>命令后，你的栈里将充满了未提交的代码，这时候你会对将哪个版本应用回来有些困惑，<code>git stash list</code>命令可以将当前的Git栈信息打印出来，你只需要将找到对应的版本号，例如使用<code>git stash apply stash@{1}</code>就可以将你指定版本号为stash@{1}的工作取出来，当你将所有的栈都应用回来的时候，可以使用<code>git stash clear</code>来将栈清空。 在这里顺便提下<code>git format-patch-n</code>, n是具体某个数字， 例如<code>git format-patch-1</code>这时便会根据log生成一个对应的补丁，如果<code>git format-patch-2</code>那么便会生成2个补丁，当然前提是你的log上有至少有两个记录。</p><h4 id="作者：Miss-Ye"><a href="#作者：Miss-Ye" class="headerlink" title="作者：Miss_Ye"></a>作者：Miss_Ye</h4><p>来自：<a href="https://segmentfault.com/a/1190000014461898" target="_blank" rel="noopener">https://segmentfault.com/a/1190000014461898</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;一、-创建与合并分支&quot;&gt;&lt;a href=&quot;#一、-创建与合并分支&quot; class=&quot;headerlink&quot; title=&quot;一、 创建与合并分支&quot;&gt;&lt;/a&gt;&lt;strong&gt;一、 创建与合并分支&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;1、 从master分支创建dev分支并切
+      
+    
+    </summary>
+    
+      <category term="Git" scheme="https:zhengjie.me/categories/Git/"/>
+    
+    
+      <category term="Git" scheme="https:zhengjie.me/tags/Git/"/>
+    
+      <category term="git stash临时保存本地操作" scheme="https:zhengjie.me/tags/git-stash%E4%B8%B4%E6%97%B6%E4%BF%9D%E5%AD%98%E6%9C%AC%E5%9C%B0%E6%93%8D%E4%BD%9C/"/>
+    
+      <category term="git入门" scheme="https:zhengjie.me/tags/git%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="git合并与删除分支" scheme="https:zhengjie.me/tags/git%E5%90%88%E5%B9%B6%E4%B8%8E%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF/"/>
+    
+      <category term="git恢复stash内容" scheme="https:zhengjie.me/tags/git%E6%81%A2%E5%A4%8Dstash%E5%86%85%E5%AE%B9/"/>
+    
+      <category term="git撤销修改" scheme="https:zhengjie.me/tags/git%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9/"/>
+    
+      <category term="git版本回退" scheme="https:zhengjie.me/tags/git%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80/"/>
+    
+      <category term="git解决冲突" scheme="https:zhengjie.me/tags/git%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring boot整合SwaggerUI构建API文档</title>
+    <link href="https:zhengjie.me/blog/383.html"/>
+    <id>https:zhengjie.me/blog/383.html</id>
+    <published>2018-04-05T07:40:34.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>SwaggerUI可以说是一个非常好用的API文档工具，它可以称为前后端开发人员的纽带，具体实现三步即可。</p><p><strong>第一步、导入依赖包</strong></p><p>我这里使用gradle构建的项目，maven项目自行转换下</p><ol><li>//Swagger2依赖</li><li>compile(‘io.springfox:springfox-swagger2:2.8.0’)</li><li>compile(‘io.springfox:springfox-swagger-ui:2.8.0’)</li></ol><p><strong>第二步、编写配置类</strong></p><ol><li>import org.springframework.boot.autoconfigure.EnableAutoConfiguration;</li><li>import org.springframework.context.annotation.Bean;</li><li>import org.springframework.context.annotation.ComponentScan;</li><li>import org.springframework.context.annotation.Configuration;</li><li>import springfox.documentation.builders.ApiInfoBuilder;</li><li>import springfox.documentation.builders.PathSelectors;</li><li>import springfox.documentation.service.ApiInfo;</li><li>import springfox.documentation.spi.DocumentationType;</li><li>import springfox.documentation.spring.web.plugins.Docket;</li><li><p>import springfox.documentation.swagger2.annotations.EnableSwagger2;</p></li><li><p>@Configuration</p></li><li>@EnableSwagger2</li><li>@EnableAutoConfiguration</li><li>//项目中存在多个controller包，使用该注解</li><li>@ComponentScan(basePackages = {“oa.server.controller”,”oa.server.activiti.controller”})</li><li><p>public class test {</p></li><li><p>@Bean</p></li><li>public Docket createRestApi() {</li><li>return new Docket(DocumentationType.SWAGGER_2)</li><li>.apiInfo(apiInfo())</li><li>.select()</li><li>//单个controller包可使用这个</li><li>//                .apis(RequestHandlerSelectors.basePackage(“oa.server.controller”))</li><li>.paths(PathSelectors.any())</li><li>.build();</li><li>}</li><li>private ApiInfo apiInfo() {</li><li>return new ApiInfoBuilder()</li><li>.title(“OA-API-接口文档”)</li><li>.description(“简单优雅的restfun风格”)</li><li>.termsOfServiceUrl(“<a href="http://192.168.2.70:8081/#/oa&quot;" target="_blank" rel="noopener">http://192.168.2.70:8081/#/oa&quot;</a>)</li><li>.version(“1.0”)</li><li>.build();</li><li>}</li><li>}</li></ol><p><strong>注：如果项目中存在多个controller包，使用该注解</strong> <code>@ComponentScan(basePackages = {&quot;oa.server.controller&quot;,&quot;oa.server.activiti.controller&quot;})</code></p><p><strong>第三步、启动项目查看</strong></p><p>swagger默认启动地址：项目地址后面加<code>/swagger-ui.html</code> 如<code>http://localhost:8081/swagger-ui.html#</code> 查看效果 <a href="https://www.zhengjie.me/wp-content/uploads/2018/04/2018-04-27_153708.jpg" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/04/2018-04-27_153708-1024x255.jpg" alt=""></a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;SwaggerUI可以说是一个非常好用的API文档工具，它可以称为前后端开发人员的纽带，具体实现三步即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第一步、导入依赖包&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;我这里使用gradle构建的项目，maven项目自行转换下&lt;/p&gt;
+&lt;ol&gt;
+&lt;li
+      
+    
+    </summary>
+    
+      <category term="Spring boot" scheme="https:zhengjie.me/categories/Spring-boot/"/>
+    
+    
+      <category term="spring boot构建 SwaggerUI" scheme="https:zhengjie.me/tags/spring-boot%E6%9E%84%E5%BB%BA-SwaggerUI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring boot配置文件</title>
+    <link href="https:zhengjie.me/blog/331.html"/>
+    <id>https:zhengjie.me/blog/331.html</id>
+    <published>2018-03-16T07:37:21.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>前言：application.properties它存在于<code>src/main/resources</code>目录下或者类路径的<code>/config</code>下它是我们程序的全局配置文件，我们可以对它默认配置的配置值进行修改。现在，让我们一起来揭开它的面纱。</p><p><strong>设置端口与自定义属性</strong></p><ol><li>//设置访问端口</li><li><p>server.port=8080</p></li><li><p>//设置自定义属性</p></li><li>com.zhengjieblog.name=”hello”</li><li>com.zhengjieblog.value=”world”</li></ol><p>使用<code>@Value(value=”${config.name}”)</code>，将值绑定到相应属性上，如：</p><ol><li>@RestController</li><li><p>public class HelloController {</p></li><li><p>@Value(“${com.zhengjieblog.name}”)</p></li><li><p>private String name;</p></li><li><p>@Value(“${com.zhengjieblog.value}”)</p></li><li><p>private String value;</p></li><li><p>@RequestMapping(“/“)</p></li><li>public String hello(){  return name+value;  }</li><li>}</li></ol><p>启动程序，在浏览器中输入 localhost:8080 就可以看到hello world 如果属性太多岂会变得很繁琐，Spring boot官方支持绑定到一个Bean上，使用注解<code>@ConfigurationProperties(prefix = “com.zhengjieblog”)</code>来指明使用在哪个Bean上</p><ol><li>import lombok.Data;</li><li>import org.springframework.boot.context.properties.ConfigurationProperties;</li><li>@Data</li><li>@ConfigurationProperties(prefix = “com.zhengjieblog”)</li><li>public class ConfigBean {</li><li>private String name;</li><li>private String value;</li><li>}</li></ol><p><strong>添加依赖</strong></p><ol><li>buildscript {</li><li>dependencies {</li><li>optional “org.springframework.boot:spring-boot-configuration-processor”</li><li>}</li><li>}</li><li>#lombok工具中的@Data注解，支持自动生成<strong>Getter</strong>和<strong>Setter</strong>方法</li><li>dependencies {</li><li>compile(‘org.projectlombok:lombok:1.16.18’)</li><li>}</li><li>compileJava.dependsOn(processResources)</li></ol><p>在spring Boot入口类加上<code>@EnableConfigurationProperties</code>并指明要加载哪个Bean @EnableConfigurationProperties({ConfigBean.class}) 最后在控制器中使用</p><ol><li>@RestController</li><li><p>public class HelloController {</p></li><li><p>@Autowired</p></li><li><p>ConfigBean configBean;</p></li><li><p>@RequestMapping(“/“)</p></li><li>public String hello(){</li><li>return configBean.getName()+configBean.getValue();</li><li>}</li><li>}</li></ol><p><strong>使用自定义的配置文件</strong></p><p>在<code>src/main/resources</code>路径下新建一个<code>application-prod.properties</code>配置文件</p><ol><li>com.zhengjieblog1.name=”hello”</li><li>com.zhengjieblog1.value=”test world”</li></ol><p>新建一个测试Bean，指定到我们的配置文件即可</p><ol><li>@Data</li><li>@Configuration</li><li>@ConfigurationProperties(prefix = “com.zhengjieblog1”)</li><li>@PropertySource(“classpath:application-prod.properties”)</li><li>public class ConfigTestBean {</li><li>private String name;</li><li>private String value;</li><li>}</li></ol><p><strong>命令行方式 指定运行Spring boot外部配置文件</strong></p><p>通过命令行的方式运行<code>spring boot</code>程序</p><ol><li>java -jar xx.jar     –使用默认的配置文件</li><li>运行外部配置文件</li><li>java -Dspring.config.location=E:\resources\xx.properties -jar xx.jar</li><li>修改tomcat端口号</li><li>java -jar xx.jar –server.port=8888</li></ol><p><strong>配置文件的优先级</strong></p><p><code>application.properties</code>和<code>application.yml`文件可以放在以下四个位置：`</code></p><ul><li>外置，在相对于应用程序运行目录的/congfig子目录里。</li><li>外置，在应用程序运行的目录里</li><li>内置，在config包内</li><li>内置，在Classpath根目录</li></ul><p>如果你在相同优先级位置同时有<code>application.properties</code>和<code>application.yml</code>，那么<code>application.properties</code>里的属性里面的属性就会覆盖<code>application.yml</code> <strong>参考</strong> <a href="http://blog.didispace.com/springbootproperties/" target="_blank" rel="noopener">http://blog.didispace.com/springbootproperties/</a> <strong>附上源码</strong> <a href="https://code.aliyun.com/zhengjieblog/SpringBoot.git" target="_blank" rel="noopener">https://code.aliyun.com/zhengjieblog/SpringBoot.git</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;前言：application.properties它存在于&lt;code&gt;src/main/resources&lt;/code&gt;目录下或者类路径的&lt;code&gt;/config&lt;/code&gt;下它是我们程序的全局配置文件，我们可以对它默认配置的配置值进行修改。现在，让我们一起来揭开它的面
+      
+    
+    </summary>
+    
+      <category term="Spring boot" scheme="https:zhengjie.me/categories/Spring-boot/"/>
+    
+    
+      <category term="spring boot配置文件详解" scheme="https:zhengjie.me/tags/spring-boot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决Spring boot无数据库启动失败的问题</title>
+    <link href="https:zhengjie.me/blog/327.html"/>
+    <id>https:zhengjie.me/blog/327.html</id>
+    <published>2018-03-16T05:32:13.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>遇到这种问题，基本上是因为引入了数据库相关的依赖，而配置文件中又没有配置数据库。解决的办法有两种，第一种注释掉数据库相关的依赖，第二种加入如下注解 <a href="https://www.zhengjie.me/wp-content/uploads/2018/03/2018-03-16_132713.png" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/03/2018-03-16_132713-300x132.png" alt=""></a> <strong>解决办法</strong></p><p>在@SpringBootApplication注解后跟上一句话即可</p><ol><li>@SpringBootApplication(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})</li><li><p>public class Application {</p></li><li><p>public static void main(String[] args){</p></li><li>SpringApplication.run(Application.class,args);</li><li>}</li><li>}</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;遇到这种问题，基本上是因为引入了数据库相关的依赖，而配置文件中又没有配置数据库。解决的办法有两种，第一种注释掉数据库相关的依赖，第二种加入如下注解 &lt;a href=&quot;https://www.zhengjie.me/wp-content/uploads/2018/03/201
+      
+    
+    </summary>
+    
+      <category term="Spring boot" scheme="https:zhengjie.me/categories/Spring-boot/"/>
+    
+    
+      <category term="spring boot禁止自动注入数据库" scheme="https:zhengjie.me/tags/spring-boot%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring boot配置Druid</title>
+    <link href="https:zhengjie.me/blog/326.html"/>
+    <id>https:zhengjie.me/blog/326.html</id>
+    <published>2018-03-16T03:55:10.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>昨天将最新的项目代码部署到服务器，今天早上再次访问某个接口，出现如下错误</strong> <code>org.springframework.transaction.CannotCreateTransactionException</code></p><ol><li>Could not open JPA EntityManager for transaction;</li><li>nested exception is javax.persistence.PersistenceException: com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: No operations allowed after connection closed.</li></ol><p><strong>目前错误定位到数据库连接池未配置，在application.properties添加Druid配置</strong></p><ol><li>#使用阿里云的druid</li><li>spring.datasource.type=com.alibaba.druid.pool.DruidDataSource</li><li>#连接池的配置信息</li><li><h2 id="初始化大小，最小，最大"><a href="#初始化大小，最小，最大" class="headerlink" title="初始化大小，最小，最大"></a>初始化大小，最小，最大</h2></li><li>spring.druid.initialSize=5</li><li>spring.druid.minIdle=5</li><li>spring.druid.maxActive=20</li><li><h2 id="配置获取连接等待超时的时间"><a href="#配置获取连接等待超时的时间" class="headerlink" title="配置获取连接等待超时的时间"></a>配置获取连接等待超时的时间</h2></li><li>spring.druid.maxWait=60000</li><li><h1 id="配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒"><a href="#配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒" class="headerlink" title="配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒"></a>配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒</h1></li><li>spring.druid.timeBetweenEvictionRunsMillis=60000</li><li><h1 id="配置一个连接在池中最小生存的时间，单位是毫秒"><a href="#配置一个连接在池中最小生存的时间，单位是毫秒" class="headerlink" title="配置一个连接在池中最小生存的时间，单位是毫秒"></a>配置一个连接在池中最小生存的时间，单位是毫秒</h1></li><li>spring.druid.minEvictableIdleTimeMillis=300000</li><li>spring.druid.validationQuery=SELECT 1 FROM DUAL</li><li>spring.druid.testWhileIdle=true</li><li>spring.druid.testOnBorrow=false</li><li>spring.druid.testOnReturn=false</li><li>spring.druid.poolPreparedStatements=true</li><li>spring.druid.maxPoolPreparedStatementPerConnectionSize=20</li></ol><p>添加gradle依赖</p><ol><li>compile(“com.alibaba:druid:1.1.6”)</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;昨天将最新的项目代码部署到服务器，今天早上再次访问某个接口，出现如下错误&lt;/strong&gt; &lt;code&gt;org.springframework.transaction.CannotCreateTransactionException&lt;/code&gt;&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="Spring boot" scheme="https:zhengjie.me/categories/Spring-boot/"/>
+    
+    
+      <category term="spring boot配置阿里云数据库连接池" scheme="https:zhengjie.me/tags/spring-boot%E9%85%8D%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编写Dockerfile发布Spring boot项目</title>
+    <link href="https:zhengjie.me/blog/271.html"/>
+    <id>https:zhengjie.me/blog/271.html</id>
+    <published>2018-03-07T14:07:30.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>在公司写了两个月的oa项目，要上线初步测试，需要提供一个spring boot的docker镜像和前端整合，于是 查阅资料编写了一个dockerfile 现将步骤记录于此，方便自己，也希望能帮助其他人 1、在服务器上创建一个文件夹，将jar包和资源文件上传到该文件夹下； 2、在该文件夹下新建一个Docker文件</p><p>由于开发环境和生产环境的所使用的数据库是不一样的，所以在这里我指定了一个外部配置文件</p><ol><li>#基于镜像</li><li>FROM azul/zulu-openjdk:8</li><li>#创建一个放资源目录的文件夹</li><li>VOLUME /etc/resources</li><li>#将打包好的jar包添加到容器根目录</li><li>ADD netbank.jar app.jar</li><li>#将资源文件添加的资源文件夹</li><li>ADD application.properties /etc/resources/application.properties</li><li>RUN bash -c ‘touch /app.jar’</li><li>#端口设置</li><li>EXPOSE 8080</li><li>#启动命令   –指定了外部application.properties</li><li>CMD [“java”,”-Dspring.config.location=/etc/resources/application.properties”,”-jar”,”app.jar”]</li></ol><p>使用xshell或其他工具，定位到该目录 <strong>执行命令</strong></p><ol><li>docker build ./ -t springboot:1.0</li><li>dcoker images    -查看镜像</li></ol><p>./   表明从当前路径中寻找Dockerfile文件 :后面为版本号 <strong>执行镜像</strong></p><ol><li>docker run –name 容器名 -p 8080:8080 -itd 镜像id</li></ol><p>进入容器配置配置资源文件，参考 <a href="https://www.zhengjie.me/blog/233.html" target="_blank" rel="noopener">https://www.zhengjie.me/blog/233.html</a> 参考资料Dockerfile详解 <a href="https://www.cnblogs.com/sorex/p/6481407.html" target="_blank" rel="noopener">https://www.cnblogs.com/sorex/p/6481407.html</a> 本文章Docker文件下载 <a href="https://code.aliyun.com/zhengjie/dockerfile.git" target="_blank" rel="noopener">https://code.aliyun.com/zhengjie/dockerfile.git</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在公司写了两个月的oa项目，要上线初步测试，需要提供一个spring boot的docker镜像和前端整合，于是 查阅资料编写了一个dockerfile 现将步骤记录于此，方便自己，也希望能帮助其他人 1、在服务器上创建一个文件夹，将jar包和资源文件上传到该文件夹下； 2
+      
+    
+    </summary>
+    
+      <category term="docker" scheme="https:zhengjie.me/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="https:zhengjie.me/tags/docker/"/>
+    
+      <category term="编写Dockerfile发布spring boot" scheme="https:zhengjie.me/tags/%E7%BC%96%E5%86%99Dockerfile%E5%8F%91%E5%B8%83spring-boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在docker容器中使用mysql</title>
+    <link href="https:zhengjie.me/blog/237.html"/>
+    <id>https:zhengjie.me/blog/237.html</id>
+    <published>2018-03-05T05:11:50.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>步骤：拉取镜像，登录mysql，修改密码，设置远程登录</strong></p><ol><li>docker pull mysql    拉取官方镜像</li><li>docker run –name mysql -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123456 -itd 镜像id</li><li>-e MYSQL_ROOT_PASSWORD=123456   设置密码</li><li>i是交互式操作，t是一个终端，d指的是在后台运行</li></ol><p><strong>运行后查看进入该容器启动mysql服务</strong></p><ol start="5"><li>docker exec -it mysql bash</li><li>service mysql start</li></ol><p><a href="https://www.zhengjie.me/wp-content/uploads/2018/02/mysql-start.png" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/02/mysql-start-300x49.png" alt=""></a> <strong>设置允许在远程任何计算机上登录</strong></p><ol start="7"><li>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root‘@’%’ IDENTIFIED BY ‘密码’ WITH GRANT OPTION;</li><li>设置成功后原密码也会改变</li></ol><p>在Navicat上登录试试吧~~ 注：官方的mysql内很多编码都不是utf8，这个时候就需要手动修改编码 附：mysql修改默认编码 <a href="https://www.linuxidc.com/Linux/2016-09/135273.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2016-09/135273.html</a> 如不想折腾，也可以pull博主正在使用的mysql镜像，默认编码都设置成了utf8 附地址：</p><ol start="9"><li>docker pull registry.cn-hangzhou.aliyuncs.com/netbank/mysql-utf8</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;步骤：拉取镜像，登录mysql，修改密码，设置远程登录&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;docker pull mysql    拉取官方镜像&lt;/li&gt;
+&lt;li&gt;docker run –name mysql -p 3307:3306 -e MYS
+      
+    
+    </summary>
+    
+      <category term="docker" scheme="https:zhengjie.me/categories/docker/"/>
+    
+      <category term="MySQL" scheme="https:zhengjie.me/categories/docker/MySQL/"/>
+    
+    
+      <category term="docker" scheme="https:zhengjie.me/tags/docker/"/>
+    
+      <category term="docker容器使用mysql" scheme="https:zhengjie.me/tags/docker%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于centos的docker安装与卸载</title>
+    <link href="https:zhengjie.me/blog/232.html"/>
+    <id>https:zhengjie.me/blog/232.html</id>
+    <published>2018-02-28T05:59:58.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>Linux系统下 前提条件 1、系统内核需要大于3.10 uname -r <a href="https://www.zhengjie.me/wp-content/uploads/2018/02/20170629163943864.png" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/02/20170629163943864.png" alt=""></a> 2、确保yum为最新 yum update 3、开始安装</p><ol><li>yum install docker-io   或者 yum install docker-engine     –安装docker</li><li>systemctl start docker.service    –启动docker服务</li><li>systemctl enable docker    –设置开机自启</li></ol><p>4、卸载docker</p><ol><li>列出所有docker安装包：yum list installed | grep docker</li><li>[root@admin ~]# yum list installed | grep docker</li><li>docker.x86_64                     2:1.12.6-71.git3e8e77d.el7.centos.1  @extras</li><li>docker-client.x86_64              2:1.12.6-71.git3e8e77d.el7.centos.1  @extras</li><li>docker-common.x86_64              2:1.12.6-71.git3e8e77d.el7.centos.1  @extras</li><li>删除所有安装包</li><li>[root@admin ~]# yum -y remove docker-common.x86_64</li><li>删除所有镜像容器等</li><li>[root@admin ~]# rm -rf /var/lib/docker</li></ol><h4 id="其他docker操作参考实例"><a href="#其他docker操作参考实例" class="headerlink" title="其他docker操作参考实例"></a>其他docker操作参考实例</h4><p><a href="https://www.zhengjie.me/blog/233.html" target="_blank" rel="noopener">Docker实例–使用tomcat发布web项目</a> Windows下安装docker <a href="https://www.linuxidc.com/Linux/2016-07/133506.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2016-07/133506.htm</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Linux系统下 前提条件 1、系统内核需要大于3.10 uname -r &lt;a href=&quot;https://www.zhengjie.me/wp-content/uploads/2018/02/20170629163943864.png&quot; target=&quot;_blank&quot; 
+      
+    
+    </summary>
+    
+      <category term="docker" scheme="https:zhengjie.me/categories/docker/"/>
+    
+    
+      <category term="docker安装，docker卸载，docker" scheme="https:zhengjie.me/tags/docker%E5%AE%89%E8%A3%85%EF%BC%8Cdocker%E5%8D%B8%E8%BD%BD%EF%BC%8Cdocker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mysql开启远程访问权限</title>
+    <link href="https:zhengjie.me/blog/169.html"/>
+    <id>https:zhengjie.me/blog/169.html</id>
+    <published>2018-01-22T14:14:47.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>登录mysql</p><ol><li>mysql -u root -ppassword</li></ol><p>授权为在任何主机上都能远程登录mysql</p><ol start="2"><li>mysql -u root -p grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘password’ with</li><li>grant option;</li></ol><p>重新刷新权限</p><ol start="4"><li>flush privileges;</li><li>exit;      #退出</li></ol><h4 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h4><p><a href="http://www.linuxidc.com/Linux/2013-06/86459.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2013-06/86459.htm</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;登录mysql&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;mysql -u root -ppassword&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;授权为在任何主机上都能远程登录mysql&lt;/p&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;mysql -u root -p grant all privil
+      
+    
+    </summary>
+    
+      <category term="MySQL" scheme="https:zhengjie.me/categories/MySQL/"/>
+    
+    
+      <category term="mysql，mysql配置远程访问" scheme="https:zhengjie.me/tags/mysql%EF%BC%8Cmysql%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git生成ssh keys步骤与使用</title>
+    <link href="https:zhengjie.me/blog/64.html"/>
+    <id>https:zhengjie.me/blog/64.html</id>
+    <published>2018-01-10T08:51:02.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<p>SSH key 可以让你在你的电脑和Code服务器之间建立安全的加密连接。 打开Git Bash</p><ol><li>cat ~/.ssh/id_rsa.pub    #运行查看是否存在本地公钥</li></ol><p>如果你看到一串字符就可以跳过生成公钥的步骤，如果没有出现，则需要使用下面的命令生成公钥。</p><ol start="2"><li>ssh-keygen -t rsa -C “youremail”</li></ol><p>执行后会在本地创建一个.ssh的文件夹 <a href="https://www.zhengjie.me/wp-content/uploads/2018/01/4.gif" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/01/4-300x124.gif" alt=""></a> <a href="https://www.zhengjie.me/wp-content/uploads/2018/01/5.gif" target="_blank" rel="noopener"><img src="https://www.zhengjie.me/wp-content/uploads/2018/01/5-300x187.gif" alt=""></a> 打开复制，或者使用</p><ol start="3"><li>clip &lt; ~/.ssh/id_rsa.pub        #复制到剪贴板</li></ol><p>添加公钥到相应的Code服务器上。 <a href="https://code.aliyun.com/" target="_blank" rel="noopener">阿里云代码托管平台</a> 选择profile–&gt; SSH key–&gt; ADD SSH KEY <a href="https://github.com/" target="_blank" rel="noopener">github</a> 选择右上角头像–> setings–&gt; SSH and GPG keys</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;SSH key 可以让你在你的电脑和Code服务器之间建立安全的加密连接。 打开Git Bash&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;cat ~/.ssh/id_rsa.pub    #运行查看是否存在本地公钥&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果你看到一串字符就可以跳过生成公钥的步骤，
+      
+    
+    </summary>
+    
+      <category term="Git" scheme="https:zhengjie.me/categories/Git/"/>
+    
+    
+      <category term="Git，git生成ssh key，git入门" scheme="https:zhengjie.me/tags/Git%EF%BC%8Cgit%E7%94%9F%E6%88%90ssh-key%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git常用命令</title>
+    <link href="https:zhengjie.me/blog/21.html"/>
+    <id>https:zhengjie.me/blog/21.html</id>
+    <published>2018-01-07T15:41:44.000Z</published>
+    <updated>2018-08-29T02:10:04.356Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>master : 默认开发分支； origin : 默认远程版本库</p></li><li><p>初始化操作</p></li><li>$ git config -global user.name <name>  #设置提交者名字</name></li><li>$ git config -global user.email <email>  #设置提交者邮箱</email></li><li>$ git config -global core.editor <editor>  #设置默认文本编辑器</editor></li><li>$ git config -global merge.tool <tool>  #设置解决合并冲突时差异分析工具</tool></li><li><p>$ git config -list  #检查已有的配置信息</p></li><li><p>创建新版本库</p></li><li>$ git clone <url>  #克隆远程版本库</url></li><li><p>$ git init  #初始化本地版本库</p></li><li><p>修改和提交</p></li><li>$ git add .  #添加所有改动过的文件</li><li>$ git add <file>  #添加指定的文件</file></li><li>$ git mv <old> <new> #文件重命名</new></old></li><li>$ git rm <file>  #删除文件</file></li><li>$ git rm -cached <file>  #停止跟踪文件但不删除</file></li><li>$ git commit -m <file> #提交指定文件</file></li><li>$ git commit -m “commit message”  #提交所有更新过的文件</li><li>$ git commit -amend  #修改最后一次提交</li><li><p>$ git commit -C HEAD -a -amend  #增补提交（不会产生新的提交历史纪录）</p></li><li><p>查看提交历史</p></li><li>$ git log  #查看提交历史</li><li>$ git log -p <file>  #查看指定文件的提交历史</file></li><li>$ git blame <file>  #以列表方式查看指定文件的提交历史</file></li><li>$ gitk  #查看当前分支历史纪录</li><li>$ gitk <branch> #查看某分支历史纪录</branch></li><li>$ gitk –all  #查看所有分支历史纪录</li><li>$ git branch -v  #每个分支最后的提交</li><li>$ git status  #查看当前状态</li><li><p>$ git diff  #查看变更内容</p></li><li><p>撤消操作</p></li><li>$ git reset -hard HEAD  #撤消工作目录中所有未提交文件的修改内容</li><li>$ git checkout HEAD <file1> <file2>  #撤消指定的未提交文件的修改内容</file2></file1></li><li>$ git checkout HEAD. #撤消所有文件</li><li><p>$ git revert <commit>  #撤消指定的提交</commit></p></li><li><p>分支与标签</p></li><li>$ git branch  #显示所有本地分支</li><li>$ git checkout &lt;branch/tagname&gt;  #切换到指定分支或标签</li><li>$ git branch <new-branch>  #创建新分支</new-branch></li><li>$ git branch -d <branch>  #删除本地分支</branch></li><li>$ git tag  #列出所有本地标签</li><li>$ git tag <tagname>  #基于最新提交创建标签</tagname></li><li>$ git tag -d <tagname>  #删除标签</tagname></li><li>合并与衍合</li><li>$ git merge <branch>  #合并指定分支到当前分支</branch></li><li><p>$ git rebase <branch>  #衍合指定分支到当前分支</branch></p></li><li><p>远程操作</p></li><li>$ git remote -v  #查看远程版本库信息</li><li>$ git remote show <remote>  #查看指定远程版本库信息</remote></li><li>$ git remote add <remote> <url>  #添加远程版本库</url></remote></li><li>$ git fetch <remote>  #从远程库获取代码</remote></li><li>$ git pull <remote> <branch>  #下载代码及快速合并</branch></remote></li><li>$ git push <remote> <branch>  #上传代码及快速合并</branch></remote></li><li>$ git push <remote> : <branch>/<tagname>  #删除远程分支或标签</tagname></branch></remote></li><li>$ git push -tags  #上传所有标签</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;master : 默认开发分支； origin : 默认远程版本库&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;初始化操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;$ git config -global user.name &lt;name&gt;  #设置提交者名字&lt;/name&gt;&lt;/l
+      
+    
+    </summary>
+    
+      <category term="Git" scheme="https:zhengjie.me/categories/Git/"/>
+    
+    
+      <category term="Git，git命令，git入门" scheme="https:zhengjie.me/tags/Git%EF%BC%8Cgit%E5%91%BD%E4%BB%A4%EF%BC%8Cgit%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
