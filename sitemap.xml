@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>www.zhengjie.me/tags/index.html</loc>
+    
+    <lastmod>2018-08-30T04:17:06.143Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>www.zhengjie.me/categories/index.html</loc>
+    
+    <lastmod>2018-08-30T04:16:43.330Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>www.zhengjie.me/blog/492.html</loc>
     
     <lastmod>2018-08-29T15:54:49.832Z</lastmod>
@@ -135,28 +149,14 @@
   </url>
   
   <url>
-    <loc>www.zhengjie.me/tags/index.html</loc>
-    
-    <lastmod>2018-08-29T02:19:22.998Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>www.zhengjie.me/categories/index.html</loc>
-    
-    <lastmod>2018-08-29T02:19:09.973Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>www.zhengjie.me/blog/169.html</loc>
+    <loc>www.zhengjie.me/blog/429.html</loc>
     
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     
   </url>
   
   <url>
-    <loc>www.zhengjie.me/blog/429.html</loc>
+    <loc>www.zhengjie.me/blog/169.html</loc>
     
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     
