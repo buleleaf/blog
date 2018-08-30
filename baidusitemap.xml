@@ -3,6 +3,26 @@
 
 
     
+  <url>
+    <loc>www.zhengjie.me/blog/492.html</loc>
+    <lastmod>2018-08-30T08:59:26.670Z</lastmod>
+    <data>
+        <display>
+        <title>【Java8新特性】使用Optional取代null</title>
+        <pubTime>2018-08-09T13:06:36.000Z</pubTime>
+        
+        <tag>Java8新特性,Optional</tag>
+         
+         
+           
+             
+              <breadCrumb title="随笔,Java8新特性" url="www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94-Java8%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>www.zhengjie.me/blog/1.html</loc>
@@ -25,26 +45,6 @@
 
     
     
-    
-  <url>
-    <loc>www.zhengjie.me/blog/492.html</loc>
-    <lastmod>2018-08-29T15:54:49.832Z</lastmod>
-    <data>
-        <display>
-        <title>Java 8 Optional 类</title>
-        <pubTime>2018-08-09T13:06:36.000Z</pubTime>
-        
-        <tag>Optional 类</tag>
-         
-         
-           
-             
-              <breadCrumb title="随笔" url="www.zhengjie.me/categories/%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>www.zhengjie.me/blog/21.html</loc>
