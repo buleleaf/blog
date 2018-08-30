@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>www.zhengjie.me/blog/1.html</loc>
     <lastmod>2018-08-30T07:41:42.401Z</lastmod>
@@ -439,26 +440,6 @@
 
     
   <url>
-    <loc>www.zhengjie.me/blog/169.html</loc>
-    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
-    <data>
-        <display>
-        <title>mysql开启远程访问权限</title>
-        <pubTime>2018-01-22T14:14:47.000Z</pubTime>
-        
-        <tag>mysql，mysql配置远程访问</tag>
-         
-         
-           
-             
-              <breadCrumb title="MySQL" url="www.zhengjie.me/categories/MySQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>www.zhengjie.me/blog/429.html</loc>
     <lastmod>2018-08-29T02:10:04.356Z</lastmod>
     <data>
@@ -482,4 +463,23 @@
     </url>
 
     
+  <url>
+    <loc>www.zhengjie.me/blog/169.html</loc>
+    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
+    <data>
+        <display>
+        <title>mysql开启远程访问权限</title>
+        <pubTime>2018-01-22T14:14:47.000Z</pubTime>
+        
+        <tag>mysql，mysql配置远程访问</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="www.zhengjie.me/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
 </urlset>
