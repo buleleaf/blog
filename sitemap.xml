@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>www.zhengjie.me/blog/1.html</loc>
+    
+    <lastmod>2018-08-30T11:13:04.425Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>www.zhengjie.me/blog/2.html</loc>
     
-    <lastmod>2018-08-30T09:32:46.216Z</lastmod>
+    <lastmod>2018-08-30T11:11:45.292Z</lastmod>
     
   </url>
   
@@ -19,13 +26,6 @@
     <loc>www.zhengjie.me/about/index.html</loc>
     
     <lastmod>2018-08-30T08:45:36.524Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>www.zhengjie.me/blog/1.html</loc>
-    
-    <lastmod>2018-08-30T07:41:42.401Z</lastmod>
     
   </url>
   
