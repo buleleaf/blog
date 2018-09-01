@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="www.zhengjie.me/"/>
-  <updated>2018-08-31T00:42:34.494Z</updated>
+  <updated>2018-09-01T12:21:55.039Z</updated>
   <id>www.zhengjie.me/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MYSQL:使用SQL语句清空所有外键关联</title>
+    <link href="www.zhengjie.me/blog/9.html"/>
+    <id>www.zhengjie.me/blog/9.html</id>
+    <published>2018-09-01T12:21:15.000Z</published>
+    <updated>2018-09-01T12:21:55.039Z</updated>
+    
+    <content type="html"><![CDATA[<p>####　解决办法<br>查询数据库中所有外键名称然后拼接生成删除语句，再复制执行<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(<span class="string">'ALTER TABLE '</span>,TABLE_SCHEMA,<span class="string">'.'</span>,TABLE_NAME,<span class="string">' DROP FOREIGN KEY '</span>,CONSTRAINT_NAME,<span class="string">' ;'</span>) </span><br><span class="line"><span class="keyword">FROM</span> information_schema.TABLE_CONSTRAINTS c </span><br><span class="line"><span class="keyword">WHERE</span> c.TABLE_SCHEMA=<span class="string">'库名'</span> <span class="keyword">AND</span> c.CONSTRAINT_TYPE=<span class="string">'FOREIGN KEY'</span>;</span><br></pre></td></tr></table></figure></p><p>执行结果如下，复制拼接好的sql语句，执行即可</p><p><img src="https://i.imgur.com/3o1uMyp.jpg" alt=""></p><h4 id="检查结果"><a href="#检查结果" class="headerlink" title="检查结果"></a>检查结果</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CONSTRAINT_NAME</span><br><span class="line"><span class="keyword">FROM</span> information_schema.TABLE_CONSTRAINTS c </span><br><span class="line"><span class="keyword">WHERE</span> c.TABLE_SCHEMA=<span class="string">'aurora'</span> <span class="keyword">AND</span> c.CONSTRAINT_TYPE=<span class="string">'FOREIGN KEY'</span>;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;####　解决办法&lt;br&gt;查询数据库中所有外键名称然后拼接生成删除语句，再复制执行&lt;br&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;
+      
+    
+    </summary>
+    
+      <category term="MySQL" scheme="www.zhengjie.me/categories/MySQL/"/>
+    
+    
+      <category term="mysql" scheme="www.zhengjie.me/tags/mysql/"/>
+    
+      <category term="mysql清空外键约束" scheme="www.zhengjie.me/tags/mysql%E6%B8%85%E7%A9%BA%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>【Java8新特性】新的日期和时间API</title>
@@ -585,11 +612,11 @@
   </entry>
   
   <entry>
-    <title>mysql开启远程访问权限</title>
+    <title>MYSQL:开启远程访问权限</title>
     <link href="www.zhengjie.me/blog/169.html"/>
     <id>www.zhengjie.me/blog/169.html</id>
     <published>2018-01-22T14:14:47.000Z</published>
-    <updated>2018-08-29T02:10:04.356Z</updated>
+    <updated>2018-09-01T12:22:21.013Z</updated>
     
     <content type="html"><![CDATA[<p>登录mysql</p><ol><li>mysql -u root -ppassword</li></ol><p>授权为在任何主机上都能远程登录mysql</p><ol start="2"><li>mysql -u root -p grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘password’ with</li><li>grant option;</li></ol><p>重新刷新权限</p><ol start="4"><li>flush privileges;</li><li>exit;      #退出</li></ol><h4 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h4><p><a href="http://www.linuxidc.com/Linux/2013-06/86459.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2013-06/86459.htm</a></p>]]></content>
     
@@ -611,7 +638,9 @@
       <category term="MySQL" scheme="www.zhengjie.me/categories/MySQL/"/>
     
     
-      <category term="mysql，mysql配置远程访问" scheme="www.zhengjie.me/tags/mysql%EF%BC%8Cmysql%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/"/>
+      <category term="mysql" scheme="www.zhengjie.me/tags/mysql/"/>
+    
+      <category term="mysql配置远程访问" scheme="www.zhengjie.me/tags/mysql%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/"/>
     
   </entry>
   

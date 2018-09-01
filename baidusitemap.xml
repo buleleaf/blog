@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>www.zhengjie.me/blog/169.html</loc>
+    <lastmod>2018-09-01T12:22:21.013Z</lastmod>
+    <data>
+        <display>
+        <title>MYSQL:开启远程访问权限</title>
+        <pubTime>2018-01-22T14:14:47.000Z</pubTime>
+        
+        <tag>mysql</tag>
+         
+        <tag>mysql配置远程访问</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="www.zhengjie.me/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>www.zhengjie.me/blog/9.html</loc>
+    <lastmod>2018-09-01T12:21:55.039Z</lastmod>
+    <data>
+        <display>
+        <title>MYSQL:使用SQL语句清空所有外键关联</title>
+        <pubTime>2018-09-01T12:21:15.000Z</pubTime>
+        
+        <tag>mysql</tag>
+         
+        <tag>mysql清空外键约束</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="www.zhengjie.me/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>www.zhengjie.me/blog/492.html</loc>
     <lastmod>2018-08-31T00:43:04.865Z</lastmod>
     <data>
@@ -469,26 +513,6 @@
            
              
               <breadCrumb title="JHipster" url="www.zhengjie.me/categories/JHipster/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>www.zhengjie.me/blog/169.html</loc>
-    <lastmod>2018-08-29T02:10:04.356Z</lastmod>
-    <data>
-        <display>
-        <title>mysql开启远程访问权限</title>
-        <pubTime>2018-01-22T14:14:47.000Z</pubTime>
-        
-        <tag>mysql，mysql配置远程访问</tag>
-         
-         
-           
-             
-              <breadCrumb title="MySQL" url="www.zhengjie.me/categories/MySQL/"/>
           
         </display>
     </data>
