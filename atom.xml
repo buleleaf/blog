@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="www.zhengjie.me/"/>
-  <updated>2018-09-01T12:21:55.039Z</updated>
+  <updated>2018-09-01T12:25:09.343Z</updated>
   <id>www.zhengjie.me/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>MYSQL:使用SQL语句清空所有外键关联</title>
-    <link href="www.zhengjie.me/blog/9.html"/>
-    <id>www.zhengjie.me/blog/9.html</id>
+    <link href="www.zhengjie.me/blog/99.html"/>
+    <id>www.zhengjie.me/blog/99.html</id>
     <published>2018-09-01T12:21:15.000Z</published>
-    <updated>2018-09-01T12:21:55.039Z</updated>
+    <updated>2018-09-01T12:25:09.343Z</updated>
     
     <content type="html"><![CDATA[<p>####　解决办法<br>查询数据库中所有外键名称然后拼接生成删除语句，再复制执行<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(<span class="string">'ALTER TABLE '</span>,TABLE_SCHEMA,<span class="string">'.'</span>,TABLE_NAME,<span class="string">' DROP FOREIGN KEY '</span>,CONSTRAINT_NAME,<span class="string">' ;'</span>) </span><br><span class="line"><span class="keyword">FROM</span> information_schema.TABLE_CONSTRAINTS c </span><br><span class="line"><span class="keyword">WHERE</span> c.TABLE_SCHEMA=<span class="string">'库名'</span> <span class="keyword">AND</span> c.CONSTRAINT_TYPE=<span class="string">'FOREIGN KEY'</span>;</span><br></pre></td></tr></table></figure></p><p>执行结果如下，复制拼接好的sql语句，执行即可</p><p><img src="https://i.imgur.com/3o1uMyp.jpg" alt=""></p><h4 id="检查结果"><a href="#检查结果" class="headerlink" title="检查结果"></a>检查结果</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CONSTRAINT_NAME</span><br><span class="line"><span class="keyword">FROM</span> information_schema.TABLE_CONSTRAINTS c </span><br><span class="line"><span class="keyword">WHERE</span> c.TABLE_SCHEMA=<span class="string">'aurora'</span> <span class="keyword">AND</span> c.CONSTRAINT_TYPE=<span class="string">'FOREIGN KEY'</span>;</span><br></pre></td></tr></table></figure>]]></content>
     
