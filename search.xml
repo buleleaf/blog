@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[MYSQL:使用SQL语句清空所有外键关联]]></title>
     <url>%2Fblog%2F99.html</url>
-    <content type="text"><![CDATA[解决办法查询数据库中所有外键名称然后拼接生成删除语句，再复制执行123SELECT CONCAT('ALTER TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' DROP FOREIGN KEY ',CONSTRAINT_NAME,' ;') FROM information_schema.TABLE_CONSTRAINTS c WHERE c.TABLE_SCHEMA='库名' AND c.CONSTRAINT_TYPE='FOREIGN KEY'; 执行结果如下，复制拼接好的sql语句，执行即可 检查结果123SELECT CONSTRAINT_NAMEFROM information_schema.TABLE_CONSTRAINTS c WHERE c.TABLE_SCHEMA='aurora' AND c.CONSTRAINT_TYPE='FOREIGN KEY';]]></content>
+    <content type="text"><![CDATA[解决办法执行下面SQL语句查询数据库中所有外键名称，然后拼接生成删除语句1234#拼接所有外键SELECT CONCAT('ALTER TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' DROP FOREIGN KEY ',CONSTRAINT_NAME,' ;') FROM information_schema.TABLE_CONSTRAINTS c WHERE c.TABLE_SCHEMA='库名' AND c.CONSTRAINT_TYPE='FOREIGN KEY'; 执行结果如下，复制拼接好的sql语句，执行即可 检查结果123SELECT CONSTRAINT_NAMEFROM information_schema.TABLE_CONSTRAINTS c WHERE c.TABLE_SCHEMA='aurora' AND c.CONSTRAINT_TYPE='FOREIGN KEY';]]></content>
       <categories>
         <category>MySQL</category>
       </categories>
