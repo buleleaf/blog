@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="www.zhengjie.me/"/>
-  <updated>2018-09-02T02:17:23.964Z</updated>
+  <updated>2018-09-02T02:21:29.921Z</updated>
   <id>www.zhengjie.me/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="www.zhengjie.me/blog/99.html"/>
     <id>www.zhengjie.me/blog/99.html</id>
     <published>2018-09-01T12:21:15.000Z</published>
-    <updated>2018-09-02T02:17:23.964Z</updated>
+    <updated>2018-09-02T02:21:29.921Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>执行下面SQL语句查询数据库中所有外键名称，然后拼接生成删除语句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#拼接所有外键</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(<span class="string">'ALTER TABLE '</span>,TABLE_SCHEMA,<span class="string">'.'</span>,TABLE_NAME,<span class="string">' DROP FOREIGN KEY '</span>,CONSTRAINT_NAME,<span class="string">' ;'</span>) </span><br><span class="line"><span class="keyword">FROM</span> information_schema.TABLE_CONSTRAINTS c </span><br><span class="line"><span class="keyword">WHERE</span> c.TABLE_SCHEMA=<span class="string">'库名'</span> <span class="keyword">AND</span> c.CONSTRAINT_TYPE=<span class="string">'FOREIGN KEY'</span>;</span><br></pre></td></tr></table></figure></p><p>执行结果如下，复制拼接好的sql语句，执行即可</p><p><img src="https://i.imgur.com/3o1uMyp.jpg" alt=""></p><h4 id="检查结果"><a href="#检查结果" class="headerlink" title="检查结果"></a>检查结果</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CONSTRAINT_NAME</span><br><span class="line"><span class="keyword">FROM</span> information_schema.TABLE_CONSTRAINTS c </span><br><span class="line"><span class="keyword">WHERE</span> c.TABLE_SCHEMA=<span class="string">'aurora'</span> <span class="keyword">AND</span> c.CONSTRAINT_TYPE=<span class="string">'FOREIGN KEY'</span>;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>执行下面SQL语句查询数据库中所有外键名称然后拼接生成删除语句，再执行<br><br><strong>SQL语句入下：</strong><br><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#拼接所有外键</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CONCAT</span>(<span class="string">'ALTER TABLE '</span>,TABLE_SCHEMA,<span class="string">'.'</span>,TABLE_NAME,<span class="string">' DROP FOREIGN KEY '</span>,CONSTRAINT_NAME,<span class="string">' ;'</span>) </span><br><span class="line"><span class="keyword">FROM</span> information_schema.TABLE_CONSTRAINTS c </span><br><span class="line"><span class="keyword">WHERE</span> c.TABLE_SCHEMA=<span class="string">'库名'</span> <span class="keyword">AND</span> c.CONSTRAINT_TYPE=<span class="string">'FOREIGN KEY'</span>;</span><br></pre></td></tr></table></figure></p><p>执行结果如下，复制拼接好的sql语句，执行即可</p><p><img src="https://i.imgur.com/3o1uMyp.jpg" alt=""></p><h4 id="检查结果"><a href="#检查结果" class="headerlink" title="检查结果"></a>检查结果</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> CONSTRAINT_NAME</span><br><span class="line"><span class="keyword">FROM</span> information_schema.TABLE_CONSTRAINTS c </span><br><span class="line"><span class="keyword">WHERE</span> c.TABLE_SCHEMA=<span class="string">'aurora'</span> <span class="keyword">AND</span> c.CONSTRAINT_TYPE=<span class="string">'FOREIGN KEY'</span>;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h4 id=&quot;解决办法&quot;&gt;&lt;a href=&quot;#解决办法&quot; class=&quot;headerlink&quot; title=&quot;解决办法&quot;&gt;&lt;/a&gt;解决办法&lt;/h4&gt;&lt;p&gt;执行下面SQL语句查询数据库中所有外键名称，然后拼接生成删除语句&lt;br&gt;&lt;figure class=&quot;highlight s
+        &lt;h4 id=&quot;解决办法&quot;&gt;&lt;a href=&quot;#解决办法&quot; class=&quot;headerlink&quot; title=&quot;解决办法&quot;&gt;&lt;/a&gt;解决办法&lt;/h4&gt;&lt;p&gt;执行下面SQL语句查询数据库中所有外键名称然后拼接生成删除语句，再执行&lt;br&gt;&lt;br&gt;&lt;strong&gt;SQL语句入下：&lt;/s
       
     
     </summary>
