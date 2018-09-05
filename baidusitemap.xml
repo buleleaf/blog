@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>www.zhengjie.me/blog/100.html</loc>
+    <lastmod>2018-09-05T06:15:21.890Z</lastmod>
+    <data>
+        <display>
+        <title>MySQL:使用SQL语句删除所有索引</title>
+        <pubTime>2018-09-05T06:14:41.000Z</pubTime>
+        
+        <tag>mysql</tag>
+         
+        <tag>mysql清空索引</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="www.zhengjie.me/categories/MySQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>www.zhengjie.me/blog/666.html</loc>
     <lastmod>2018-09-05T01:36:38.092Z</lastmod>
     <data>
