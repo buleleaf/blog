@@ -4,30 +4,8 @@
 
     
   <url>
-    <loc>www.zhengjie.me/blog/100.html</loc>
-    <lastmod>2018-09-10T01:35:04.627Z</lastmod>
-    <data>
-        <display>
-        <title>MySQL:使用SQL语句删除所有索引</title>
-        <pubTime>2018-09-05T06:14:41.000Z</pubTime>
-        
-        <tag>mysql</tag>
-         
-        <tag>mysql清空索引</tag>
-         
-         
-           
-             
-              <breadCrumb title="MySQL" url="www.zhengjie.me/categories/MySQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>www.zhengjie.me/blog/666.html</loc>
-    <lastmod>2018-09-05T01:36:38.092Z</lastmod>
+    <lastmod>2018-09-18T15:44:51.889Z</lastmod>
     <data>
         <display>
         <title>Spring Boot 2.0.4 & Shiro1.4.0 后台脚手架</title>
@@ -46,6 +24,28 @@
           
              
               <breadCrumb title="Spring boot" url="www.zhengjie.me/categories/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/Spring-boot/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>www.zhengjie.me/blog/100.html</loc>
+    <lastmod>2018-09-10T01:35:04.627Z</lastmod>
+    <data>
+        <display>
+        <title>MySQL:使用SQL语句删除所有索引</title>
+        <pubTime>2018-09-05T06:14:41.000Z</pubTime>
+        
+        <tag>mysql</tag>
+         
+        <tag>mysql清空索引</tag>
+         
+         
+           
+             
+              <breadCrumb title="MySQL" url="www.zhengjie.me/categories/MySQL/"/>
           
         </display>
     </data>
