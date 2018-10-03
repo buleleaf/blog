@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="www.zhengjie.me/"/>
-  <updated>2018-10-03T08:20:08.388Z</updated>
+  <updated>2018-10-03T08:25:23.071Z</updated>
   <id>www.zhengjie.me/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="www.zhengjie.me/blog/80.html"/>
     <id>www.zhengjie.me/blog/80.html</id>
     <published>2018-10-03T08:19:49.000Z</published>
-    <updated>2018-10-03T08:20:08.388Z</updated>
+    <updated>2018-10-03T08:25:23.071Z</updated>
     
     <content type="html"><![CDATA[<h4 id="追述历史"><a href="#追述历史" class="headerlink" title="追述历史"></a>追述历史</h4><p>在 Spring 早期的的1.x版本中，当时的<em>JDK</em>还不支持注解，因此只能只用 <em>xml</em> 。在<em>JDK</em>升级到<em>JDK1.5</em>后，它加入了注解的新特性，从此注解就被广泛的使用起来。<br>有人支持肯定也会有人反对，于是 Spring 内部也分成了两派，一边是使用XML    的赞同派，一边是使用注解的赞同派。为了简化开发，在 Spring 2.x 之后的版本也引入了注解，不过只是少量的，如 <em>@Component</em>、<em>@Service</em> 等，但是功能还不强大，因此对于 <em>Spring</em> 的开发，大对数情况下都是<em>xml</em>为主，注解为辅。<br>随着注解的功能增强，尤其是 <em>Servlet3.0</em>  规范的提出，<em>Web</em> 容器可以脱离web.xml的部署，使得 Web容器完全可以基于注解开发。对于 Spring3.x 和 Spring4.x 的版本注解功能越来越强大，对于 xml 的依赖越来越少，到了 4.x 的版本后甚至可以完全脱离 xml ，因此在 Spring 中使用注解开发占据了主流的地位。</p><h4 id="Spring-boot-与-Spring的关系"><a href="#Spring-boot-与-Spring的关系" class="headerlink" title="Spring boot 与 Spring的关系"></a>Spring boot 与 Spring的关系</h4><p>Pivotal 团队在原有 Spring 的基础上主要通过注解的方式继续简化了 Spring 框架的开发，他们基于 Spring 框架开发了 Spring boot。 所以 Spring boot 并非是替代 Spring 框架，而是让 Spring 框架更加容易得到快速的使用。</p><h4 id="Spring-boot的优点"><a href="#Spring-boot的优点" class="headerlink" title="Spring boot的优点"></a>Spring boot的优点</h4><p>学习Spring boot前，我们先谈下它的优点。官方文档是这样说的，Spring boot 的有点如下：</p><ol><li>创建独立的 Spring 应用程序</li><li>嵌入额 Tomcat、Jetty 或者 Undertow，无需部署 War 文件</li><li>允许通过 Maven 或者 Gradle 来根据需要获取 starter</li><li>尽可能的自动配置 Spring</li><li>对 xml 没有要求配置</li></ol><h4 id="开启Spring-boot"><a href="#开启Spring-boot" class="headerlink" title="开启Spring boot"></a>开启Spring boot</h4><p>先确定自己安装的JDK是1.8版本或者以上，这里使用 <em>idea</em> 创建<br>1、选择New-&gt;Project，直接点击下一步<br><img src="https://i.loli.net/2018/10/03/5bb4758eda22a.png" alt="在这里插入图片描述"><br>2、修改Group的名称，这个名称可以根据自己的实际需求进行修改，点击Next<br><img src="https://i.loli.net/2018/10/03/5bb4763fb3ccf.png" alt="在这里插入图片描述"><br>3、选择 Web，勾选Web，点击Next<br><img src="https://i.loli.net/2018/10/03/5bb47693486d2.png" alt="在这里插入图片描述"><br>4、项目命名与项目路径，点击完成<br><img src="https://i.loli.net/2018/10/03/5bb4772519710.png" alt="在这里插入图片描述"></p><h4 id="简单演示"><a href="#简单演示" class="headerlink" title="简单演示"></a>简单演示</h4><p>项目新建好了，我们找到spring boot的启动类，这里方便演示，不再新建控制器，直接在入口类中编写代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">    <span class="function">String <span class="title">index</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello spring boot"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>启动项目，点击启动按钮或者打包成jar再启动，方式如图<br><img src="https://i.loli.net/2018/10/03/5bb478aa48f00.png" alt="在这里插入图片描述"><br>打包后，在target目录，会生成一个可执行的jar文件，使用命令启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar demo-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure></p><p>启动后访问：localhost：8080<br><img src="https://i.loli.net/2018/10/03/5bb479a0a7e67.png" alt="在这里插入图片描述"></p>]]></content>
     
@@ -34,10 +34,10 @@
     
     </summary>
     
-      <category term="Aurora 脚手架系列" scheme="www.zhengjie.me/categories/Aurora-%E8%84%9A%E6%89%8B%E6%9E%B6%E7%B3%BB%E5%88%97/"/>
+      <category term="Spring boot 循序渐进" scheme="www.zhengjie.me/categories/Spring-boot-%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B/"/>
     
     
-      <category term="Spring boot 循序渐进" scheme="www.zhengjie.me/tags/Spring-boot-%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B/"/>
+      <category term="Aurora 脚手架系列" scheme="www.zhengjie.me/tags/Aurora-%E8%84%9A%E6%89%8B%E6%9E%B6%E7%B3%BB%E5%88%97/"/>
     
   </entry>
   

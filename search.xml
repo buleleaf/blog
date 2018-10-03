@@ -5,10 +5,10 @@
     <url>%2Fblog%2F80.html</url>
     <content type="text"><![CDATA[追述历史在 Spring 早期的的1.x版本中，当时的JDK还不支持注解，因此只能只用 xml 。在JDK升级到JDK1.5后，它加入了注解的新特性，从此注解就被广泛的使用起来。有人支持肯定也会有人反对，于是 Spring 内部也分成了两派，一边是使用XML 的赞同派，一边是使用注解的赞同派。为了简化开发，在 Spring 2.x 之后的版本也引入了注解，不过只是少量的，如 @Component、@Service 等，但是功能还不强大，因此对于 Spring 的开发，大对数情况下都是xml为主，注解为辅。随着注解的功能增强，尤其是 Servlet3.0 规范的提出，Web 容器可以脱离web.xml的部署，使得 Web容器完全可以基于注解开发。对于 Spring3.x 和 Spring4.x 的版本注解功能越来越强大，对于 xml 的依赖越来越少，到了 4.x 的版本后甚至可以完全脱离 xml ，因此在 Spring 中使用注解开发占据了主流的地位。 Spring boot 与 Spring的关系Pivotal 团队在原有 Spring 的基础上主要通过注解的方式继续简化了 Spring 框架的开发，他们基于 Spring 框架开发了 Spring boot。 所以 Spring boot 并非是替代 Spring 框架，而是让 Spring 框架更加容易得到快速的使用。 Spring boot的优点学习Spring boot前，我们先谈下它的优点。官方文档是这样说的，Spring boot 的有点如下： 创建独立的 Spring 应用程序 嵌入额 Tomcat、Jetty 或者 Undertow，无需部署 War 文件 允许通过 Maven 或者 Gradle 来根据需要获取 starter 尽可能的自动配置 Spring 对 xml 没有要求配置 开启Spring boot先确定自己安装的JDK是1.8版本或者以上，这里使用 idea 创建1、选择New-&gt;Project，直接点击下一步2、修改Group的名称，这个名称可以根据自己的实际需求进行修改，点击Next3、选择 Web，勾选Web，点击Next4、项目命名与项目路径，点击完成 简单演示项目新建好了，我们找到spring boot的启动类，这里方便演示，不再新建控制器，直接在入口类中编写代码 123456789101112131415161718import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;import org.springframework.web.bind.annotation.RequestMapping;import org.springframework.web.bind.annotation.RestController;@RestController@SpringBootApplicationpublic class DemoApplication &#123; public static void main(String[] args) &#123; SpringApplication.run(DemoApplication.class, args); &#125; @RequestMapping("/") String index() &#123; return "Hello spring boot"; &#125;&#125; 启动项目，点击启动按钮或者打包成jar再启动，方式如图打包后，在target目录，会生成一个可执行的jar文件，使用命令启动：1java -jar demo-0.0.1-SNAPSHOT.jar 启动后访问：localhost：8080]]></content>
       <categories>
-        <category>Aurora 脚手架系列</category>
+        <category>Spring boot 循序渐进</category>
       </categories>
       <tags>
-        <tag>Spring boot 循序渐进</tag>
+        <tag>Aurora 脚手架系列</tag>
       </tags>
   </entry>
   <entry>
