@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>www.zhengjie.me/blog/80.html</loc>
+    <lastmod>2018-10-03T08:20:08.388Z</lastmod>
+    <data>
+        <display>
+        <title>开启 Spring boot</title>
+        <pubTime>2018-10-03T08:19:49.000Z</pubTime>
+        
+        <tag>Spring boot 循序渐进</tag>
+         
+         
+           
+             
+              <breadCrumb title="Aurora 脚手架系列" url="www.zhengjie.me/categories/Aurora-%E8%84%9A%E6%89%8B%E6%9E%B6%E7%B3%BB%E5%88%97/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>www.zhengjie.me/blog/666.html</loc>
-    <lastmod>2018-09-23T02:58:03.316Z</lastmod>
+    <lastmod>2018-10-03T07:16:16.460Z</lastmod>
     <data>
         <display>
         <title>Spring Boot 2.0.4 & Shiro1.4.0 后台脚手架</title>
