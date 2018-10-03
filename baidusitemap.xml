@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>www.zhengjie.me/blog/666.html</loc>
+    <lastmod>2018-10-03T08:29:45.111Z</lastmod>
+    <data>
+        <display>
+        <title>Spring Boot 2.0.4 & Shiro1.4.0 后台脚手架</title>
+        <pubTime>2018-08-28T09:30:44.000Z</pubTime>
+        
+        <tag>Aurora 脚手架系列</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot" url="www.zhengjie.me/categories/Spring-boot/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>www.zhengjie.me/blog/80.html</loc>
     <lastmod>2018-10-03T08:25:23.071Z</lastmod>
     <data>
@@ -17,33 +37,6 @@
            
              
               <breadCrumb title="Spring boot 循序渐进" url="www.zhengjie.me/categories/Spring-boot-%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>www.zhengjie.me/blog/666.html</loc>
-    <lastmod>2018-10-03T07:16:16.460Z</lastmod>
-    <data>
-        <display>
-        <title>Spring Boot 2.0.4 & Shiro1.4.0 后台脚手架</title>
-        <pubTime>2018-08-28T09:30:44.000Z</pubTime>
-        
-        <tag>后台脚手架</tag>
-         
-        <tag>后台管理系统</tag>
-         
-        <tag>layui</tag>
-         
-         
-           
-             
-              <breadCrumb title="后台管理系统" url="www.zhengjie.me/categories/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
-          
-             
-              <breadCrumb title="Spring boot" url="www.zhengjie.me/categories/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/Spring-boot/"/>
           
         </display>
     </data>
