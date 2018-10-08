@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Spring boot 基础配置]]></title>
+    <url>%2Fblog%2F500.html</url>
+    <content type="text"><![CDATA[前言上一篇文章介绍了如何开启spring boot，这篇文章将介绍spring boot的一些基本配置，通过这篇文章，你将知道：spring boot全局配置、配置文件的优先级、如何读取自定义配置文件、如何通过命令行方式运行、如何定制Banner等 定制BannerSpring Boot项目在启动的时候会有一个默认的启动图案： 123456 . ____ _ __ _ _ /\\ / ___'_ __ _ _(_)_ __ __ _ \ \ \ \( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \ \\/ ___)| |_)| | | | | || (_| | ) ) ) ) ' |____| .__|_| |_|_| |_\__, | / / / / =========|_|==============|___/=/_/_/_/ 只需要在src/main/resources目录下新建banner.txt文件,把我们自己的图案复制进去，就能自定义这个图案，当然可以通过网站：http://patorjk.com/software/taag/ 一键生成，我们使用Aurora生成，效果如下 配置文件的优先级application.properties和application.yml文件可以放在以下四个位置： 外置，在相对于应用程序运行目录的/congfig子目录里。 外置，在应用程序运行的目录里 内置，在config包内 内置，在Classpath根目录 如果你在相同优先级位置同时有application.properties和application.yml，那么application.properties里的属性里面的属性就会覆盖application.yml 测试：在resources目录下分别新建application.properties和application.yml，指定端口启动 application.properties内容 1server.port=8081 application.yml内容 12server: port: 8080 启动服务，可以看到spring boot加载的是application.properties的内容 自定义属性的读取有时候项目需要用到自定义的属性，在application.properties中定义 12me.zhengjie.name=zhengjieme.zhengjie.pass=123456 使用@Value(value=”${属性名称}”)，将值绑定到相应属性上，并且在启动类中加入控制器，使其可以直接访问，如： 12345678910111213141516171819@RestController@SpringBootApplicationpublic class SpringbootDeployApplication &#123; @Value("$&#123;me.zhengjie.name&#125;") private String name; @Value("$&#123;me.zhengjie.pass&#125;") private String pass; @GetMapping("/") public String index()&#123; return "name:"+name+",pass:"+pass; &#125; public static void main(String[] args) &#123; SpringApplication.run(SpringbootDeployApplication.class, args); &#125;&#125; 启动项目，访问http://localhost:8081，页面显示如下： 在属性非常多的情况下，也可以定义一个和配置文件对应的Bean：通过注解@ConfigurationProperties(prefix=”me.zhengjie”)指明了属性的通用前缀，通用前缀加属性名和配置文件的属性名对应。12345678910@Component@ConfigurationProperties(prefix="me.zhengjie")public class MyProperties &#123; private String name; private String pass; // get,set略&#125; 在之前的启动类中，注入该Bean，即可获取属性值1234567@Autowired private MyProperties myProperties; @GetMapping("/test") public String index1()&#123; return "name:"+myProperties.getName()+",pass:"+myProperties.getPass(); &#125; 启动项目，访问http://localhost:8081/test，页面显示如下 属性间的引用在application.properties配置文件中，各个属性可以相互引用，如下：1234me.zhengjie.name=zhengjieme.zhengjie.pass=123456me.zhengjie.nameAndPass=$&#123;me.zhengjie.name&#125;--$&#123;me.zhengjie.pass&#125; 自定义配置文件在src/main/resources路径下新建一个application-test.properties配置文件1me.zhengjie.test=test 定义一个对应的Bean12345678910@Configuration@ConfigurationProperties(prefix="me.zhengjie")@PropertySource("classpath:application-test.properties")@Componentpublic class MyTestProperties &#123; private String test; // get,set略&#125; 注解@PropertySource(“classpath:application-test.properties”)指明了使用哪个配置文件 命令行方式运行通过命令行的方式运行spring boot程序12345java -jar xx.jar --使用默认的配置文件运行外部配置文件java -Dspring.config.location=E:\resources\xx.properties -jar xx.jar修改端口号java -jar xx.jar --server.port=8888 开源后台管理系统：欢迎体验Aurora github: https://github.com/dqjdda/Aurora 码云： https://gitee.com/hgpt/Aurora]]></content>
+      <categories>
+        <category>Spring boot 循序渐进</category>
+      </categories>
+      <tags>
+        <tag>Aurora 脚手架系列</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[开启 Spring boot]]></title>
     <url>%2Fblog%2F80.html</url>
     <content type="text"><![CDATA[追述历史在 Spring 早期的的1.x版本中，当时的JDK还不支持注解，因此只能只用 xml 。在JDK升级到JDK1.5后，它加入了注解的新特性，从此注解就被广泛的使用起来。有人支持肯定也会有人反对，于是 Spring 内部也分成了两派，一边是使用XML 的赞同派，一边是使用注解的赞同派。为了简化开发，在 Spring 2.x 之后的版本也引入了注解，不过只是少量的，如 @Component、@Service 等，但是功能还不强大，因此对于 Spring 的开发，大对数情况下都是xml为主，注解为辅。随着注解的功能增强，尤其是 Servlet3.0 规范的提出，Web 容器可以脱离web.xml的部署，使得 Web容器完全可以基于注解开发。对于 Spring3.x 和 Spring4.x 的版本注解功能越来越强大，对于 xml 的依赖越来越少，到了 4.x 的版本后甚至可以完全脱离 xml ，因此在 Spring 中使用注解开发占据了主流的地位。 Spring boot 与 Spring的关系Pivotal 团队在原有 Spring 的基础上主要通过注解的方式继续简化了 Spring 框架的开发，他们基于 Spring 框架开发了 Spring boot。 所以 Spring boot 并非是替代 Spring 框架，而是让 Spring 框架更加容易得到快速的使用。 Spring boot的优点学习Spring boot前，我们先谈下它的优点。官方文档是这样说的，Spring boot 的有点如下： 创建独立的 Spring 应用程序 嵌入额 Tomcat、Jetty 或者 Undertow，无需部署 War 文件 允许通过 Maven 或者 Gradle 来根据需要获取 starter 尽可能的自动配置 Spring 对 xml 没有要求配置 开启Spring boot先确定自己安装的JDK是1.8版本或者以上，这里使用 idea 创建1、选择New-&gt;Project，直接点击下一步2、修改Group的名称，这个名称可以根据自己的实际需求进行修改，点击Next3、选择 Web，勾选Web，点击Next4、项目命名与项目路径，点击完成 简单演示项目新建好了，我们找到spring boot的启动类，这里方便演示，不再新建控制器，直接在入口类中编写代码 123456789101112131415161718import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;import org.springframework.web.bind.annotation.RequestMapping;import org.springframework.web.bind.annotation.RestController;@RestController@SpringBootApplicationpublic class DemoApplication &#123; public static void main(String[] args) &#123; SpringApplication.run(DemoApplication.class, args); &#125; @RequestMapping("/") String index() &#123; return "Hello spring boot"; &#125;&#125; 启动项目，点击启动按钮或者打包成jar再启动，方式如图打包后，在target目录，会生成一个可执行的jar文件，使用命令启动：1java -jar demo-0.0.1-SNAPSHOT.jar 启动后访问：localhost：8080]]></content>
@@ -58,8 +69,8 @@
         <category>Git</category>
       </categories>
       <tags>
-        <tag>git提交代码到多个平台</tag>
         <tag>git入门</tag>
+        <tag>git提交代码到多个平台</tag>
       </tags>
   </entry>
   <entry>
@@ -212,9 +223,9 @@
         <category>Git</category>
       </categories>
       <tags>
-        <tag>git入门</tag>
         <tag>Git</tag>
         <tag>git stash临时保存本地操作</tag>
+        <tag>git入门</tag>
         <tag>git合并与删除分支</tag>
         <tag>git恢复stash内容</tag>
         <tag>git撤销修改</tag>
@@ -231,17 +242,6 @@
       </categories>
       <tags>
         <tag>spring boot构建 SwaggerUI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Spring boot配置文件]]></title>
-    <url>%2Fblog%2F331.html</url>
-    <content type="text"><![CDATA[前言application.properties它存在于src/main/resources目录下或者类路径的/config下它是我们程序的全局配置文件，我们可以对它默认配置的配置值进行修改。现在，让我们一起来揭开它的面纱。 设置端口与自定义属性12345//设置访问端口server.port=8080//设置自定义属性com.zhengjieblog.name=&quot;hello&quot;com.zhengjieblog.value=&quot;world&quot; 使用@Value(value=”${config.name}”)，将值绑定到相应属性上，如： 123456789@RestControllerpublic class HelloController &#123; @Value("$&#123;com.zhengjieblog.name&#125;") private String name; @Value("$&#123;com.zhengjieblog.value&#125;") private String value; @RequestMapping("/") public String hello()&#123; return name+value; &#125;&#125; 启动程序，在浏览器中输入 localhost:8080 就可以看到hello world如果属性太多岂会变得很繁琐，Spring boot官方支持绑定到一个Bean上，使用注解@ConfigurationProperties(prefix = “com.zhengjieblog”)来指明使用在哪个Bean上 12345678import lombok.Data;import org.springframework.boot.context.properties.ConfigurationProperties;@Data@ConfigurationProperties(prefix = "com.zhengjieblog")public class ConfigBean &#123; private String name; private String value;&#125; 添加依赖 12345678910buildscript &#123; dependencies &#123; optional "org.springframework.boot:spring-boot-configuration-processor" &#125;&#125;#lombok工具中的@Data注解，支持自动生成Getter和Setter方法dependencies &#123; compile('org.projectlombok:lombok:1.16.18')&#125;compileJava.dependsOn(processResources) 在spring Boot入口类加上@EnableConfigurationProperties并指明要加载哪个Bean @EnableConfigurationProperties({ConfigBean.class}) 最后在控制器中使用 123456789@RestControllerpublic class HelloController &#123; @Autowired ConfigBean configBean; @RequestMapping("/") public String hello()&#123; return configBean.getName()+configBean.getValue(); &#125;&#125; 使用自定义的配置文件在src/main/resources路径下新建一个application-prod.properties配置文件 12com.zhengjieblog1.name="hello"com.zhengjieblog1.value="test world" 新建一个测试Bean，指定到我们的配置文件即可 12345678@Data@Configuration@ConfigurationProperties(prefix = "com.zhengjieblog1")@PropertySource("classpath:application-prod.properties")public class ConfigTestBean &#123; private String name; private String value;&#125; 命令行方式 指定运行Spring boot外部配置文件通过命令行的方式运行spring boot程序 12345java -jar xx.jar --使用默认的配置文件运行外部配置文件java -Dspring.config.location=E:\resources\xx.properties -jar xx.jar修改tomcat端口号java -jar xx.jar --server.port=8888 配置文件的优先级application.properties和application.yml`文件可以放在以下四个位置： 外置，在相对于应用程序运行目录的/congfig子目录里。 外置，在应用程序运行的目录里 内置，在config包内 内置，在Classpath根目录 如果你在相同优先级位置同时有application.properties和application.yml，那么application.properties里的属性里面的属性就会覆盖application.yml 参考: http://blog.didispace.com/springbootproperties/]]></content>
-      <categories>
-        <category>Spring boot</category>
-      </categories>
-      <tags>
-        <tag>spring boot配置文件详解</tag>
       </tags>
   </entry>
   <entry>

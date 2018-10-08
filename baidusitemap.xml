@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>www.zhengjie.me/blog/500.html</loc>
+    <lastmod>2018-10-08T12:57:05.977Z</lastmod>
+    <data>
+        <display>
+        <title>Spring boot 基础配置</title>
+        <pubTime>2018-10-08T11:57:14.000Z</pubTime>
+        
+        <tag>Aurora 脚手架系列</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot 循序渐进" url="www.zhengjie.me/categories/Spring-boot-%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>www.zhengjie.me/blog/666.html</loc>
     <lastmod>2018-10-08T04:45:51.993Z</lastmod>
     <data>
@@ -142,9 +162,9 @@
         <title>git同步提交代码到github和码云上</title>
         <pubTime>2018-08-30T07:41:44.000Z</pubTime>
         
-        <tag>git提交代码到多个平台</tag>
-         
         <tag>git入门</tag>
+         
+        <tag>git提交代码到多个平台</tag>
          
          
            
@@ -316,26 +336,6 @@
 
     
   <url>
-    <loc>www.zhengjie.me/blog/331.html</loc>
-    <lastmod>2018-08-29T13:11:31.556Z</lastmod>
-    <data>
-        <display>
-        <title>Spring boot配置文件</title>
-        <pubTime>2018-03-16T07:37:21.000Z</pubTime>
-        
-        <tag>spring boot配置文件详解</tag>
-         
-         
-           
-             
-              <breadCrumb title="Spring boot" url="www.zhengjie.me/categories/Spring-boot/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>www.zhengjie.me/blog/383.html</loc>
     <lastmod>2018-08-29T12:46:56.884Z</lastmod>
     <data>
@@ -363,11 +363,11 @@
         <title>掌握这10条规范，轻松搞定Git！</title>
         <pubTime>2018-06-04T09:31:20.000Z</pubTime>
         
-        <tag>git入门</tag>
-         
         <tag>Git</tag>
          
         <tag>git stash临时保存本地操作</tag>
+         
+        <tag>git入门</tag>
          
         <tag>git合并与删除分支</tag>
          
