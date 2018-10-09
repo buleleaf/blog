@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>www.zhengjie.me/blog/501.html</loc>
+    <lastmod>2018-10-09T01:36:39.903Z</lastmod>
+    <data>
+        <display>
+        <title>Spring boot 集成druid连接池</title>
+        <pubTime>2018-10-09T01:36:36.000Z</pubTime>
+        
+        <tag>Aurora 脚手架系列</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot 循序渐进" url="www.zhengjie.me/categories/Spring-boot-%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>www.zhengjie.me/blog/500.html</loc>
     <lastmod>2018-10-08T14:42:40.166Z</lastmod>
     <data>
