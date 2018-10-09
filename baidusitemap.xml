@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>www.zhengjie.me/blog/503.html</loc>
+    <lastmod>2018-10-09T11:34:00.600Z</lastmod>
+    <data>
+        <display>
+        <title>Spring boot 集成Thymeleaf</title>
+        <pubTime>2018-10-09T11:33:59.000Z</pubTime>
+        
+        <tag>Aurora 脚手架系列</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot 循序渐进" url="www.zhengjie.me/categories/Spring-boot-%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>www.zhengjie.me/blog/502.html</loc>
     <lastmod>2018-10-09T04:56:04.754Z</lastmod>
     <data>
