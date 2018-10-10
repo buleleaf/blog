@@ -102,8 +102,8 @@
         <category>Git</category>
       </categories>
       <tags>
-        <tag>git入门</tag>
         <tag>git提交代码到多个平台</tag>
+        <tag>git入门</tag>
       </tags>
   </entry>
   <entry>
@@ -256,9 +256,9 @@
         <category>Git</category>
       </categories>
       <tags>
+        <tag>git入门</tag>
         <tag>Git</tag>
         <tag>git stash临时保存本地操作</tag>
-        <tag>git入门</tag>
         <tag>git合并与删除分支</tag>
         <tag>git恢复stash内容</tag>
         <tag>git撤销修改</tag>
