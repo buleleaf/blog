@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>www.zhengjie.me/blog/506.html</loc>
+    <lastmod>2018-10-16T01:16:56.985Z</lastmod>
+    <data>
+        <display>
+        <title>Spring boot Jpa高级查询</title>
+        <pubTime>2018-10-10T05:48:45.000Z</pubTime>
+        
+        <tag>Aurora 脚手架系列</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot 循序渐进" url="www.zhengjie.me/categories/Spring-boot-%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>www.zhengjie.me/blog/505.html</loc>
     <lastmod>2018-10-15T05:07:59.887Z</lastmod>
     <data>
@@ -242,9 +262,9 @@
         <title>git同步提交代码到github和码云上</title>
         <pubTime>2018-08-30T07:41:44.000Z</pubTime>
         
-        <tag>git提交代码到多个平台</tag>
-         
         <tag>git入门</tag>
+         
+        <tag>git提交代码到多个平台</tag>
          
          
            
@@ -443,11 +463,11 @@
         <title>掌握这10条规范，轻松搞定Git！</title>
         <pubTime>2018-06-04T09:31:20.000Z</pubTime>
         
-        <tag>git入门</tag>
-         
         <tag>Git</tag>
          
         <tag>git stash临时保存本地操作</tag>
+         
+        <tag>git入门</tag>
          
         <tag>git合并与删除分支</tag>
          
