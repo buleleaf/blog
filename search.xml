@@ -107,8 +107,7 @@
         <category>MySQL</category>
       </categories>
       <tags>
-        <tag>mysql</tag>
-        <tag>mysql清空索引</tag>
+        <tag>mysql基础操作</tag>
       </tags>
   </entry>
   <entry>
@@ -119,8 +118,7 @@
         <category>MySQL</category>
       </categories>
       <tags>
-        <tag>mysql</tag>
-        <tag>mysql清空外键约束</tag>
+        <tag>mysql基础操作</tag>
       </tags>
   </entry>
   <entry>
@@ -128,15 +126,8 @@
     <url>%2Fblog%2F2.html</url>
     <content type="text"><![CDATA[前言Java 8之前的库对日期和时间的支持并不理想，为了解决这个问题，Java 8引入了一套全新的时间日期API，位于java.time路径下。 LocalDateLocalDate类型包含了年月日信息，下面举些LocalDate的使用示例： 12345678LocalDate date = LocalDate.of(2018, 8, 30); // 2018-08-30int year = date.getYear(); // 2018int month = date.getMonth().getValue(); // 8int day = date.getDayOfMonth(); // 30// 查看该月有多少天int days = date.lengthOfMonth(); // 31// 是否是闰年boolean isLeap = date.isLeapYear(); // false 可以使用LocalDate.now()获取当天的日期信息： 12// 查看当天 年月日LocalDate today = LocalDate.now(); // 2018-08-30 除了调用LocalDate的getYear方法外，我们也可以使用ChronoField枚举类型来实现相同的功能： 12345int year1 = date.get(ChronoField.YEAR); // 2018int month1 = date.get(ChronoField.MONTH_OF_YEAR); // 8int day1 = date.get(ChronoField.DAY_OF_MONTH); // 30// 当前日期属于该月第几周int weekOfMonth = date.get(ChronoField.ALIGNED_WEEK_OF_MONTH); // 4 ChronoField枚举类型包含了诸多的属性可供选择： 我们也可以修改LocalDate对象： 1234567LocalDate date3 = LocalDate.of(2018, 8, 30); // 2018-08-30LocalDate date4 = date3.withDayOfMonth(30); // 2018-08-30LocalDate date5 = date3.with(ChronoField.DAY_OF_MONTH, 30); // 2018-08-30LocalDate date6 = date3.withYear(2019); // 2019-08-30LocalDate date7 = date3.plusDays(5); // 2018-09-04LocalDate date8 = date3.plus(5, ChronoUnit.DAYS); // 2018-09-04LocalDate date9 = date3.minusYears(10); // 2008-08-30 TemporalAdjusters类提供了许多静态方法来修改LocalDate对象。当我们需要获取下一个周天，下一个工作日，本月的最后一天等信息时，TemporalAdjusters类便可派上用场： 1234import static java.time.temporal.TemporalAdjusters.*;LocalDate date10 = date3.with(nextOrSame(DayOfWeek.MONDAY)); // 2018-09-03LocalDate date11 = date3.with(lastDayOfMonth()); // 2018-09-31LocalDate date12 = date3.with(previous(DayOfWeek.SATURDAY)); // 2018-08-25 可参考9月的日历来理解上面的结果： 我们还可以对LocalDate进行格式化操作： 12345String str1 = date.format(DateTimeFormatter.BASIC_ISO_DATE); // 20180930String str2 = date.format(DateTimeFormatter.ISO_LOCAL_DATE); // 2018-09-30DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");String str5 = date.format(dtf); // 2018-09-30LocalDate date13 = LocalDate.parse(str5, dtf); // 2018-09-30 LocalDate和下面要介绍的LocalTime LocalDateTime之间共享了许多类似的方法，上面介绍的LocalDate修改、格式化等方法通用适用于LocalTime和LocalDateTime。 LocalTimeLocalTime和LocalDate类似，区别在于LocalTime包含的是时分秒（毫秒）信息。举些LocalTime的例子： 1234LocalTime time = LocalTime.of(20, 13, 54); // 17:18:54int hour = time.getHour(); // 17int minute = time.getMinute(); // 18int second = time.getSecond(); // 54 LocalDate和LocalTime都可以通过字符串来创建： 12LocalDate date = LocalDate.parse("2018-09-30");LocalTime time = LocalTime.parse("17:18:54"); LocalDateTimeLocalDateTime是LocalDate和LocalTime的组合形式，包含了年月日时分秒信息。举些LocalDateTime的使用示例： 12LocalDateTime ldt1 = LocalDateTime.of(2018, 9, 30, 17, 18, 54); // 2018-09-30T17:18:54LocalDateTime ldt2 = LocalDateTime.of(date, time); // 2018-09-30T17:18:54 LocalDateTime可以转换为LocalDate和LocalTime，转换后包含的信息减少了： 12LocalDate date1 = ldt1.toLocalDate(); // 2018-09-30LocalTime time1 = ldt1.toLocalTime(); // 17:18:54 同样的，LocalDate和LocalTime也可以转换为LocalDateTime，只需要补上日期或者时间： 123LocalDateTime ldt3 = date.atTime(time); // 2019-09-30T17:18:54LocalDateTime ldt4 = date.atTime(17, 18, 54); // 2019-09-30T17:18:54LocalDateTime ldt5 = time.atDate(date); // 2019-09-30T17:18:54 DurationDuration用于计算两个LocalTime或者LocalDateTime的时间差，例如： 123LocalTime time2 = LocalTime.of(23, 59, 59);Duration duration = Duration.between(time1, time2);long seconds = duration.getSeconds(); // 13565 time1和time2之间相差了13565秒。 手动创建Duration对象： 12Duration threeMinutes = Duration.ofMinutes(3);threeMinutes = Duration.of(3, ChronoUnit.MINUTES); // 创建了一个3分钟的Duration，两种创建方式等价 PeriodPeriod用于计算两个LocalDate之间的时长。举些例子： 1234LocalDate date2 = LocalDate.of(2018, 10, 31);Period period = Period.between(date1, date2);int monthsBetween = period.getMonths(); // 1int daysBetween = period.getDays(); // 1 2018-09-30和2018-10-30之间月份相差1，天数相差1。 同样的，我们也可以手动创建Period对象： 123Period tenDays = Period.ofDays(10);Period threeWeeks = Period.ofWeeks(3);Period twoYearsSixMonthsOneDay = Period.of(2, 6, 1); 其他一些常用的方法比较两个时间的先后1234LocalDate date15 = LocalDate.of(2018,9,31);date.isEqual(date15); // falsedate.isAfter(date15); // falsedate.isBefore(date15); // true MonthDay类的使用MonthDay只包含月日信息，可以用于存放类似于生日，结婚纪念日等信息。举个使用MonthDay的例子： 123456LocalDate birthday = LocalDate.of(1999, 9, 9);MonthDay monthDay = MonthDay.of(birthday.getMonth(), birthday.getDayOfMonth());MonthDay currentMonthDay = MonthDay.from(LocalDate.now());if (currentMonthDay.equals(monthDay)) &#123; System.out.println("happy birthday!");&#125; 假如用户的生日是1999年9月9号，那么可以通过这种方法来判断今天是否是用户的生日，如果是的话便发送生日祝福。同样的也有YearMonth类。 原文：https://mrbird.cc/java8-new-time-date-api.html]]></content>
       <categories>
-        <category>随笔</category>
         <category>Java8新特性</category>
       </categories>
-      <tags>
-        <tag>Java8新特性</tag>
-        <tag>LocalDate</tag>
-        <tag>LocalTime</tag>
-        <tag>LocalDateTime</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[git同步提交代码到github和码云上]]></title>
@@ -146,7 +137,6 @@
         <category>Git</category>
       </categories>
       <tags>
-        <tag>git提交代码到多个平台</tag>
         <tag>git入门</tag>
       </tags>
   </entry>
@@ -169,8 +159,7 @@
         <category>JHipster</category>
       </categories>
       <tags>
-        <tag>Jhipster微服务调用微服务</tag>
-        <tag>微服务相互通信</tag>
+        <tag>JHipster入门</tag>
       </tags>
   </entry>
   <entry>
@@ -181,7 +170,7 @@
         <category>JHipster</category>
       </categories>
       <tags>
-        <tag>jhipster删除实体</tag>
+        <tag>JHipster入门</tag>
       </tags>
   </entry>
   <entry>
@@ -192,7 +181,7 @@
         <category>JHipster</category>
       </categories>
       <tags>
-        <tag>jhipster Gateway数据菜单为空</tag>
+        <tag>JHipster入门</tag>
       </tags>
   </entry>
   <entry>
@@ -200,11 +189,9 @@
     <url>%2Fblog%2F492.html</url>
     <content type="text"><![CDATA[在Java中对一个空对象进行操作时，便会抛出最常见的异常NullPointerException。为了改善这个问题，Java 8中提供了一个java.util.Optional类型。Optional类的Javadoc描述如下：这是一个可以为null的容器对象。如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。 类声明以下是一个 java.util.Optional 类的声明： 1public final class Optional&lt;T&gt; extends Object 类创建创建一个Optional对象有好几种方式： 创建一个空的Optional我们可以使用静态工厂方法Optional.empty，创建一个空的Optional对象： 1Optional&lt;Department&gt; department = Optional.empty(); 根据非空值创建Optional我们也可以使用静态工厂方法Optional.of来创建一个非空对象的Optional对象： 1Optional&lt;Employee&gt; optEmployee = Optional.of(employee); 如果employee为空，这段代码会立即抛出一个NullPointerException 创建可以为null的Optional使用静态工厂方法Optional.ofNullable，我们可以创建一个允许null值的Optional对象： 1Optional&lt;Employee&gt; optEmployee = Optional.ofNullable(employee); 如果employee为空，对其调用get方法将抛出NoSuchElementException。 Optional 实例我们可以通过以下实例来更好的了解 Optional 类的使用： 1234567891011121314151617181920212223import java.util.Optional;public class Java8Tester &#123; public static void main(String args[])&#123; Java8Tester java8Tester = new Java8Tester(); Integer value1 = null; Integer value2 = new Integer(10); // Optional.ofNullable - 允许传递为 null 参数 Optional&lt;Integer&gt; a = Optional.ofNullable(value1); // Optional.of - 如果传递的参数是 null，抛出异常 NullPointerException Optional&lt;Integer&gt; b = Optional.of(value2); System.out.println(java8Tester.sum(a,b)); &#125; public Integer sum(Optional&lt;Integer&gt; a, Optional&lt;Integer&gt; b)&#123; // Optional.isPresent - 判断值是否存在 System.out.println("第一个参数值存在: " + a.isPresent()); System.out.println("第二个参数值存在: " + b.isPresent()); // Optional.orElse - 如果值存在，返回它，否则返回默认值 Integer value1 = a.orElse(new Integer(0)); //Optional.get - 获取值，值需要存在 Integer value2 = b.get(); return value1 + value2; &#125;&#125; 执行以上代码，输出结果为： 12345$ javac Java8Tester.java$ java Java8Tester第一个参数值存在: false第二个参数值存在: true10]]></content>
       <categories>
-        <category>随笔</category>
         <category>Java8新特性</category>
       </categories>
       <tags>
-        <tag>Java8新特性</tag>
         <tag>Optional</tag>
       </tags>
   </entry>
@@ -217,7 +204,6 @@
       </categories>
       <tags>
         <tag>JHipster入门</tag>
-        <tag>jhipster微服务</tag>
       </tags>
   </entry>
   <entry>
@@ -228,7 +214,7 @@
         <category>JHipster</category>
       </categories>
       <tags>
-        <tag>Jhipster空白页问题</tag>
+        <tag>JHipster入门</tag>
       </tags>
   </entry>
   <entry>
@@ -238,10 +224,6 @@
       <categories>
         <category>随笔</category>
       </categories>
-      <tags>
-        <tag>cmd</tag>
-        <tag>cmder</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[JHipster 创建实体，并且增加关联关系]]></title>
@@ -252,7 +234,6 @@
       </categories>
       <tags>
         <tag>JHipster入门</tag>
-        <tag>JHipster创建实体详细教程</tag>
       </tags>
   </entry>
   <entry>
@@ -263,7 +244,7 @@
         <category>JHipster</category>
       </categories>
       <tags>
-        <tag>JHipster安装</tag>
+        <tag>JHipster入门</tag>
       </tags>
   </entry>
   <entry>
@@ -274,9 +255,7 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>docker使用范围</tag>
         <tag>docker入门</tag>
-        <tag>为什么使用docker</tag>
       </tags>
   </entry>
   <entry>
@@ -284,11 +263,9 @@
     <url>%2Fblog%2F429.html</url>
     <content type="text"><![CDATA[作为一个Java开发人员，有些常用的Linux命令必须掌握。即使平时开发过程中不使用Linux（Unix）或者mac系统，也需要熟练掌握Linux命令。因为很多服务器上都是Linux系统。所以，要和服务器机器交互，就要通过shell命令。 必会Linux命令清单查找文件find / -name filename.txt根据名称查找/目录下的filename.txt文件。 find . -name &quot;*.xml&quot;递归查找所有的xml文件 find . -name &quot;*&quot; |xargs grep &quot;hello&quot;递归查找所有文件内容中包含hello world的xml文件 grep -H &#39;spring&#39; *.xml查找所以有的包含spring的xml文件 find ./ -size 0 | xargs rm -f &amp;删除文件大小为零的文件 ls -l | grep &#39;.jar&#39;查找当前目录中的所有jar文件 grep &#39;test&#39; d*显示所有以d开头的文件中包含test的行。 grep &#39;test&#39; aa bb cc显示在aa，bb，cc文件中匹配test的行。 grep &#39;[a-z]\{5\}&#39; aa显示所有包含每个字符串至少有5个连续小写字符的字符串的行。 查看一个程序是否运行ps –ef|grep tomcat查看所有有关tomcat的进程 ps -ef|grep --color java高亮要查询的关键字 终止进程kill -9 19979终止线程号位19979的进程 查看文件，包含隐藏文件ls -al当前工作目录pwd复制文件cp source dest复制文件 cp -r sourceFolder targetFolder递归复制整个文件夹 scp sourecFile name@ip:addr远程拷贝 创建目录mkdir newfolder 删除目录rmdir deleteEmptyFolder删除空目录rm -rf deleteFile递归删除目录中所有内容 移动文件mv /temp/movefile /targetFolder 重命名mv oldNameFile newNameFile 切换用户su -username 修改文件权限chmod 777 file.javafile.java的权限-rwxrwxrwx，r表示读、w表示写、x表示可执行 压缩文件tar -czf test.tar.gz /test1 /test2 列出压缩文件列表tar -tzf test.tar.gz 解压文件tar -xvzf test.tar.gz 查看文件前10行head -n 10 example.txt 查看文件后10行tail -n 10 example.txt 查看日志最近更新tail -f exmaple.log这个命令会自动显示新增内容，屏幕只显示10行内容的（可设置）。 使用超级管理员身份执行命令sudo rm a.txt使用管理员身份删除文件 查看端口占用情况netstat -tln | grep 8080查看端口8080的使用情况 查看端口属于哪个进程lsof -i :8080 查看进程ps aux|grep java查看java进程 ps aux查看所有进程 以树状格式列出目录tree a PS：Mac下使用tree命令 文件下载wget http://file.tgz PS ：Mac下安装wget命令 curl http://file.tgz 网络检测ping www.just-ping.com 远程登录ssh userName@ip 打印信息echo $JAVA_HOME打印java home环境变量的值]]></content>
       <categories>
-        <category>随笔</category>
+        <category>linux</category>
       </categories>
       <tags>
-        <tag>java学习linux命令</tag>
-        <tag>Linux命令</tag>
         <tag>linux学习</tag>
       </tags>
   </entry>
@@ -301,13 +278,6 @@
       </categories>
       <tags>
         <tag>git入门</tag>
-        <tag>Git</tag>
-        <tag>git stash临时保存本地操作</tag>
-        <tag>git合并与删除分支</tag>
-        <tag>git恢复stash内容</tag>
-        <tag>git撤销修改</tag>
-        <tag>git版本回退</tag>
-        <tag>git解决冲突</tag>
       </tags>
   </entry>
   <entry>
@@ -329,7 +299,7 @@
         <category>Spring boot</category>
       </categories>
       <tags>
-        <tag>spring boot禁止自动注入数据库</tag>
+        <tag>spring boot异常记录</tag>
       </tags>
   </entry>
   <entry>
@@ -340,8 +310,7 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>docker</tag>
-        <tag>编写Dockerfile发布spring boot</tag>
+        <tag>Dockerfile</tag>
       </tags>
   </entry>
   <entry>
@@ -350,12 +319,7 @@
     <content type="text"><![CDATA[步骤1234docker pull mysql 拉取官方镜像docker run --name mysql -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123456 -itd 镜像id-e MYSQL_ROOT_PASSWORD=123456 设置密码i是交互式操作，t是一个终端，d指的是在后台运行 运行后查看进入该容器启动mysql服务12docker exec -it mysql bashservice mysql start 设置允许在远程任何计算机上登录12GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;密码&apos; WITH GRANT OPTION;设置成功后原密码也会改变]]></content>
       <categories>
         <category>docker</category>
-        <category>MySQL</category>
       </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>docker容器使用mysql</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[基于centos的docker安装与卸载]]></title>
@@ -365,7 +329,7 @@
         <category>docker</category>
       </categories>
       <tags>
-        <tag>docker安装，docker卸载</tag>
+        <tag>docker入门</tag>
       </tags>
   </entry>
   <entry>
@@ -376,8 +340,7 @@
         <category>MySQL</category>
       </categories>
       <tags>
-        <tag>mysql</tag>
-        <tag>mysql配置远程访问</tag>
+        <tag>mysql基础操作</tag>
       </tags>
   </entry>
   <entry>
@@ -388,7 +351,7 @@
         <category>Git</category>
       </categories>
       <tags>
-        <tag>Git，git生成ssh key，git入门</tag>
+        <tag>git入门</tag>
       </tags>
   </entry>
   <entry>
@@ -399,7 +362,7 @@
         <category>Git</category>
       </categories>
       <tags>
-        <tag>git命令，git入门</tag>
+        <tag>git入门</tag>
       </tags>
   </entry>
 </search>
