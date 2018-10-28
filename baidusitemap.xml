@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>www.zhengjie.me/blog/383.html</loc>
+    <lastmod>2018-10-28T05:27:07.347Z</lastmod>
+    <data>
+        <display>
+        <title>Spring boot 使用Swagger2构建RESTful API文档</title>
+        <pubTime>2018-10-28T05:21:31.000Z</pubTime>
+        
+        <tag>Aurora 脚手架系列</tag>
+         
+         
+           
+             
+              <breadCrumb title="Spring boot 循序渐进" url="www.zhengjie.me/categories/Spring-boot-%E5%BE%AA%E5%BA%8F%E6%B8%90%E8%BF%9B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>www.zhengjie.me/blog/511.html</loc>
     <lastmod>2018-10-28T03:34:55.351Z</lastmod>
     <data>
@@ -719,24 +739,4 @@
     
     
     
-    
-  <url>
-    <loc>www.zhengjie.me/blog/383.html</loc>
-    <lastmod>2018-08-29T12:46:56.884Z</lastmod>
-    <data>
-        <display>
-        <title>Spring boot整合SwaggerUI构建API文档</title>
-        <pubTime>2018-04-05T07:40:34.000Z</pubTime>
-        
-        <tag>spring boot构建 SwaggerUI</tag>
-         
-         
-           
-             
-              <breadCrumb title="Spring boot" url="www.zhengjie.me/categories/Spring-boot/"/>
-          
-        </display>
-    </data>
-    </url>
-
 </urlset>
